@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Đăng ký - Văn Phòng Phẩm</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="bg-light">
+
+<!-- HEADER -->
+<header class="bg-dark text-white py-3">
+  <div class="container d-flex justify-content-between align-items-center">
+    <h2 class="mb-0">🖊️ Văn Phòng Phẩm</h2>
+    <a href="index.html" class="btn btn-outline-light">← Về trang chủ</a>
+  </div>
+</header>
+
+<!-- FORM ĐĂNG KÝ -->
+<section class="register-page py-5">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-6 col-lg-4">
+        <div class="card shadow p-4 border-0">
+          <h3 class="text-center fw-bold mb-4">Đăng ký</h3>
+          
+          <form>
+            <!-- Họ tên -->
+            <div class="mb-3">
+              <label for="fullname" class="form-label">Họ và tên</label>
+              <input type="text" class="form-control" id="fullname" placeholder="Nhập họ và tên" required>
+            </div>
+
+            <!-- Email -->
+            <div class="mb-3">
+              <label for="email" class="form-label">Email</label>
+              <input type="email" class="form-control" id="email" placeholder="Nhập email" required>
+            </div>
+            
+            <!-- Số điện thoại -->
+            <div class="mb-3">
+              <label for="phone" class="form-label">Số điện thoại</label>
+              <input type="tel" class="form-control" id="phone" placeholder="Nhập số điện thoại" required>
+            </div>
+            
+            <!-- Mật khẩu -->
+            <div class="mb-3">
+              <label for="password" class="form-label">Mật khẩu</label>
+              <input type="password" class="form-control" id="password" placeholder="Nhập mật khẩu" required>
+            </div>
+
+            <!-- Xác nhận mật khẩu -->
+            <div class="mb-3">
+              <label for="confirm-password" class="form-label">Xác nhận mật khẩu</label>
+              <input type="password" class="form-control" id="confirm-password" placeholder="Nhập lại mật khẩu" required>
+            </div>
+            
+            <!-- Button -->
+            <button type="submit" class="btn btn-danger w-100">Đăng ký</button>
+          </form>
+
+          <p class="text-center mt-3 mb-0">
+            Đã có tài khoản? <a href="dangnhap.html" class="text-danger fw-bold">Đăng nhập ngay</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer text-white bg-dark">
+  <div class="container py-5 d-flex flex-wrap justify-content-between">
+
+    <!-- Logo + liên hệ -->
+    <div class="mb-4">
+      <h4 class="fw-bold">DKT Bookstore</h4>
+      <p>Lựa chọn số 1 cho bạn</p>
+      <p><i class="bi bi-geo-alt"></i> Trụ sở: Tp. Hà Nội</p>
+      <p><i class="bi bi-telephone"></i> 0123456789</p>
+      <p><i class="bi bi-envelope"></i> Ahihi12345@gmail.com</p>
+    </div>
+
+    <!-- Links -->
+    <div class="mb-4">
+      <h6 class="fw-bold">TÌM HIỂU THÊM</h6>
+      <ul class="list-unstyled">
+        <li><a href="#" class="text-white">Trang chủ</a></li>
+        <li><a href="#" class="text-white">Giới thiệu</a></li>
+        <li><a href="#" class="text-white">Sản phẩm</a></li>
+        <li><a href="#" class="text-white">Tin tức</a></li>
+      </ul>
+    </div>
+
+    <div class="mb-4">
+      <h6 class="fw-bold">HỖ TRỢ KHÁCH HÀNG</h6>
+      <ul class="list-unstyled">
+        <li><a href="#" class="text-white">Chính sách</a></li>
+        <li><a href="#" class="text-white">Hướng dẫn mua hàng</a></li>
+        <li><a href="#" class="text-white">Liên hệ</a></li>
+      </ul>
+    </div>
+
+    <!-- Social -->
+    <div>
+      <h6 class="fw-bold">THEO DÕI CHÚNG TÔI</h6>
+      <div class="d-flex gap-3 fs-5">
+        <a href="#" class="text-white"><i class="bi bi-facebook"></i></a>
+        <a href="#" class="text-white"><i class="bi bi-instagram"></i></a>
+        <a href="#" class="text-white"><i class="bi bi-twitter"></i></a>
+        <a href="#" class="text-white"><i class="bi bi-youtube"></i></a>
+      </div>
+     <h6 class="fw-bold mt-3">PHƯƠNG THỨC THANH TOÁN</h6>
+<div class="payment-box d-inline-block px-3 py-2">
+  <img src="https://taphoa01.vinastar.info/wp-content/uploads/2023/05/logo_acb.png" alt="ACB" style="height:25px; margin-right:10px;">
+  <img src="https://taphoa01.vinastar.info/wp-content/uploads/2023/05/logo_msb.png" alt="MSB" style="height:25px;">
+</div>
+
+    </div>
+
+  </div>
+
+  <!-- Bản quyền -->
+  <div class="footer-bottom text-center text-dark py-2">
+    © 2025 Văn Phòng Phẩm - Bản Quyền Thuộc Về DKT | 
+    Lấy Cảm Hứng Từ <a href="https://vinastar.net/website/" class="text-dark fw-bold">VINASTAR.INFO</a>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

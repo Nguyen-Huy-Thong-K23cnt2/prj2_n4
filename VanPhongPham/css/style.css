@@ -1,0 +1,439 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+  font-family: Arial, sans-serif;
+}
+
+.card img {
+  height: 200px;
+  object-fit: cover;
+}
+
+footer {
+  margin-top: 50px;
+}
+header h2 {
+  font-family: 'Arial', sans-serif;
+  font-size: 20px;
+}
+
+header small {
+  font-size: 12px;
+  color: #ccc;
+}
+
+header nav .nav-link {
+  margin-right: 20px;
+  font-weight: 500;
+}
+
+header nav .nav-link:hover {
+  color: #c7a062;
+}
+header {
+  position: relative;   /* giữ header cố định trong luồng layout */
+  z-index: 1000;        /* đẩy header lên trên */
+}
+.banner {
+  margin-top: 20px;   /* đẩy banner xuống một chút */
+}
+.banner img {
+  width: 100%;
+  display: block;
+  margin-top: 10px;   /* tránh dính header */
+}
+header {
+  position: sticky;
+  top: 0;
+  z-index: 1100; /* để nổi trên slider và nội dung */
+}
+/* Giới hạn chiều rộng submenu */
+.dropdown-menu {
+  min-width: 600px;   /* đủ chứa các cột */
+  max-width: 900px;   /* không bị to quá */
+  border-radius: 6px;
+  border: 1px solid #ddd;
+}
+/* Khi hover vào nút danh mục thì mở dropdown */
+.dropdown:hover .dropdown-menu {
+  display: block;
+  margin-top: 0; /* submenu dính sát menu chính */
+}
+
+/* Khoảng cách giữa các cột */
+.dropdown-menu .me-4 {
+  margin-right: 2rem;
+}
+
+/*--------------------------------------------------------------------------------*/
+
+/* Categories Section */
+.categories-section {
+  padding: 40px 0;
+  margin-top: 10px; /* 👈 tạo khoảng cách giữa banner và categories */
+  background: #fff;
+}
+
+.categories {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 50px;
+}
+
+.category-item {
+  text-align: center;
+  padding: 20px;
+  transition: all 0.3s ease;
+}
+
+.category-item:last-child {
+  border-right: none;
+}
+
+.category-item img {
+  width: 70px;
+  height: 70px;
+  display: block;
+  margin: 0 auto 10px;
+}
+
+.category-item:hover {
+  transform: translateY(-5px);
+}
+
+.divider {
+  width: 1px;
+  background-color: #e0c5a5; /* màu vạch */
+  height: 130px; /* cao vừa bằng icon + text */
+  align-self: center; /* căn giữa theo chiều dọc */
+}
+
+/*--------------------------------------------------------------------------------*/
+
+/* Flash Sale */
+.flash-sale h2 {
+  font-size: 38px;
+  letter-spacing: 1px;  
+}
+
+#countdown .time-box {
+  background: #dc3545;
+  color: #fff;
+  padding: 10px 15px;
+  border-radius: 6px;
+  font-weight: bold;
+  text-align: center;
+  min-width: 60px;
+}
+#countdown .time-box span {
+  display: block;
+  font-size: 12px;
+  font-weight: normal;
+}
+
+/* khung đỏ bao quanh carousel */
+.flash-sale .carousel {
+  border: 2px solid #dc3545;
+  border-radius: 12px;
+  padding: 15px;
+  position: relative;
+}
+
+/* ảnh sản phẩm */
+.flash-sale .card img,
+#flashSaleCarousel .card-img-top {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  display: block;
+}
+
+/* card hover */
+.flash-sale .card {
+  border: none;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.flash-sale .card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+}
+
+/* nút giỏ */
+.flash-sale .btn {
+  border-radius: 20px;
+  font-weight: 500;
+  padding: 5px 15px;
+}
+
+/* nút điều khiển */
+.flash-sale .carousel-control-prev,
+.flash-sale .carousel-control-next {
+  width: 35px;
+  height: 35px;
+  background: #dc3545;
+  border-radius: 50%;
+  top: 50%;                 /* nút nằm giữa chiều cao khối ảnh */
+  transform: translateY(-50%);
+  opacity: 0.5;
+}
+.flash-sale .carousel-control-prev:hover,
+.flash-sale .carousel-control-next:hover {
+  opacity: 1;
+}
+
+.flash-sale .carousel-control-prev-icon,
+.flash-sale .carousel-control-next-icon {
+  filter: invert(1);
+  width: 16px;
+  height: 16px;
+}
+
+/*--------------------------------------------------------------------------------*/
+
+/*Sản phẩm nổi bật*/
+/* Nền be + hình minh họa */
+.featured-products {
+  background: #ffe url("../assets/img/Background123.png") no-repeat center center;
+  background-size: cover;
+  border-radius: 12px;
+  padding: 60px 0;
+}
+
+
+/* Tiêu đề */
+.featured-products h2 {
+  font-size: 28px;
+  letter-spacing: 1px;
+}
+
+/* Card sản phẩm */
+.featured-products .card {
+  border: none;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.featured-products .card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+}
+.featured-products .card img {
+  height: 220px;
+  object-fit: cover;
+}
+
+/* Nút thêm giỏ */
+.featured-products .btn {
+  border-radius: 20px;
+  font-weight: 500;
+  padding: 5px 15px;
+}
+
+/* Nút điều hướng carousel nhỏ gọn */
+.featured-products .carousel-control-prev,
+.featured-products .carousel-control-next {
+  width: 35px;
+  height: 35px;
+  background: #dc3545;
+  border-radius: 50%;
+  top: 50%;                 /* nút nằm giữa chiều cao khối ảnh */
+  transform: translateY(-50%);
+  opacity: 0.5;
+}
+
+.featured-products .carousel-control-prev:hover,
+.featured-products .carousel-control-next:hover {
+  opacity: 1;
+}
+
+/* Icon mũi tên nhỏ hơn */
+.featured-products .carousel-control-prev-icon,
+.featured-products .carousel-control-next-icon {
+  filter: invert(1);
+  width: 16px;
+  height: 16px;
+}
+
+.featured-products .carousel-indicators {
+  position: static;       /* để nó nằm phía dưới */
+  margin-top: 15px;       /* cách sản phẩm một chút */
+  justify-content: center;
+}
+
+.featured-products .carousel-indicators [data-bs-target] {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #5e595a;
+  opacity: 0.5;
+  margin: 0 4px;
+  border: none;
+}
+
+.featured-products .carousel-indicators .active {
+  opacity: 1;
+}
+
+/*--------------------------------------------------------------------------------*/
+
+/* Văn phòng phẩm cho bạn */
+.for-you {
+  border-radius: 12px;
+}
+
+/* Tiêu đề */
+.for-you h2 {
+  font-size: 28px;
+  letter-spacing: 1px;
+  margin-bottom: 10px;
+}
+
+/* Tabs */
+.for-you .nav-pills .nav-link {
+  color: #555;
+  font-weight: 500;
+  border-radius: 20px;
+  margin: 0 5px;
+}
+
+.for-you .nav-pills .nav-link.active {
+  background-color: #c7a062;
+  color: #fff;
+}
+
+/* Card */
+.for-you .card {
+  border: none;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.for-you .card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+}
+.for-you .card img {
+  height: 220px;
+  object-fit: cover;
+}
+.for-you .btn {
+  border-radius: 20px;
+  font-weight: 500;
+  padding: 5px 15px;
+}
+
+/*--------------------------------------------------------------------------------*/
+
+/* Dịch vụ */
+.services h3 {
+  color: #6c4e23;
+}
+.services-list i {
+  font-size: 22px;
+  vertical-align: middle;
+}
+
+.services {
+  background: url("../assets/img/Bg123.png") no-repeat center center;
+  background-size: cover;   /* ảnh phủ kín */
+  position: relative;
+  z-index: 1;
+}
+
+
+/* Newsletter */
+.newsletter {
+  background: #c7a062;
+  border-radius: 40px 40px 0 0;
+  margin-top: 0;        /* bỏ margin-top gây khoảng trắng */
+  padding: 40px 0;      /* giữ khoảng đệm bên trong */
+}
+
+.newsletter input {
+  max-width: 400px;
+}
+
+/* Footer */
+.footer {
+  background: #222;
+  margin-top: 0;        /* đảm bảo không có khoảng cách */
+}
+
+.footer h6 {
+  margin-bottom: 10px;
+}
+.footer a {
+  text-decoration: none;
+}
+.footer a:hover {
+  text-decoration: underline;
+}
+
+.footer-bottom {
+  background: #6e6c6c;   /* nền xám nhạt */
+  font-size: 14px;
+}
+.footer-bottom a {
+  text-decoration: none;
+}
+.footer-bottom a:hover {
+  text-decoration: underline;
+}
+
+.payment-box {
+  background: #fff;          /* nền trắng */
+  border-radius: 30px;       /* bo tròn */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 8px 16px;         /* đệm trong */
+}
+.payment-box img {
+  height: 25px;
+  object-fit: contain;
+}
+
+/*--------------------------------------------------------------------------------*/
+
+/* Giỏ Hàng */
+/* Giỏ hàng */
+.cart-page table th {
+  text-align: center;
+}
+.cart-page table td {
+  vertical-align: middle;
+}
+.cart-page input[type="number"] {
+  text-align: center;
+}
+
+/*--------------------------------------------------------------------------------*/
+/* Trang đăng nhập */
+.login-page {
+  min-height: 70vh;
+  display: flex;
+  align-items: center;
+}
+.login-page .card {
+  border-radius: 12px;
+}
+.login-page .btn {
+  border-radius: 30px;
+  font-weight: 600;
+}
+
+/*--------------------------------------------------------------------------------*/
+/* Trang đăng ký */
+.register-page {
+  min-height: 70vh;
+  display: flex;
+  align-items: center;
+}
+.register-page .card {
+  border-radius: 12px;
+}
+.register-page .btn {
+  border-radius: 30px;
+  font-weight: 600;
+}
