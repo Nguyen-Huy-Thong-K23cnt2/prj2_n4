@@ -1,0 +1,20 @@
+﻿@{
+    ViewData["Title"] = "Đăng xuất";
+}
+
+<div class="container py-5" style="max-width:640px;">
+    <h3 class="mb-3">Bạn có chắc muốn đăng xuất?</h3>
+    <p class="text-muted">Sau khi đăng xuất, bạn cần đăng nhập lại để tiếp tục mua hàng và quản lý tài khoản.</p>
+
+    <form asp-action="DangXuat" asp-controller="Auth" method="post" class="mt-4">
+        @Html.AntiForgeryToken()
+
+        <button type="submit" class="btn btn-danger me-2">
+            <i class="bi bi-box-arrow-right"></i> Đăng xuất
+        </button>
+
+        <a asp-controller="Home" asp-action="Index" class="btn btn-outline-secondary">
+            Ở lại trang web
+        </a>
+    </form>
+</div>

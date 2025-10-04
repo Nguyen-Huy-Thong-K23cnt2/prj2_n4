@@ -1,0 +1,55 @@
+﻿@model IEnumerable<VanPhongPhamDKT.Models.DonHang>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2 class="fw-bold text-primary">Quản lý đơn hàng</h2>
+    </div>
+
+    <table class="table table-bordered table-striped shadow-sm">
+        <thead class="table-dark text-center">
+            <tr>
+                <th>Ngày đặt</th>
+                <th>Tổng tiền</th>
+                <th>Trạng thái</th>
+                <th>Khách hàng</th>      <!-- ✅ Thêm cột khách hàng -->
+                <th>Hành động</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr class="align-middle text-center">
+                    <td>@item.NgayDat?.ToString("dd/MM/yyyy")</td>
+                    <td>@string.Format("{0:N0} đ", item.TongTien)</td>
+                    <td>
+                        <span class="badge bg-@(item.TrangThai == "Hoàn tất" ? "success" : "warning")">
+                            @item.TrangThai
+                        </span>
+                    </td>
+
+                    <!-- ✅ Hiển thị tên khách hàng -->
+                    <td>@item.MaKhNavigation?.HoTen</td>
+
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.MaDh" class="btn btn-sm btn-primary">Sửa</a>
+                        <a asp-action="Details" asp-route-id="@item.MaDh" class="btn btn-sm btn-info">Chi tiết</a>
+                        <a asp-action="Delete" asp-route-id="@item.MaDh" class="btn btn-sm btn-danger">Xóa</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<p>
+    <a asp-area="admins" asp-controller="Dashboard" asp-action="Index" class="btn btn-secondary">
+        ⬅ Quay về trang chủ
+    </a>
+</p>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

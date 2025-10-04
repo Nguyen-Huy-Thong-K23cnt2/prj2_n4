@@ -1,0 +1,117 @@
+﻿@{
+    ViewData["Title"] = "Bảng điều khiển";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+
+<div class="d-flex">
+    <!-- Sidebar -->
+    <div class="sidebar bg-primary text-white p-3 shadow-lg">
+        <h3 class="text-center mb-4"><i class="fa-solid fa-crown"></i> Admin</h3>
+        <ul class="nav flex-column">
+            <li class="nav-item mb-2">
+                <a class="nav-link text-white fw-semibold" asp-area="admins" asp-controller="Admin" asp-action="Index">
+                    <i class="fa-solid fa-user-shield me-2"></i> Quản lý Admin
+                </a>
+            </li>
+            <li class="nav-item mb-2">
+                <a class="nav-link text-white fw-semibold" asp-area="admins" asp-controller="SanPham" asp-action="Index">
+                    <i class="fa-solid fa-box me-2"></i> Quản lý Sản phẩm
+                </a>
+            </li>
+            <li class="nav-item mb-2">
+                <a class="nav-link text-white fw-semibold" asp-area="admins" asp-controller="KhachHang" asp-action="Index">
+                    <i class="fa-solid fa-users me-2"></i> Quản lý Khách hàng
+                </a>
+            </li>
+            <li class="nav-item mb-2">
+                <a class="nav-link text-white fw-semibold" asp-area="admins" asp-controller="DonHang" asp-action="Index">
+                    <i class="fa-solid fa-cart-shopping me-2"></i> Quản lý Đơn hàng
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Content -->
+    <div class="content p-4">
+        <h2 class="fw-bold text-primary mb-3"><i class="fa-solid fa-gauge-high"></i> Bảng điều khiển</h2>
+        <p class="text-muted">Chào mừng bạn đến với trang quản trị, hãy chọn chức năng bạn muốn quản lý:</p>
+
+        <div class="row g-4 justify-content-center mt-4">
+            <div class="col-md-3"> 
+                <a asp-area="admins" asp-controller="Admin" asp-action="Index" class="text-decoration-none"> 
+                    <div class="card shadow border-0 rounded-4 bg-primary text-white text-center p-4 admin-card"> 
+                        <i class="fa-solid fa-user-shield fa-2x mb-3"></i>
+                        <h5 class="fw-bold">Quản lý Admin</h5> 
+                        <p>Thêm, sửa, xóa tài khoản quản trị.</p> 
+                    </div> 
+                  </a> 
+                </div>
+            <div class="col-md-3">
+                <a asp-area="admins" asp-controller="SanPham" asp-action="Index" class="text-decoration-none">
+                    <div class="card shadow border-0 rounded-4 text-white text-center p-4 admin-card" style="background: linear-gradient(135deg, #28a745, #1e7e34);">
+                        <i class="fa-solid fa-box-open fa-2x mb-3"></i>
+                        <h5 class="fw-bold">Quản lý Sản phẩm</h5>
+                        <p class="small">Quản lý kho và thông tin sản phẩm.</p>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-3">
+                <a asp-area="admins" asp-controller="KhachHang" asp-action="Index" class="text-decoration-none">
+                    <div class="card shadow border-0 rounded-4 text-white text-center p-4 admin-card" style="background: linear-gradient(135deg, #17a2b8, #117a8b);">
+                        <i class="fa-solid fa-users fa-2x mb-3"></i>
+                        <h5 class="fw-bold">Quản lý Khách hàng</h5>
+                        <p class="small">Theo dõi và quản lý thông tin khách hàng.</p>
+                    </div>
+                </a>
+            </div>
+            <div class="col-md-3">
+                <a asp-area="admins" asp-controller="DonHang" asp-action="Index" class="text-decoration-none">
+                    <div class="card shadow border-0 rounded-4 text-white text-center p-4 admin-card" style="background: linear-gradient(135deg, #ffc107, #e0a800);">
+                        <i class="fa-solid fa-cart-shopping fa-2x mb-3"></i>
+                        <h5 class="fw-bold">Quản lý Đơn hàng</h5>
+                        <p class="small">Theo dõi và quản lý thông tin đơn hàng.</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .sidebar {
+        width: 260px;
+        min-height: 100vh;
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 1000;
+    }
+
+    .content {
+        margin-left: 260px;
+        width: calc(100% - 260px);
+    }
+
+    .sidebar .nav-link {
+        font-size: 1rem;
+        padding: 10px 15px;
+        border-radius: 6px;
+        transition: background 0.2s, transform 0.2s;
+    }
+
+    .sidebar .nav-link:hover {
+        background: rgba(255, 255, 255, 0.2);
+        transform: translateX(5px);
+    }
+
+    .admin-card {
+        transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .admin-card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 12px 24px rgba(0,0,0,0.2);
+    }
+</style>

@@ -1,0 +1,48 @@
+﻿@model VanPhongPhamDKT.Models.SanPham
+
+@{
+    ViewData["Title"] = "Thêm sản phẩm";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container mt-4">
+    <h2 class="fw-bold text-success mb-3"><i class="fa-solid fa-plus"></i> Thêm sản phẩm mới</h2>
+
+    <form asp-action="Create" enctype="multipart/form-data" class="card shadow p-4">
+        <div class="row g-3">
+            <div class="col-md-6">
+                <label class="form-label">Tên sản phẩm</label>
+                <input asp-for="TenSp" class="form-control" />
+                <span asp-validation-for="TenSp" class="text-danger"></span>
+            </div>
+            <div class="col-md-3">
+                <label class="form-label">Giá</label>
+                <input asp-for="Gia" class="form-control" type="number" />
+                <span asp-validation-for="Gia" class="text-danger"></span>
+            </div>
+            <div class="col-md-3">
+                <label class="form-label">Số lượng</label>
+                <input asp-for="SoLuong" class="form-control" type="number" />
+                <span asp-validation-for="SoLuong" class="text-danger"></span>
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">Hình ảnh</label>
+                <input asp-for="HinhAnh" class="form-control" type="file" name="ImageFile" />
+                <span asp-validation-for="HinhAnh" class="text-danger"></span>
+            </div>
+            <div class="col-md-6">
+                <label class="form-label">Danh mục</label>
+                <select asp-for="MaDm" asp-items="ViewBag.MaDm" class="form-select"></select>
+            </div>
+            <div class="col-12">
+                <label class="form-label">Mô tả</label>
+                <textarea asp-for="MoTa" class="form-control" rows="3"></textarea>
+            </div>
+        </div>
+
+        <div class="mt-4">
+            <button type="submit" class="btn btn-success"><i class="fa-solid fa-save"></i> Lưu</button>
+            <a asp-action="Index" class="btn btn-secondary">Quay lại</a>
+        </div>
+    </form>
+</div>

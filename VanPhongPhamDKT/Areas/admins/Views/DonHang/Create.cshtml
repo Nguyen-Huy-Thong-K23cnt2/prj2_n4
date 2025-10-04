@@ -1,0 +1,58 @@
+﻿@model VanPhongPhamDKT.Models.DonHang
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container mt-4">
+    <h2 class="text-primary mb-3">Thêm đơn hàng mới</h2>
+
+    <div class="card shadow p-4">
+        <form asp-action="Create" method="post">
+            <!-- Hiển thị lỗi ModelState -->
+            <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+            <!-- Mã khách hàng -->
+            <div class="mb-3">
+                <label asp-for="MaKh" class="form-label">Mã khách hàng</label>
+                <input asp-for="MaKh"
+                       class="form-control"
+                       type="number"
+                       min="1"
+                       step="1"
+                       placeholder="Nhập mã khách hàng (ID)" />
+
+                <small class="form-text text-muted">
+                    👉 Nhập đúng <strong>ID</strong> của khách hàng (ví dụ: 1, 2, 3...)
+                    <a asp-area="admins" asp-controller="KhachHang" asp-action="Index">
+                        Xem danh sách khách hàng
+                    </a>
+                </small>
+
+                <span asp-validation-for="MaKh" class="text-danger"></span>
+            </div>
+
+            <!-- Tổng tiền -->
+            <div class="mb-3">
+                <label asp-for="TongTien" class="form-label">Tổng tiền</label>
+                <input asp-for="TongTien"
+                       class="form-control"
+                       type="number"
+                       min="0"
+                       step="1000"
+                       placeholder="Nhập tổng tiền" />
+
+                <span asp-validation-for="TongTien" class="text-danger"></span>
+            </div>
+
+            <!-- Nút -->
+            <div class="d-flex justify-content-between">
+                <a asp-action="Index" class="btn btn-secondary">← Quay lại</a>
+                <button type="submit" class="btn btn-success">Lưu đơn hàng</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
