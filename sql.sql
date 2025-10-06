@@ -12,6 +12,7 @@ CREATE TABLE KhachHang (
     DiaChi NVARCHAR(255),
     SoDienThoai NVARCHAR(20),
     NgayTao DATETIME DEFAULT GETDATE()
+	ChucVu NVARCHAR (200),
 );
 GO
 
@@ -24,6 +25,7 @@ CREATE TABLE Admin (
     SoDienThoai NVARCHAR(20),
     ChucVu NVARCHAR(50),
     NgayTao DATETIME DEFAULT GETDATE()
+	TrangThai NVARCHAR (50),
 );
 GO
 
@@ -52,12 +54,10 @@ GO
 CREATE TABLE DonHang (
     MaDH INT IDENTITY(1,1) PRIMARY KEY,
     MaKH INT NOT NULL,
-    MaNV INT NULL,
     NgayDat DATETIME DEFAULT GETDATE(),
     TongTien DECIMAL(18,2) NOT NULL,
     TrangThai NVARCHAR(50) DEFAULT N'Chờ duyệt',
     FOREIGN KEY (MaKH) REFERENCES KhachHang(MaKH),
-    FOREIGN KEY (MaNV) REFERENCES NhanVien(MaNV)
 );
 GO
 
@@ -75,20 +75,9 @@ CREATE TABLE ChiTietDonHang (
 INSERT INTO Admin (HoTen, Email, MatKhau, SoDienThoai, ChucVu, NgayTao, TrangThai)
 VALUES
 (N'Nguyễn Văn A', 'adminA@gmail.com', '123456', '0123456789', N'Quản trị viên', GETDATE(), 1),
-(N'Trần Thị B', 'adminB@gmail.com', '654321', '0987654321', N'Nhân viên', GETDATE(), 1),
-(N'Lê Văn C', 'adminC@gmail.com', 'abcdef', '0911222333', N'Quản lý', GETDATE(), 0),
-(N'Phạm Thị D', 'adminD@gmail.com', 'pass123', '0933444555', N'Nhân viên', GETDATE(), 1);
+(N'Trần Thị B', 'adminB@gmail.com', '654321', '0987654321', N'Nhân viên', GETDATE(), 1);
 
 SELECT * FROM KhachHang;
-
--- Thêm danh mục sản phẩm
-INSERT INTO DanhMucSanPham (TenDM)
-VALUES 
-(N'Sổ - Vở - Giấy'),
-(N'Bút - Dụng cụ viết'),
-(N'Phụ kiện văn phòng'),
-(N'Thiết bị học tập');
-
 
 -- Thêm sản phẩm mẫu vào bảng SanPham
 INSERT INTO SanPham (TenSP, Gia, SoLuong, HinhAnh, MoTa, MaDM)
@@ -107,10 +96,7 @@ SELECT * FROM SanPham;
 -- Thêm khách hàng mẫu
 INSERT INTO KhachHang (HoTen, Email, MatKhau, DiaChi, SoDienThoai)
 VALUES
-(N'Nguyễn Văn A', 'nguyenvana@example.com', '123456', N'Hà Nội', '0912345678'),
-(N'Trần Thị B', 'tranthib@example.com', 'abc@123', N'TP. Hồ Chí Minh', '0987654321'),
-(N'Lê Minh C', 'leminhc@example.com', 'matkhau@2025', N'Đà Nẵng', '0905123456');
+(N'Nguyễn Văn A', 'nguyenvana@example.com', '123456', N'Hà Nội', '0912345678');
 
-ALTER TABLE KhachHang
-ADD ChucVu NVARCHAR(20) DEFAULT 'KhachHang';
+
 
