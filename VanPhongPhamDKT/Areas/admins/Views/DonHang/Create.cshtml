@@ -1,58 +1,101 @@
 ﻿@model VanPhongPhamDKT.Models.DonHang
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
+    var statuses = new[] { "Mới", "Chờ duyệt", "Đang giao", "Hoàn tất", "Đã hủy" };
 }
 
 <div class="container mt-4">
-    <h2 class="text-primary mb-3">Thêm đơn hàng mới</h2>
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2 class="fw-bold text-primary mb-0">Thêm đơn hàng mới</h2>
+        <a asp-action="Index" class="btn btn-outline-secondary">← Quay lại</a>
+    </div>
 
-    <div class="card shadow p-4">
-        <form asp-action="Create" method="post">
-            <!-- Hiển thị lỗi ModelState -->
-            <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+    <div class="card shadow-sm border-0">
+        <div class="card-body">
+            <form asp-action="Create" method="post" class="needs-validation" novalidate>
+                @Html.AntiForgeryToken()
 
-            <!-- Mã khách hàng -->
-            <div class="mb-3">
-                <label asp-for="MaKh" class="form-label">Mã khách hàng</label>
-                <input asp-for="MaKh"
-                       class="form-control"
-                       type="number"
-                       min="1"
-                       step="1"
-                       placeholder="Nhập mã khách hàng (ID)" />
+                <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
 
-                <small class="form-text text-muted">
-                    👉 Nhập đúng <strong>ID</strong> của khách hàng (ví dụ: 1, 2, 3...)
-                    <a asp-area="admins" asp-controller="KhachHang" asp-action="Index">
-                        Xem danh sách khách hàng
-                    </a>
-                </small>
+                <!-- Khách hàng -->
+                <div class="mb-3">
+                    <label asp-for="MaKh" class="form-label fw-semibold">Khách hàng</label>
+                    <select asp-for="MaKh" class="form-select" asp-items="ViewBag.MaKh" required>
+                        <option value="">-- Chọn khách hàng --</option>
+                    </select>
+                    <div class="form-text">
+                        Nếu chưa có khách hàng, hãy thêm trước ở mục Khách Hàng.
+                    </div>
+                    <span asp-validation-for="MaKh" class="text-danger"></span>
+                </div>
 
-                <span asp-validation-for="MaKh" class="text-danger"></span>
-            </div>
+                <!-- Ngày đặt (tùy chọn) -->
+                <div class="mb-3">
+                    <label asp-for="NgayDat" class="form-label fw-semibold">Ngày đặt (tùy chọn)</label>
+                    <input asp-for="NgayDat" type="datetime-local" class="form-control" />
+                    <div class="form-text">Bỏ trống để hệ thống tự lấy thời điểm hiện tại.</div>
+                    <span asp-validation-for="NgayDat" class="text-danger"></span>
+                </div>
 
-            <!-- Tổng tiền -->
-            <div class="mb-3">
-                <label asp-for="TongTien" class="form-label">Tổng tiền</label>
-                <input asp-for="TongTien"
-                       class="form-control"
-                       type="number"
-                       min="0"
-                       step="1000"
-                       placeholder="Nhập tổng tiền" />
+                <!-- Tổng tiền: không thập phân -->
+                <div class="mb-3">
+                    <label asp-for="TongTien" class="form-label fw-semibold">Tổng tiền</label>
+                    <div class="input-group">
+                        <input asp-for="TongTien"
+                               type="number"
+                               class="form-control"
+                               min="0"
+                               step="1"
+                               inputmode="numeric"
+                               placeholder="Nhập tổng tiền (đ)" />
+                        <span class="input-group-text">đ</span>
+                    </div>
+                    <span asp-validation-for="TongTien" class="text-danger"></span>
+                </div>
 
-                <span asp-validation-for="TongTien" class="text-danger"></span>
-            </div>
+                <!-- Trạng thái -->
+                <div class="mb-4">
+                    <label asp-for="TrangThai" class="form-label fw-semibold">Trạng thái</label>
+                    <select asp-for="TrangThai" class="form-select">
+                        <option value="">-- Chọn trạng thái --</option>
+                        @foreach (var s in statuses)
+                        {
+                            <option value="@s" selected="@(string.Equals(Model?.TrangThai, s, StringComparison.OrdinalIgnoreCase))">@s</option>
+                        }
+                    </select>
+                    <div class="form-text">Mặc định hệ thống sẽ lưu là “Mới” nếu bạn để trống.</div>
+                    <span asp-validation-for="TrangThai" class="text-danger"></span>
+                </div>
 
-            <!-- Nút -->
-            <div class="d-flex justify-content-between">
-                <a asp-action="Index" class="btn btn-secondary">← Quay lại</a>
-                <button type="submit" class="btn btn-success">Lưu đơn hàng</button>
-            </div>
-        </form>
+                <div class="d-flex justify-content-end gap-2">
+                    <a asp-action="Index" class="btn btn-outline-secondary">Hủy</a>
+                    <button type="submit" class="btn btn-success">Lưu đơn hàng</button>
+                </div>
+            </form>
+        </div>
     </div>
 </div>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
+    <script>
+        // Bootstrap client-side validation (tùy chọn)
+        (() => {
+            'use strict';
+            const forms = document.querySelectorAll('.needs-validation');
+            Array.from(forms).forEach(form => {
+                form.addEventListener('submit', e => {
+                    if (!form.checkValidity()) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        })();
+    </script>
 }
+
+<style>
+    .card { border-radius: .75rem; }
+</style>

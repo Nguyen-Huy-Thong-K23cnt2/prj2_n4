@@ -1,20 +1,38 @@
 ﻿@{
     ViewData["Title"] = "Đăng xuất";
+    Layout = "_Layout";   // Hoặc null nếu muốn trang trống
 }
 
-<div class="container py-5" style="max-width:640px;">
-    <h3 class="mb-3">Bạn có chắc muốn đăng xuất?</h3>
-    <p class="text-muted">Sau khi đăng xuất, bạn cần đăng nhập lại để tiếp tục mua hàng và quản lý tài khoản.</p>
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-5">
+            <div class="card shadow-sm border-0 rounded-4">
+                <div class="card-body p-4">
+                    <h3 class="fw-bold mb-2">Đăng xuất</h3>
+                    <p class="text-muted mb-4">
+                        Bạn có chắc chắn muốn đăng xuất khỏi tài khoản không?
+                    </p>
 
-    <form asp-action="DangXuat" asp-controller="Auth" method="post" class="mt-4">
-        @Html.AntiForgeryToken()
+                    <form asp-action="DangXuat" method="post" class="d-flex gap-2">
+                        @Html.AntiForgeryToken()
 
-        <button type="submit" class="btn btn-danger me-2">
-            <i class="bi bi-box-arrow-right"></i> Đăng xuất
-        </button>
+                        <button type="submit" class="btn btn-danger">
+                            <i class="bi bi-box-arrow-right me-1"></i> Đăng xuất
+                        </button>
 
-        <a asp-controller="Home" asp-action="Index" class="btn btn-outline-secondary">
-            Ở lại trang web
-        </a>
-    </form>
+                        <a asp-controller="Home" asp-action="Index" class="btn btn-outline-secondary">
+                            Ở lại trang chủ
+                        </a>
+                    </form>
+                </div>
+            </div>
+
+            <div class="text-center mt-3">
+                <small class="text-muted">
+                    Đang đăng nhập dưới tên:
+                    <strong>@(User?.Identity?.Name ?? Context.Session.GetString("UserEmail"))</strong>
+                </small>
+            </div>
+        </div>
+    </div>
 </div>

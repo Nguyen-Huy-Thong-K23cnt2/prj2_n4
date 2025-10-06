@@ -16,27 +16,20 @@ public partial class VanPhongPhamContext : DbContext
     }
 
     public virtual DbSet<Admin> Admins { get; set; }
-
     public virtual DbSet<ChiTietDonHang> ChiTietDonHangs { get; set; }
-
     public virtual DbSet<DanhMucSanPham> DanhMucSanPhams { get; set; }
-
     public virtual DbSet<DonHang> DonHangs { get; set; }
-
     public virtual DbSet<KhachHang> KhachHangs { get; set; }
-
     public virtual DbSet<SanPham> SanPhams { get; set; }
 
-//    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-//#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-//        => optionsBuilder.UseSqlServer("Server=LAPTOP-PJ0J5DU8\\SQLEXPRESS;Database=VanPhongPham;Trusted_Connection=True;TrustServerCertificate=True;");
+    // protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    //     => optionsBuilder.UseSqlServer("Name=ConnectionStrings:VanPhongPham");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Admin>(entity =>
         {
             entity.HasKey(e => e.MaId).HasName("PK__NhanVien__2725D70A0D61A4BF");
-
             entity.ToTable("admin");
 
             entity.HasIndex(e => e.Email, "UQ__NhanVien__A9D105342E1A664B").IsUnique();
@@ -56,7 +49,6 @@ public partial class VanPhongPhamContext : DbContext
         modelBuilder.Entity<ChiTietDonHang>(entity =>
         {
             entity.HasKey(e => e.MaCtdh).HasName("PK__ChiTietD__1E4E40F06490D92D");
-
             entity.ToTable("ChiTietDonHang");
 
             entity.Property(e => e.MaCtdh).HasColumnName("MaCTDH");
@@ -64,21 +56,24 @@ public partial class VanPhongPhamContext : DbContext
             entity.Property(e => e.MaDh).HasColumnName("MaDH");
             entity.Property(e => e.MaSp).HasColumnName("MaSP");
 
+            // Indexes hỗ trợ truy vấn nhanh
+            entity.HasIndex(e => e.MaDh);
+            entity.HasIndex(e => e.MaSp);
+
             entity.HasOne(d => d.MaDhNavigation).WithMany(p => p.ChiTietDonHangs)
                 .HasForeignKey(d => d.MaDh)
-                .OnDelete(DeleteBehavior.ClientSetNull)
+                .OnDelete(DeleteBehavior.Restrict) // KHÔNG cascade; ta xóa chi tiết thủ công
                 .HasConstraintName("FK__ChiTietDon__MaDH__5BE2A6F2");
 
             entity.HasOne(d => d.MaSpNavigation).WithMany(p => p.ChiTietDonHangs)
                 .HasForeignKey(d => d.MaSp)
-                .OnDelete(DeleteBehavior.ClientSetNull)
+                .OnDelete(DeleteBehavior.Restrict) // tránh xóa sản phẩm làm rớt chi tiết
                 .HasConstraintName("FK__ChiTietDon__MaSP__5CD6CB2B");
         });
 
         modelBuilder.Entity<DanhMucSanPham>(entity =>
         {
             entity.HasKey(e => e.MaDm).HasName("PK__DanhMucS__2725866E6E6F179E");
-
             entity.ToTable("DanhMucSanPham");
 
             entity.Property(e => e.MaDm).HasColumnName("MaDM");
@@ -91,7 +86,6 @@ public partial class VanPhongPhamContext : DbContext
         modelBuilder.Entity<DonHang>(entity =>
         {
             entity.HasKey(e => e.MaDh).HasName("PK__DonHang__272586618CCD0E0F");
-
             entity.ToTable("DonHang");
 
             entity.Property(e => e.MaDh).HasColumnName("MaDH");
@@ -104,16 +98,18 @@ public partial class VanPhongPhamContext : DbContext
                 .HasMaxLength(50)
                 .HasDefaultValue("Chờ duyệt");
 
+            // Index hỗ trợ lọc theo khách hàng
+            entity.HasIndex(e => e.MaKh);
+
             entity.HasOne(d => d.MaKhNavigation).WithMany(p => p.DonHangs)
                 .HasForeignKey(d => d.MaKh)
-                .OnDelete(DeleteBehavior.ClientSetNull)
+                .OnDelete(DeleteBehavior.Restrict) // KHÔNG cascade từ KH -> Đơn
                 .HasConstraintName("FK__DonHang__MaKH__5812160E");
         });
 
         modelBuilder.Entity<KhachHang>(entity =>
         {
             entity.HasKey(e => e.MaKh).HasName("PK__KhachHan__2725CF1EFA8996B7");
-
             entity.ToTable("KhachHang");
 
             entity.HasIndex(e => e.Email, "UQ__KhachHan__A9D105347F199D06").IsUnique();
@@ -132,7 +128,6 @@ public partial class VanPhongPhamContext : DbContext
         modelBuilder.Entity<SanPham>(entity =>
         {
             entity.HasKey(e => e.MaSp).HasName("PK__SanPham__2725081CE5B2B7E4");
-
             entity.ToTable("SanPham");
 
             entity.Property(e => e.MaSp).HasColumnName("MaSP");

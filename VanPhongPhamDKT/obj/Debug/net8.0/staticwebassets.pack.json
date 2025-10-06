@@ -5,6 +5,58 @@
       "PackagePath": "staticwebassets\\VanPhongPhamDKT.bundle.scp.css"
     },
     {
+      "Id": "D:\\project2\\VanPhongPhamDKT\\wwwroot\\assets\\icon\\670345195836-removebg-preview.png",
+      "PackagePath": "staticwebassets\\assets\\icon\\670345195836-removebg-preview.png"
+    },
+    {
+      "Id": "D:\\project2\\VanPhongPhamDKT\\wwwroot\\assets\\icon\\cate_1.webp",
+      "PackagePath": "staticwebassets\\assets\\icon\\cate_1.webp"
+    },
+    {
+      "Id": "D:\\project2\\VanPhongPhamDKT\\wwwroot\\assets\\icon\\cate_2.webp",
+      "PackagePath": "staticwebassets\\assets\\icon\\cate_2.webp"
+    },
+    {
+      "Id": "D:\\project2\\VanPhongPhamDKT\\wwwroot\\assets\\icon\\cate_3.webp",
+      "PackagePath": "staticwebassets\\assets\\icon\\cate_3.webp"
+    },
+    {
+      "Id": "D:\\project2\\VanPhongPhamDKT\\wwwroot\\assets\\icon\\cate_4.webp",
+      "PackagePath": "staticwebassets\\assets\\icon\\cate_4.webp"
+    },
+    {
+      "Id": "D:\\project2\\VanPhongPhamDKT\\wwwroot\\assets\\icon\\cate_5.webp",
+      "PackagePath": "staticwebassets\\assets\\icon\\cate_5.webp"
+    },
+    {
+      "Id": "D:\\project2\\VanPhongPhamDKT\\wwwroot\\assets\\icon\\iconmyabay.png",
+      "PackagePath": "staticwebassets\\assets\\icon\\iconmyabay.png"
+    },
+    {
+      "Id": "D:\\project2\\VanPhongPhamDKT\\wwwroot\\assets\\img\\Background123.png",
+      "PackagePath": "staticwebassets\\assets\\img\\Background123.png"
+    },
+    {
+      "Id": "D:\\project2\\VanPhongPhamDKT\\wwwroot\\assets\\img\\Bg123.png",
+      "PackagePath": "staticwebassets\\assets\\img\\Bg123.png"
+    },
+    {
+      "Id": "D:\\project2\\VanPhongPhamDKT\\wwwroot\\assets\\img\\logo.png",
+      "PackagePath": "staticwebassets\\assets\\img\\logo.png"
+    },
+    {
+      "Id": "D:\\project2\\VanPhongPhamDKT\\wwwroot\\assets\\img\\logo2.png",
+      "PackagePath": "staticwebassets\\assets\\img\\logo2.png"
+    },
+    {
+      "Id": "D:\\project2\\VanPhongPhamDKT\\wwwroot\\assets\\img\\slider_1.png",
+      "PackagePath": "staticwebassets\\assets\\img\\slider_1.png"
+    },
+    {
+      "Id": "D:\\project2\\VanPhongPhamDKT\\wwwroot\\assets\\img\\sp9.webp",
+      "PackagePath": "staticwebassets\\assets\\img\\sp9.webp"
+    },
+    {
       "Id": "D:\\project2\\VanPhongPhamDKT\\wwwroot\\css\\site.css",
       "PackagePath": "staticwebassets\\css\\site.css"
     },

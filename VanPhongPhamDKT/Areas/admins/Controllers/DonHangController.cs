@@ -1,4 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System;
+using System.Globalization;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using VanPhongPhamDKT.Models;
 
@@ -14,62 +19,73 @@ namespace VanPhongPhamDKT.Areas.admins.Controllers
             _context = context;
         }
 
-        // GET: admins/DonHang
-        public IActionResult Index()
+        // ====== INDEX ======
+        [HttpGet]
+        public async Task<IActionResult> Index()
         {
-            var donHangs = _context.DonHangs
+            var donHangs = await _context.DonHangs
+                .AsNoTracking()
                 .Include(d => d.MaKhNavigation)
-                .ToList();
+                .ToListAsync();
 
             return View(donHangs);
         }
 
-        // GET: admins/DonHang/Details/5
-        public IActionResult Details(int id)
+        // ====== DETAILS ======
+        [HttpGet]
+        public async Task<IActionResult> Details(int id)
         {
-            var donHang = _context.DonHangs
+            var donHang = await _context.DonHangs
+                .AsNoTracking()
                 .Include(d => d.MaKhNavigation)
-                .FirstOrDefault(d => d.MaDh == id);
+                .Include(d => d.ChiTietDonHangs)
+                    .ThenInclude(ct => ct.MaSpNavigation)
+                .FirstOrDefaultAsync(d => d.MaDh == id);
 
             if (donHang == null) return NotFound();
             return View(donHang);
         }
 
-        // GET: admins/DonHang/Create
-        public IActionResult Create() => View();
+        // ====== CREATE ======
+        [HttpGet]
+        public async Task<IActionResult> Create()
+        {
+            await BindKhachHangSelectListAsync();
+            return View();
+        }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(DonHang donHang)
+        public async Task<IActionResult> Create(DonHang model)
         {
-            if (donHang.TongTien <= 0)
-                ModelState.AddModelError(nameof(donHang.TongTien), "Tổng tiền phải > 0.");
-
-            var kh = _context.KhachHangs.Find(donHang.MaKh);
+            var kh = await _context.KhachHangs.FindAsync(model.MaKh);
             if (kh == null)
-                ModelState.AddModelError(nameof(donHang.MaKh), "Mã khách hàng không tồn tại.");
+                ModelState.AddModelError(nameof(model.MaKh), "Mã khách hàng không tồn tại.");
+
+            if (model.TongTien <= 0)
+                ModelState.AddModelError(nameof(model.TongTien), "Tổng tiền phải > 0.");
 
             if (!ModelState.IsValid)
             {
-                // log ra Output window
-                var errors = string.Join(" | ",
-                    ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage));
-                System.Diagnostics.Debug.WriteLine("MODELSTATE ERRORS: " + errors);
+                var errors = string.Join(" | ", ModelState.Values.SelectMany(v => v.Errors).Select(e => e.ErrorMessage));
+                System.Diagnostics.Debug.WriteLine("MODELSTATE ERRORS (CREATE): " + errors);
 
-                // show ngay trên view
                 ViewBag.ServerErrors = errors;
                 ViewBag.DbName = _context.Database.GetDbConnection().Database;
                 ViewBag.DbSource = _context.Database.GetDbConnection().DataSource;
 
-                return View(donHang);
+                await BindKhachHangSelectListAsync(model.MaKh);
+                return View(model);
             }
 
             try
             {
-                donHang.NgayDat = DateTime.Now;
-                donHang.TrangThai = "Mới";
-                _context.DonHangs.Add(donHang);
-                _context.SaveChanges();
+                model.NgayDat = model.NgayDat ?? DateTime.Now;
+                model.TrangThai = string.IsNullOrWhiteSpace(model.TrangThai) ? "Mới" : model.TrangThai;
+
+                _context.DonHangs.Add(model);
+                await _context.SaveChangesAsync();
+
                 TempData["Success"] = "Đã lưu đơn hàng.";
                 return RedirectToAction(nameof(Index));
             }
@@ -81,71 +97,183 @@ namespace VanPhongPhamDKT.Areas.admins.Controllers
                 ViewBag.DbName = _context.Database.GetDbConnection().Database;
                 ViewBag.DbSource = _context.Database.GetDbConnection().DataSource;
 
-                return View(donHang);
+                await BindKhachHangSelectListAsync(model.MaKh);
+                return View(model);
             }
         }
 
+        // ====== EDIT ======
         // GET: admins/DonHang/Edit/5
-        public IActionResult Edit(int id)
+        [HttpGet]
+        public async Task<IActionResult> Edit(int id)
         {
-            var donHang = _context.DonHangs.Find(id);
+            var donHang = await _context.DonHangs.FindAsync(id);
             if (donHang == null) return NotFound();
+
+            await BindKhachHangSelectListAsync(donHang.MaKh);
             return View(donHang);
         }
 
-        // POST: admins/DonHang/Edit/5
+        /// <summary>
+        /// CÁCH 2: Không dựa vào binder cho các trường nhạy cảm.
+        /// Đọc thẳng Request.Form, tự parse/validate, gán vào entity đang tracking và lưu.
+        /// (ĐỔI TÊN method -> EditPost, map lại tên action "Edit" để tránh trùng chữ ký)
+        /// </summary>
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, DonHang donHang)
+        [ActionName("Edit")]
+        public async Task<IActionResult> EditPost(int id)
         {
-            if (id != donHang.MaDh) return NotFound();
+            // 1) Lấy entity đang tracking
+            var donHangDb = await _context.DonHangs.FirstOrDefaultAsync(d => d.MaDh == id);
+            if (donHangDb == null) return NotFound();
 
-            // Kiểm tra MaKh khi sửa
-            var kh = _context.KhachHangs.Find(donHang.MaKh);
+            // 2) Lấy dữ liệu từ form
+            var form = Request.Form;
+
+            // MaKh
+            if (!int.TryParse(form["MaKh"], out var maKh))
+                ModelState.AddModelError("MaKh", "Vui lòng chọn khách hàng hợp lệ.");
+
+            // NgayDat
+            DateTime? ngayDat = null;
+            var ngayDatStr = form["NgayDat"].ToString();
+            if (!string.IsNullOrWhiteSpace(ngayDatStr))
+            {
+                if (DateTime.TryParse(ngayDatStr, CultureInfo.InvariantCulture, DateTimeStyles.AssumeLocal, out var dt) ||
+                    DateTime.TryParse(ngayDatStr, CultureInfo.GetCultureInfo("vi-VN"), DateTimeStyles.AssumeLocal, out dt) ||
+                    DateTime.TryParse(ngayDatStr, CultureInfo.CurrentCulture, DateTimeStyles.AssumeLocal, out dt))
+                {
+                    ngayDat = dt;
+                }
+                else
+                {
+                    ModelState.AddModelError("NgayDat", "Định dạng ngày không hợp lệ.");
+                }
+            }
+
+            // TongTien
+            decimal tongTien = 0;
+            var tongTienStr = form["TongTien"].ToString().Trim();
+            if (!string.IsNullOrEmpty(tongTienStr))
+            {
+                tongTienStr = tongTienStr.Replace(" ", "");
+                if (!decimal.TryParse(tongTienStr, NumberStyles.Number, CultureInfo.GetCultureInfo("vi-VN"), out tongTien))
+                {
+                    var inv = tongTienStr.Replace(".", "").Replace(",", ".");
+                    decimal.TryParse(inv, NumberStyles.Number, CultureInfo.InvariantCulture, out tongTien);
+                }
+            }
+            if (tongTien <= 0)
+                ModelState.AddModelError("TongTien", "Tổng tiền phải > 0.");
+
+            // TrangThai
+            var trangThai = form["TrangThai"].ToString()?.Trim();
+
+            // 3) Kiểm tra KH tồn tại
+            var kh = await _context.KhachHangs.FindAsync(maKh);
             if (kh == null)
-                ModelState.AddModelError(nameof(donHang.MaKh), "Mã khách hàng không tồn tại.");
+                ModelState.AddModelError("MaKh", "Mã khách hàng không tồn tại.");
 
+            // 4) Trả lại view nếu lỗi
             if (!ModelState.IsValid)
-                return View(donHang);
+            {
+                await BindKhachHangSelectListAsync(maKh);
+                if (maKh > 0) donHangDb.MaKh = maKh;
+                if (ngayDat.HasValue) donHangDb.NgayDat = ngayDat;
+                if (tongTien > 0) donHangDb.TongTien = tongTien;
+                if (!string.IsNullOrWhiteSpace(trangThai)) donHangDb.TrangThai = trangThai;
+
+                return View(donHangDb);
+            }
+
+            // 5) Gán & lưu
+            donHangDb.MaKh = maKh;
+            if (ngayDat.HasValue) donHangDb.NgayDat = ngayDat;
+            donHangDb.TongTien = tongTien;
+            donHangDb.TrangThai = trangThai;
 
             try
             {
-                _context.Update(donHang);
-                _context.SaveChanges();
+                await _context.SaveChangesAsync();
                 TempData["Success"] = "Đã cập nhật đơn hàng.";
                 return RedirectToAction(nameof(Index));
             }
             catch (DbUpdateException ex)
             {
                 ModelState.AddModelError(string.Empty, "Không cập nhật được: " + ex.GetBaseException().Message);
-                return View(donHang);
+                await BindKhachHangSelectListAsync(donHangDb.MaKh);
+                return View(donHangDb);
             }
         }
 
-        // GET: admins/DonHang/Delete/5
-        public IActionResult Delete(int id)
+        // ====== DELETE ======
+        [HttpGet]
+        public async Task<IActionResult> Delete(int id)
         {
-            var donHang = _context.DonHangs
+            var donHang = await _context.DonHangs
+                .AsNoTracking()
                 .Include(d => d.MaKhNavigation)
-                .FirstOrDefault(d => d.MaDh == id);
+                .Include(d => d.ChiTietDonHangs)
+                    .ThenInclude(ct => ct.MaSpNavigation)
+                .FirstOrDefaultAsync(d => d.MaDh == id);
 
             if (donHang == null) return NotFound();
             return View(donHang);
         }
 
-        // POST: admins/DonHang/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public IActionResult DeleteConfirmed(int id)
+        public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var donHang = _context.DonHangs.Find(id);
-            if (donHang != null)
+            await using var tx = await _context.Database.BeginTransactionAsync();
+            try
             {
+                var donHang = await _context.DonHangs
+                    .Include(d => d.ChiTietDonHangs)
+                    .FirstOrDefaultAsync(d => d.MaDh == id);
+
+                if (donHang == null)
+                {
+                    TempData["Error"] = "Không tìm thấy đơn hàng.";
+                    return RedirectToAction(nameof(Index));
+                }
+
+                if (donHang.ChiTietDonHangs is { Count: > 0 })
+                {
+                    _context.ChiTietDonHangs.RemoveRange(donHang.ChiTietDonHangs);
+                    await _context.SaveChangesAsync();
+                }
+
                 _context.DonHangs.Remove(donHang);
-                _context.SaveChanges();
+                await _context.SaveChangesAsync();
+
+                await tx.CommitAsync();
                 TempData["Success"] = "Đã xóa đơn hàng.";
             }
+            catch (DbUpdateException ex)
+            {
+                await tx.RollbackAsync();
+                TempData["Error"] = "Không thể xoá đơn hàng: " + ex.GetBaseException().Message;
+            }
+
             return RedirectToAction(nameof(Index));
+        }
+
+        // ====== Helper ======
+        private async Task BindKhachHangSelectListAsync(int? selectedId = null)
+        {
+            var khachHangs = await _context.KhachHangs
+                .AsNoTracking()
+                .OrderBy(k => k.HoTen)
+                .Select(k => new
+                {
+                    k.MaKh,
+                    Ten = string.IsNullOrEmpty(k.HoTen) ? k.Email : k.HoTen
+                })
+                .ToListAsync();
+
+            ViewBag.MaKh = new SelectList(khachHangs, "MaKh", "Ten", selectedId);
         }
     }
 }

@@ -2,52 +2,178 @@
 
 @{
     ViewData["Title"] = "Giỏ hàng";
+
+    var isEmpty = Model == null || !Model.Any();
+    decimal tamTinh = isEmpty ? 0 : Model.Sum(x => x.ThanhTien);
+    decimal phiVanChuyen = tamTinh > 0 ? 15000 : 0;   // tuỳ bạn thay đổi quy tắc
+    decimal tongCong = tamTinh + phiVanChuyen;
 }
 
-<h2>Giỏ hàng của bạn</h2>
+<!-- Header nhỏ -->
+<header class="bg-dark text-white py-3">
+    <div class="container d-flex justify-content-between align-items-center">
+        <h5 class="mb-0"><i class="bi bi-basket2 me-2"></i>Giỏ hàng của bạn</h5>
+        <a asp-controller="Home" asp-action="Index" class="btn btn-outline-light btn-sm">
+            ← Tiếp tục mua sắm
+        </a>
+    </div>
+</header>
 
-@if (Model == null || !Model.Any())
-{
-    <p>Giỏ hàng trống</p>
-}
-else
-{
-    <form asp-action="DatHang" method="post">
-        @Html.AntiForgeryToken()
-        <!-- Tạm thời dùng mã KH cố định, sau này thay bằng User đăng nhập -->
-        <input type="hidden" name="maKh" value="1" />
+<section class="py-4">
+    <div class="container">
 
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Sản phẩm</th>
-                    <th>Giá</th>
-                    <th>Số lượng</th>
-                    <th>Thành tiền</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model)
-                {
-                    <tr>
-                        <td>@item.TenSp</td>
-                        <td>@item.Gia.ToString("N0") đ</td>
-                        <td>@item.SoLuong</td>
-                        <td>@item.ThanhTien.ToString("N0") đ</td>
-                        <td>
-                            <a asp-action="Remove" asp-route-maSp="@item.MaSp" class="btn btn-danger btn-sm">Xóa</a>
-                        </td>
-                    </tr>
-                }
-            </tbody>
-        </table>
+        @if (isEmpty)
+        {
+            <div class="text-center py-5">
+                <h4 class="mb-2">Giỏ hàng trống</h4>
+                <a asp-controller="Home" asp-action="Index" class="btn btn-danger">
+                    Mua sắm ngay
+                </a>
+            </div>
+        }
+        else
+        {
+            <form asp-action="DatHang" method="post">
+                @Html.AntiForgeryToken()
+                <!-- Tạm dùng mã KH cố định; sau thay bằng mã người dùng đăng nhập -->
+                <input type="hidden" name="maKh" value="1" />
 
-        <div class="text-end">
-            <h4>
-                Tổng: @Model.Sum(x => x.ThanhTien).ToString("N0") đ
-            </h4>
-            <button type="submit" class="btn btn-primary">Đặt hàng</button>
+                <div class="row g-4">
+                    <!-- Bảng sản phẩm -->
+                    <div class="col-lg-8">
+                        <div class="table-responsive">
+                            <table class="table align-middle">
+                                <thead class="table-light">
+                                    <tr>
+                                        <th>Sản phẩm</th>
+                                        <th class="text-end">Đơn giá</th>
+                                        <th class="text-center">Số lượng</th>
+                                        <th class="text-end">Thành tiền</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            <td class="fw-semibold">@item.TenSp</td>
+                                            <td class="text-end">@item.Gia.ToString("N0") đ</td>
+                                            <td class="text-center">@item.SoLuong</td>
+                                            <td class="text-end">@item.ThanhTien.ToString("N0") đ</td>
+                                            <td class="text-end">
+                                                <a asp-action="Remove"
+                                                   asp-route-maSp="@item.MaSp"
+                                                   class="btn btn-danger btn-sm">
+                                                    Xóa
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Tóm tắt đơn hàng -->
+                    <div class="col-lg-4">
+                        <div class="card shadow-sm border-0">
+                            <div class="card-body">
+                                <h5 class="fw-bold mb-3">Tóm tắt đơn hàng</h5>
+
+                                <div class="d-flex justify-content-between mb-2">
+                                    <span>Tạm tính:</span>
+                                    <span>@tamTinh.ToString("N0") đ</span>
+                                </div>
+                                <div class="d-flex justify-content-between mb-3">
+                                    <span>Phí vận chuyển:</span>
+                                    <span>@phiVanChuyen.ToString("N0") đ</span>
+                                </div>
+
+                                <hr />
+                                <div class="d-flex justify-content-between fw-bold mb-2">
+                                    <span>Tổng cộng:</span>
+                                    <span>@tongCong.ToString("N0") đ</span>
+                                </div>
+
+                                <button type="submit" class="btn btn-danger w-100 mt-2">
+                                    Tiến hành thanh toán
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        }
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer text-white bg-dark">
+    <div class="container py-5 d-flex flex-wrap justify-content-between">
+
+        <!-- Logo + liên hệ -->
+        <div class="mb-4">
+            <h4 class="fw-bold">DKT Bookstore</h4>
+            <p>Lựa chọn số 1 cho bạn</p>
+            <p><i class="bi bi-geo-alt"></i> Trụ sở: Tp. Hà Nội</p>
+            <p><i class="bi bi-telephone"></i> 0123456789</p>
+            <p><i class="bi bi-envelope"></i> Ahihi12345@gmail.com</p>
         </div>
-    </form>
-}
+
+        <!-- Links -->
+        <div class="mb-4">
+            <h6 class="fw-bold">TÌM HIỂU THÊM</h6>
+            <ul class="list-unstyled">
+                <li><a href="#" class="text-white">Trang chủ</a></li>
+                <li><a href="#" class="text-white">Giới thiệu</a></li>
+                <li><a href="#" class="text-white">Sản phẩm</a></li>
+                <li><a href="#" class="text-white">Tin tức</a></li>
+            </ul>
+        </div>
+
+        <div class="mb-4">
+            <h6 class="fw-bold">HỖ TRỢ KHÁCH HÀNG</h6>
+            <ul class="list-unstyled">
+                <li><a href="#" class="text-white">Chính sách</a></li>
+                <li><a href="#" class="text-white">Hướng dẫn mua hàng</a></li>
+                <li><a href="#" class="text-white">Liên hệ</a></li>
+            </ul>
+        </div>
+
+        <!-- Social -->
+        <div>
+            <h6 class="fw-bold">THEO DÕI CHÚNG TÔI</h6>
+            <div class="d-flex gap-3 fs-5">
+                <a href="#" class="text-white"><i class="bi bi-facebook"></i></a>
+                <a href="#" class="text-white"><i class="bi bi-instagram"></i></a>
+                <a href="#" class="text-white"><i class="bi bi-twitter"></i></a>
+                <a href="#" class="text-white"><i class="bi bi-youtube"></i></a>
+            </div>
+            <h6 class="fw-bold mt-3">PHƯƠNG THỨC THANH TOÁN</h6>
+            <div class="payment-box d-inline-block px-3 py-2">
+                <img src="https://taphoa01.vinastar.info/wp-content/uploads/2023/05/logo_acb.png" alt="ACB" style="height:25px; margin-right:10px;">
+                <img src="https://taphoa01.vinastar.info/wp-content/uploads/2023/05/logo_msb.png" alt="MSB" style="height:25px;">
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Bản quyền -->
+    <div class="footer-bottom text-center text-dark py-2">
+        © 2025 Văn Phòng Phẩm - Bản Quyền Thuộc Về DKT |
+        Lấy Cảm Hứng Từ <a href="https://vinastar.net/website/" class="text-dark fw-bold">VINASTAR.INFO</a>
+    </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Ít CSS cho đẹp hơn, có thể bỏ nếu không cần -->
+<style>
+    .table th, .table td {
+        vertical-align: middle;
+    }
+
+    .card {
+        border-radius: 0.75rem;
+    }
+</style>

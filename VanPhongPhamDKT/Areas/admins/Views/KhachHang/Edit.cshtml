@@ -30,6 +30,11 @@
         <label asp-for="SoDienThoai" class="form-label"></label>
         <input asp-for="SoDienThoai" class="form-control" />
     </div>
+    <div class="mb-3">
+        <label asp-for="ChucVu" class="form-label"></label>
+        <input asp-for="ChucVu" class="form-control" />
+        <span asp-validation-for="ChucVu" class="text-danger"></span>
+    </div>
     <div class="form-group mb-3">
         <label asp-for="NgayTao" class="form-label"></label>
         <input asp-for="NgayTao" class="form-control" type="date" />

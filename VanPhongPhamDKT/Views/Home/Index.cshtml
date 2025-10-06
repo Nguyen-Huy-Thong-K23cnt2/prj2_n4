@@ -24,12 +24,17 @@
 
   <link rel="stylesheet" href="css/style.css">
 
+    <style>
+        html {
+            scroll-behavior: smooth
+        }</style>
+
 </head>
 
 <body>
 
     <!-- HEADER -->
-    <header class="bg-dark text-white">
+    <header class="bg-dark text-white full-bleed"  class="bg-dark text-white">
         <div class="container d-flex justify-content-between align-items-center py-3">
             <!-- Logo -->
             <a asp-controller="Home" asp-action="Index" class="d-flex align-items-center text-decoration-none">
@@ -91,48 +96,68 @@
                        data-bs-toggle="dropdown" aria-expanded="false">
                         <i class="bi bi-list"></i> Danh mục sản phẩm
                     </a>
+                     
 
                     <ul class="dropdown-menu shadow mt-0 p-3" aria-labelledby="danhmucMenu">
                         <div class="d-flex">
                             <div class="me-4">
                                 <h6 class="fw-bold">VPP Học Sinh</h6>
-                                <a class="dropdown-item" href="#">Bút</a>
-                                <a class="dropdown-item" href="#">Vở</a>
+                                <a asp-controller="Sanpham" asp-action="index" class="nav-link text-dark me-4">
+                                     Bút
+                                </a>
+                                <a asp-controller="Sanpham" asp-action="index" class="nav-link text-dark me-4">
+                                    Vở
+                                </a>
                             </div>
                             <div class="me-4">
                                 <h6 class="fw-bold">VPP Văn Phòng</h6>
-                                <a class="dropdown-item" href="#">Kẹp Tài Liệu</a>
-                                <a class="dropdown-item" href="#">Sổ Tài Liệu</a>
+                                <a asp-controller="Sanpham" asp-action="index" class="nav-link text-dark me-4">
+                                    Kẹp tài liệu
+                                </a>
+                                <a asp-controller="Sanpham" asp-action="index" class="nav-link text-dark me-4">
+                                    Sổ tài liệu
+                                </a>
                             </div>
                             <div class="me-4">
                                 <h6 class="fw-bold">Dụng Cụ Vẽ</h6>
-                                <a class="dropdown-item" href="#">Bút Vẽ</a>
-                                <a class="dropdown-item" href="#">Màu Vẽ</a>
+                                <a asp-controller="Sanpham" asp-action="index" class="nav-link text-dark me-4">
+                                    Bút vẽ
+                                </a>
+                                <a asp-controller="Sanpham" asp-action="index" class="nav-link text-dark me-4">
+                                    Màu vẽ
+                                </a>
                             </div>
                             <div class="me-4">
                                 <h6 class="fw-bold">Bút Viết</h6>
-                                <a class="dropdown-item" href="#">Bút Bi</a>
-                                <a class="dropdown-item" href="#">Bút Chì</a>
+                                <a asp-controller="Sanpham" asp-action="index" class="nav-link text-dark me-4">
+                                    Bút bi 
+                                </a>
+                                <a asp-controller="Sanpham" asp-action="index" class="nav-link text-dark me-4">
+                                    Bút chì
+                                </a>
                             </div>
                             <div>
                                 <h6 class="fw-bold">Sản Phẩm Về Giấy</h6>
-                                <a class="dropdown-item" href="#">Sổ Các Loại</a>
-                                <a class="dropdown-item" href="#">Tập - Vở</a>
+                                <a asp-controller="Sanpham" asp-action="index" class="nav-link text-dark me-4">
+                                    Sổ các loại
+                                </a>
+                                <a asp-controller="Sanpham" asp-action="index" class="nav-link text-dark me-4">
+                                    Tập vở
+                                </a>
                             </div>
                         </div>
                     </ul>
                 </div>
 
                 <!-- Menu bên cạnh -->
-                <a asp-controller="KhuyenMai" asp-action="Index" class="nav-link text-dark me-4">
+                <a asp-controller="Home" asp-action="Index" asp-fragment="flash-sale" class="nav-link text-dark me-4">
                     <i class="bi bi-ticket-perforated"></i> Khuyến mãi
                 </a>
-                <a asp-controller="DichVu" asp-action="Index" class="nav-link text-dark me-4">
+
+                <a asp-controller="Home" asp-action="Index" asp-fragment="services" class="nav-link text-dark me-4">
                     <i class="bi bi-shield"></i> Dịch vụ
                 </a>
-                <a asp-controller="TinTuc" asp-action="Index" class="nav-link text-dark me-4">
-                    <i class="bi bi-newspaper"></i> Tin tức
-                </a>
+                
                 <a asp-controller="Home" asp-action="Contact" class="nav-link text-dark">
                     <i class="bi bi-telephone"></i> Liên hệ
                 </a>
@@ -160,6 +185,7 @@
   </div>
 
   <!-- DANH MỤC SẢN PHẨM -->
+  <a asp-controller="Sanpham" asp-action="index" class="nav-link text-dark me-4">
 <section class="categories-section">
   <div class="container">
     <div class="categories d-flex justify-content-center align-items-center mt-4">
@@ -167,34 +193,40 @@
     <img src="assets/icon/cate_1.webp" alt="">
     <p>VPP Học Sinh</p>
   </div>
-
+  </a>
   <div class="divider"></div>
 
+  <a asp-controller="Sanpham" asp-action="index" class="nav-link text-dark me-4">
   <div class="category-item text-center">
     <img src="assets/icon/cate_2.webp" alt="">
     <p>VPP Văn Phòng</p>
   </div>
+  </a>
 
   <div class="divider"></div>
 
+  <a asp-controller="Sanpham" asp-action="index" class="nav-link text-dark me-4">
   <div class="category-item text-center">
     <img src="assets/icon/cate_3.webp" alt="">
     <p>Phụ Kiện</p>
   </div>
-
+  </a>
   <div class="divider"></div>
 
+  <a asp-controller="Sanpham" asp-action="index" class="nav-link text-dark me-4">
   <div class="category-item text-center">
     <img src="assets/icon/cate_4.webp" alt="">
     <p>Cặp - Túi Xách</p>
   </div>
-
+  </a>
   <div class="divider"></div>
 
+  <a asp-controller="Sanpham" asp-action="index" class="nav-link text-dark me-4">
   <div class="category-item text-center">
     <img src="assets/icon/cate_5.webp" alt="">
     <p>Dụng Cụ Văn Phòng</p>
   </div>
+  </a>
 </div>
   </div>
 </section>
@@ -202,7 +234,7 @@
 <!------------------------------------------------------------------------------------------------------>
 
  <!-- FLASH SALE -->
-<section class="flash-sale py-5">
+<section class="flash-sale py-5" id="flash-sale">
   <div class="container">
 
     <!-- Tiêu đề + Countdown -->
@@ -927,184 +959,329 @@
 
 
       <!-- Tab Bút -->
-      <div class="tab-pane fade" id="tab-but">
-        <div class="row">
-           <div class="col-md-3 ">
-                <div class="card text-center">
-                  <img src="https://taphoa01.vinastar.info/wp-content/uploads/2023/05/sp9.webp" class="card-img-top" alt="Bìa kẹp tài liệu">
-                  <div class="card-body">
-                    <h6 class="card-title">Bìa kẹp tài liệu</h6>
-                    <p class="text-danger fw-bold">57.000₫</p>
-                    <a href="#" class="btn btn-danger btn-sm">Thêm vào giỏ</a>
-                  </div>
+                <div class="tab-pane fade show active" id="tab-but">
+                    <div class="row">
+
+                        <!-- Bìa kẹp tài liệu (MaSP=2) -->
+                        <div class="col-md-3">
+                            <div class="card text-center">
+                                <img src="https://taphoa01.vinastar.info/wp-content/uploads/2023/05/sp9.webp" class="card-img-top" alt="Bìa kẹp tài liệu">
+                                <div class="card-body">
+                                    <h6 class="card-title">Bìa kẹp tài liệu</h6>
+                                    <p class="text-danger fw-bold">57.000₫</p>
+                                    @if (isLoggedIn)
+                                    {
+                                        <a asp-controller="Cart" asp-action="AddToCart" asp-route-maSp="2" asp-route-soLuong="1" class="btn btn-danger btn-sm">Thêm vào giỏ</a>
+                                    }
+                                    else
+                                    {
+                                        <a asp-controller="Auth" asp-action="DangNhap" asp-route-returnUrl="@returnUrl" class="btn btn-secondary btn-sm">Đăng nhập để mua</a>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Vở viết kẻ ngang (MaSP=3) -->
+                        <div class="col-md-3">
+                            <div class="card text-center">
+                                <img src="https://taphoa01.vinastar.info/wp-content/uploads/2023/05/sp10-300x300.webp" class="card-img-top" alt="Vở viết kẻ ngang">
+                                <div class="card-body">
+                                    <h6 class="card-title">Vở viết kẻ ngang</h6>
+                                    <p class="text-danger fw-bold">15.000₫</p>
+                                    @if (isLoggedIn)
+                                    {
+                                        <a asp-controller="Cart" asp-action="AddToCart" asp-route-maSp="3" asp-route-soLuong="1" class="btn btn-danger btn-sm">Thêm vào giỏ</a>
+                                    }
+                                    else
+                                    {
+                                        <a asp-controller="Auth" asp-action="DangNhap" asp-route-returnUrl="@returnUrl" class="btn btn-secondary btn-sm">Đăng nhập để mua</a>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Hộp đựng bút nhựa (MaSP=4) -->
+                        <div class="col-md-3">
+                            <div class="card text-center">
+                                <img src="https://taphoa01.vinastar.info/wp-content/uploads/2023/05/sp8-3-300x300.webp" class="card-img-top" alt="Hộp đựng bút">
+                                <div class="card-body">
+                                    <h6 class="card-title">Hộp đựng bút nhựa</h6>
+                                    <p class="text-danger fw-bold">50.000₫</p>
+                                    @if (isLoggedIn)
+                                    {
+                                        <a asp-controller="Cart" asp-action="AddToCart" asp-route-maSp="4" asp-route-soLuong="1" class="btn btn-danger btn-sm">Thêm vào giỏ</a>
+                                    }
+                                    else
+                                    {
+                                        <a asp-controller="Auth" asp-action="DangNhap" asp-route-returnUrl="@returnUrl" class="btn btn-secondary btn-sm">Đăng nhập để mua</a>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Sổ tay cá nhân (MaSP=5) -->
+                        <div class="col-md-3">
+                            <div class="card text-center">
+                                <img src="https://taphoa01.vinastar.info/wp-content/uploads/2023/05/sp7-300x300.webp" class="card-img-top" alt="Sổ tay cá nhân">
+                                <div class="card-body">
+                                    <h6 class="card-title">Sổ tay cá nhân</h6>
+                                    <p class="text-danger fw-bold">28.000₫</p>
+                                    @if (isLoggedIn)
+                                    {
+                                        <a asp-controller="Cart" asp-action="AddToCart" asp-route-maSp="5" asp-route-soLuong="1" class="btn btn-danger btn-sm">Thêm vào giỏ</a>
+                                    }
+                                    else
+                                    {
+                                        <a asp-controller="Auth" asp-action="DangNhap" asp-route-returnUrl="@returnUrl" class="btn btn-secondary btn-sm">Đăng nhập để mua</a>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Bút highlight (MaSP=6) -->
+                        <div class="col-md-3">
+                            <div class="card text-center">
+                                <img src="https://taphoa01.vinastar.info/wp-content/uploads/2023/05/sp5-300x300.webp" class="card-img-top" alt="Bút highlight dạ quang">
+                                <div class="card-body">
+                                    <h6 class="card-title">Bút highlight dạ quang</h6>
+                                    <p class="text-danger fw-bold">25.000₫</p>
+                                    @if (isLoggedIn)
+                                    {
+                                        <a asp-controller="Cart" asp-action="AddToCart" asp-route-maSp="6" asp-route-soLuong="1" class="btn btn-danger btn-sm">Thêm vào giỏ</a>
+                                    }
+                                    else
+                                    {
+                                        <a asp-controller="Auth" asp-action="DangNhap" asp-route-returnUrl="@returnUrl" class="btn btn-secondary btn-sm">Đăng nhập để mua</a>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Túi đựng mỹ phẩm (MaSP=7) -->
+                        <div class="col-md-3">
+                            <div class="card text-center">
+                                <img src="https://taphoa01.vinastar.info/wp-content/uploads/2023/05/sp12-300x300.webp" class="card-img-top" alt="Túi mỹ phẩm">
+                                <div class="card-body">
+                                    <h6 class="card-title">Túi đựng mỹ phẩm</h6>
+                                    <p class="text-danger fw-bold">120.000₫</p>
+                                    @if (isLoggedIn)
+                                    {
+                                        <a asp-controller="Cart" asp-action="AddToCart" asp-route-maSp="7" asp-route-soLuong="1" class="btn btn-danger btn-sm">Thêm vào giỏ</a>
+                                    }
+                                    else
+                                    {
+                                        <a asp-controller="Auth" asp-action="DangNhap" asp-route-returnUrl="@returnUrl" class="btn btn-secondary btn-sm">Đăng nhập để mua</a>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Túi đựng đồ văn phòng (MaSP=8) -->
+                        <div class="col-md-3">
+                            <div class="card text-center">
+                                <img src="https://taphoa01.vinastar.info/wp-content/uploads/2023/05/sp11-300x300.webp" class="card-img-top" alt="Túi văn phòng phẩm">
+                                <div class="card-body">
+                                    <h6 class="card-title">Túi đựng đồ văn phòng</h6>
+                                    <p class="text-danger fw-bold">90.000₫</p>
+                                    @if (isLoggedIn)
+                                    {
+                                        <a asp-controller="Cart" asp-action="AddToCart" asp-route-maSp="8" asp-route-soLuong="1" class="btn btn-danger btn-sm">Thêm vào giỏ</a>
+                                    }
+                                    else
+                                    {
+                                        <a asp-controller="Auth" asp-action="DangNhap" asp-route-returnUrl="@returnUrl" class="btn btn-secondary btn-sm">Đăng nhập để mua</a>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Máy tính mini gấu cute (MaSP=9) -->
+                        <div class="col-md-3">
+                            <div class="card text-center">
+                                <img src="https://taphoa01.vinastar.info/wp-content/uploads/2023/05/sp6-300x300.webp" class="card-img-top" alt="Máy tính mini">
+                                <div class="card-body">
+                                    <h6 class="card-title">Máy tính mini gấu cute</h6>
+                                    <p class="text-danger fw-bold">700.000₫</p>
+                                    @if (isLoggedIn)
+                                    {
+                                        <a asp-controller="Cart" asp-action="AddToCart" asp-route-maSp="9" asp-route-soLuong="1" class="btn btn-danger btn-sm">Thêm vào giỏ</a>
+                                    }
+                                    else
+                                    {
+                                        <a asp-controller="Auth" asp-action="DangNhap" asp-route-returnUrl="@returnUrl" class="btn btn-secondary btn-sm">Đăng nhập để mua</a>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
                 </div>
-              </div>
-              <div class="col-md-3">
-                <div class="card text-center">
-                  <img src="https://taphoa01.vinastar.info/wp-content/uploads/2023/05/sp10-300x300.webp" class="card-img-top" alt="Vở viết kẻ ngang">
-                  <div class="card-body">
-                    <h6 class="card-title">Vở viết kẻ ngang</h6>
-                    <p class="text-danger fw-bold">15.000₫</p>
-                    <a href="#" class="btn btn-danger btn-sm">Thêm vào giỏ</a>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-3">
-                <div class="card text-center">
-                  <img src="https://taphoa01.vinastar.info/wp-content/uploads/2023/05/sp8-3-300x300.webp" class="card-img-top" alt="Hộp đựng bút">
-                  <div class="card-body">
-                    <h6 class="card-title">Hộp đựng bút nhựa</h6>
-                    <p class="text-danger fw-bold">50.000₫</p>
-                    <a href="#" class="btn btn-danger btn-sm">Thêm vào giỏ</a>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-3">
-                <div class="card text-center">
-                  <img src="https://taphoa01.vinastar.info/wp-content/uploads/2023/05/sp7-300x300.webp" class="card-img-top" alt="Sổ tay cá nhân">
-                  <div class="card-body">
-                    <h6 class="card-title">Sổ tay cá nhân</h6>
-                    <p class="text-danger fw-bold">28.000₫</p>
-                    <a href="#" class="btn btn-danger btn-sm">Thêm vào giỏ</a>
-                  </div>
-                </div>
-              </div>
-               <div class="col-md-3">
-                <div class="card text-center">
-                  <img src="https://taphoa01.vinastar.info/wp-content/uploads/2023/05/sp5-300x300.webp" class="card-img-top" alt="Bút highlight dạ quang">
-                  <div class="card-body">
-                    <h6 class="card-title">Bút highlight dạ quang</h6>
-                    <p class="text-danger fw-bold">25.000₫</p>
-                    <a href="#" class="btn btn-danger btn-sm">Thêm vào giỏ</a>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-3">
-                <div class="card text-center">
-                  <img src="https://taphoa01.vinastar.info/wp-content/uploads/2023/05/sp12-300x300.webp" class="card-img-top" alt="Túi mỹ phẩm">
-                  <div class="card-body">
-                    <h6 class="card-title">Túi đựng mỹ phẩm</h6>
-                    <p class="text-danger fw-bold">120.000₫</p>
-                    <a href="#" class="btn btn-danger btn-sm">Thêm vào giỏ</a>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-3">
-                <div class="card text-center">
-                  <img src="https://taphoa01.vinastar.info/wp-content/uploads/2023/05/sp11-300x300.webp" class="card-img-top" alt="Túi văn phòng phẩm">
-                  <div class="card-body">
-                    <h6 class="card-title">Túi đựng đồ văn phòng</h6>
-                    <p class="text-danger fw-bold">90.000₫</p>
-                    <a href="#" class="btn btn-danger btn-sm">Thêm vào giỏ</a>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-3">
-                <div class="card text-center">
-                  <img src="https://taphoa01.vinastar.info/wp-content/uploads/2023/05/sp6-300x300.webp" class="card-img-top" alt="Máy tính mini">
-                  <div class="card-body">
-                    <h6 class="card-title">Máy tính mini gấu cute</h6>
-                    <p class="text-danger fw-bold">700.000₫</p>
-                    <a href="#" class="btn btn-danger btn-sm">Thêm vào giỏ</a>
-                  </div>
-                </div>
-              </div>
-        </div>
-      </div>
 
       <!-- Tab Bộ cắt dán -->
-      <div class="tab-pane fade" id="tab-cut">
-        <div class="row">
-           <div class="col-md-3 ">
-                <div class="card text-center">
-                  <img src="https://taphoa01.vinastar.info/wp-content/uploads/2023/05/sp9.webp" class="card-img-top" alt="Bìa kẹp tài liệu">
-                  <div class="card-body">
-                    <h6 class="card-title">Bìa kẹp tài liệu</h6>
-                    <p class="text-danger fw-bold">57.000₫</p>
-                    <a href="#" class="btn btn-danger btn-sm">Thêm vào giỏ</a>
-                  </div>
+                <div class="tab-pane fade show active" id="tab-bo cat dan">
+                    <div class="row">
+
+                        <!-- Bìa kẹp tài liệu (MaSP=2) -->
+                        <div class="col-md-3">
+                            <div class="card text-center">
+                                <img src="https://taphoa01.vinastar.info/wp-content/uploads/2023/05/sp9.webp" class="card-img-top" alt="Bìa kẹp tài liệu">
+                                <div class="card-body">
+                                    <h6 class="card-title">Bìa kẹp tài liệu</h6>
+                                    <p class="text-danger fw-bold">57.000₫</p>
+                                    @if (isLoggedIn)
+                                    {
+                                        <a asp-controller="Cart" asp-action="AddToCart" asp-route-maSp="2" asp-route-soLuong="1" class="btn btn-danger btn-sm">Thêm vào giỏ</a>
+                                    }
+                                    else
+                                    {
+                                        <a asp-controller="Auth" asp-action="DangNhap" asp-route-returnUrl="@returnUrl" class="btn btn-secondary btn-sm">Đăng nhập để mua</a>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Vở viết kẻ ngang (MaSP=3) -->
+                        <div class="col-md-3">
+                            <div class="card text-center">
+                                <img src="https://taphoa01.vinastar.info/wp-content/uploads/2023/05/sp10-300x300.webp" class="card-img-top" alt="Vở viết kẻ ngang">
+                                <div class="card-body">
+                                    <h6 class="card-title">Vở viết kẻ ngang</h6>
+                                    <p class="text-danger fw-bold">15.000₫</p>
+                                    @if (isLoggedIn)
+                                    {
+                                        <a asp-controller="Cart" asp-action="AddToCart" asp-route-maSp="3" asp-route-soLuong="1" class="btn btn-danger btn-sm">Thêm vào giỏ</a>
+                                    }
+                                    else
+                                    {
+                                        <a asp-controller="Auth" asp-action="DangNhap" asp-route-returnUrl="@returnUrl" class="btn btn-secondary btn-sm">Đăng nhập để mua</a>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Hộp đựng bút nhựa (MaSP=4) -->
+                        <div class="col-md-3">
+                            <div class="card text-center">
+                                <img src="https://taphoa01.vinastar.info/wp-content/uploads/2023/05/sp8-3-300x300.webp" class="card-img-top" alt="Hộp đựng bút">
+                                <div class="card-body">
+                                    <h6 class="card-title">Hộp đựng bút nhựa</h6>
+                                    <p class="text-danger fw-bold">50.000₫</p>
+                                    @if (isLoggedIn)
+                                    {
+                                        <a asp-controller="Cart" asp-action="AddToCart" asp-route-maSp="4" asp-route-soLuong="1" class="btn btn-danger btn-sm">Thêm vào giỏ</a>
+                                    }
+                                    else
+                                    {
+                                        <a asp-controller="Auth" asp-action="DangNhap" asp-route-returnUrl="@returnUrl" class="btn btn-secondary btn-sm">Đăng nhập để mua</a>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Sổ tay cá nhân (MaSP=5) -->
+                        <div class="col-md-3">
+                            <div class="card text-center">
+                                <img src="https://taphoa01.vinastar.info/wp-content/uploads/2023/05/sp7-300x300.webp" class="card-img-top" alt="Sổ tay cá nhân">
+                                <div class="card-body">
+                                    <h6 class="card-title">Sổ tay cá nhân</h6>
+                                    <p class="text-danger fw-bold">28.000₫</p>
+                                    @if (isLoggedIn)
+                                    {
+                                        <a asp-controller="Cart" asp-action="AddToCart" asp-route-maSp="5" asp-route-soLuong="1" class="btn btn-danger btn-sm">Thêm vào giỏ</a>
+                                    }
+                                    else
+                                    {
+                                        <a asp-controller="Auth" asp-action="DangNhap" asp-route-returnUrl="@returnUrl" class="btn btn-secondary btn-sm">Đăng nhập để mua</a>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Bút highlight (MaSP=6) -->
+                        <div class="col-md-3">
+                            <div class="card text-center">
+                                <img src="https://taphoa01.vinastar.info/wp-content/uploads/2023/05/sp5-300x300.webp" class="card-img-top" alt="Bút highlight dạ quang">
+                                <div class="card-body">
+                                    <h6 class="card-title">Bút highlight dạ quang</h6>
+                                    <p class="text-danger fw-bold">25.000₫</p>
+                                    @if (isLoggedIn)
+                                    {
+                                        <a asp-controller="Cart" asp-action="AddToCart" asp-route-maSp="6" asp-route-soLuong="1" class="btn btn-danger btn-sm">Thêm vào giỏ</a>
+                                    }
+                                    else
+                                    {
+                                        <a asp-controller="Auth" asp-action="DangNhap" asp-route-returnUrl="@returnUrl" class="btn btn-secondary btn-sm">Đăng nhập để mua</a>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Túi đựng mỹ phẩm (MaSP=7) -->
+                        <div class="col-md-3">
+                            <div class="card text-center">
+                                <img src="https://taphoa01.vinastar.info/wp-content/uploads/2023/05/sp12-300x300.webp" class="card-img-top" alt="Túi mỹ phẩm">
+                                <div class="card-body">
+                                    <h6 class="card-title">Túi đựng mỹ phẩm</h6>
+                                    <p class="text-danger fw-bold">120.000₫</p>
+                                    @if (isLoggedIn)
+                                    {
+                                        <a asp-controller="Cart" asp-action="AddToCart" asp-route-maSp="7" asp-route-soLuong="1" class="btn btn-danger btn-sm">Thêm vào giỏ</a>
+                                    }
+                                    else
+                                    {
+                                        <a asp-controller="Auth" asp-action="DangNhap" asp-route-returnUrl="@returnUrl" class="btn btn-secondary btn-sm">Đăng nhập để mua</a>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Túi đựng đồ văn phòng (MaSP=8) -->
+                        <div class="col-md-3">
+                            <div class="card text-center">
+                                <img src="https://taphoa01.vinastar.info/wp-content/uploads/2023/05/sp11-300x300.webp" class="card-img-top" alt="Túi văn phòng phẩm">
+                                <div class="card-body">
+                                    <h6 class="card-title">Túi đựng đồ văn phòng</h6>
+                                    <p class="text-danger fw-bold">90.000₫</p>
+                                    @if (isLoggedIn)
+                                    {
+                                        <a asp-controller="Cart" asp-action="AddToCart" asp-route-maSp="8" asp-route-soLuong="1" class="btn btn-danger btn-sm">Thêm vào giỏ</a>
+                                    }
+                                    else
+                                    {
+                                        <a asp-controller="Auth" asp-action="DangNhap" asp-route-returnUrl="@returnUrl" class="btn btn-secondary btn-sm">Đăng nhập để mua</a>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Máy tính mini gấu cute (MaSP=9) -->
+                        <div class="col-md-3">
+                            <div class="card text-center">
+                                <img src="https://taphoa01.vinastar.info/wp-content/uploads/2023/05/sp6-300x300.webp" class="card-img-top" alt="Máy tính mini">
+                                <div class="card-body">
+                                    <h6 class="card-title">Máy tính mini gấu cute</h6>
+                                    <p class="text-danger fw-bold">700.000₫</p>
+                                    @if (isLoggedIn)
+                                    {
+                                        <a asp-controller="Cart" asp-action="AddToCart" asp-route-maSp="9" asp-route-soLuong="1" class="btn btn-danger btn-sm">Thêm vào giỏ</a>
+                                    }
+                                    else
+                                    {
+                                        <a asp-controller="Auth" asp-action="DangNhap" asp-route-returnUrl="@returnUrl" class="btn btn-secondary btn-sm">Đăng nhập để mua</a>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
                 </div>
-              </div>
-              <div class="col-md-3">
-                <div class="card text-center">
-                  <img src="https://taphoa01.vinastar.info/wp-content/uploads/2023/05/sp10-300x300.webp" class="card-img-top" alt="Vở viết kẻ ngang">
-                  <div class="card-body">
-                    <h6 class="card-title">Vở viết kẻ ngang</h6>
-                    <p class="text-danger fw-bold">15.000₫</p>
-                    <a href="#" class="btn btn-danger btn-sm">Thêm vào giỏ</a>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-3">
-                <div class="card text-center">
-                  <img src="https://taphoa01.vinastar.info/wp-content/uploads/2023/05/sp8-3-300x300.webp" class="card-img-top" alt="Hộp đựng bút">
-                  <div class="card-body">
-                    <h6 class="card-title">Hộp đựng bút nhựa</h6>
-                    <p class="text-danger fw-bold">50.000₫</p>
-                    <a href="#" class="btn btn-danger btn-sm">Thêm vào giỏ</a>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-3">
-                <div class="card text-center">
-                  <img src="https://taphoa01.vinastar.info/wp-content/uploads/2023/05/sp7-300x300.webp" class="card-img-top" alt="Sổ tay cá nhân">
-                  <div class="card-body">
-                    <h6 class="card-title">Sổ tay cá nhân</h6>
-                    <p class="text-danger fw-bold">28.000₫</p>
-                    <a href="#" class="btn btn-danger btn-sm">Thêm vào giỏ</a>
-                  </div>
-                </div>
-              </div>
-               <div class="col-md-3">
-                <div class="card text-center">
-                  <img src="https://taphoa01.vinastar.info/wp-content/uploads/2023/05/sp5-300x300.webp" class="card-img-top" alt="Bút highlight dạ quang">
-                  <div class="card-body">
-                    <h6 class="card-title">Bút highlight dạ quang</h6>
-                    <p class="text-danger fw-bold">25.000₫</p>
-                    <a href="#" class="btn btn-danger btn-sm">Thêm vào giỏ</a>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-3">
-                <div class="card text-center">
-                  <img src="https://taphoa01.vinastar.info/wp-content/uploads/2023/05/sp12-300x300.webp" class="card-img-top" alt="Túi mỹ phẩm">
-                  <div class="card-body">
-                    <h6 class="card-title">Túi đựng mỹ phẩm</h6>
-                    <p class="text-danger fw-bold">120.000₫</p>
-                    <a href="#" class="btn btn-danger btn-sm">Thêm vào giỏ</a>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-3">
-                <div class="card text-center">
-                  <img src="https://taphoa01.vinastar.info/wp-content/uploads/2023/05/sp11-300x300.webp" class="card-img-top" alt="Túi văn phòng phẩm">
-                  <div class="card-body">
-                    <h6 class="card-title">Túi đựng đồ văn phòng</h6>
-                    <p class="text-danger fw-bold">90.000₫</p>
-                    <a href="#" class="btn btn-danger btn-sm">Thêm vào giỏ</a>
-                  </div>
-                </div>
-              </div>
-              <div class="col-md-3">
-                <div class="card text-center">
-                  <img src="https://taphoa01.vinastar.info/wp-content/uploads/2023/05/sp6-300x300.webp" class="card-img-top" alt="Máy tính mini">
-                  <div class="card-body">
-                    <h6 class="card-title">Máy tính mini gấu cute</h6>
-                    <p class="text-danger fw-bold">700.000₫</p>
-                    <a href="#" class="btn btn-danger btn-sm">Thêm vào giỏ</a>
-                  </div>
-                </div>
-              </div>
-        </div>
-      </div>
-    </div>
 
   </div>
 </section>
 
 <!-- DỊCH VỤ CỦA CHÚNG TÔI -->
-<section class="services py-5 position-relative">
-  <div class="container d-flex flex-wrap justify-content-between align-items-center">
+    <section class="services py-5 position-relative" id="services">
+  <div  class="container d-flex flex-wrap justify-content-between align-items-center">
 
     <!-- Danh sách dịch vụ -->
     <div class="services-list col-md-6">
@@ -1145,21 +1322,37 @@
   <div class="container py-4">
     <h5 class="fw-bold">Đăng ký để nhận được ưu đãi mới nhất của chúng tôi</h5>
     <p class="small">Rất hân hạnh được phục vụ bạn. Chúc bạn có trải nghiệm tuyệt vời với DKT Bookstore</p>
-    <form class="d-flex justify-content-center mt-3">
-      <button class="btn btn-warning rounded-pill px-4 fw-bold" ><a href="dangky.html" class="text-white" >ĐĂNG KÝ NGAY</a></button>
-    </form>
+            <div class="d-flex justify-content-center mt-3">
+                @if (!isLoggedIn)
+                {
+                    <a asp-controller="Auth"
+                       asp-action="DangKi"
+                       class="btn btn-warning rounded-pill px-4 fw-bold text-white">
+                        ĐĂNG KÝ NGAY
+                    </a>
+                }
+                else
+                {
+                    <a asp-controller="Home"
+                       asp-action="Index"
+                       class="btn btn-outline-light rounded-pill px-4 fw-bold">
+                        Khám phá thêm
+                    </a>
+                }
+            </div>
+
   </div>
 </section>
 
 <!-- FOOTER -->
-<footer class="footer text-white bg-dark">
+<footer class="footer full-bleed" class="footer text-white bg-dark">
   <div class="container py-5 d-flex flex-wrap justify-content-between">
 
     <!-- Logo + liên hệ -->
     <div class="mb-4">
       <h4 class="fw-bold">DKT Bookstore</h4>
       <p>Lựa chọn số 1 cho bạn</p>
-      <p><i class="bi bi-geo-alt"></i> Trụ sở: Tp. Hà Nội</p>
+      <p><i class="bi bi-geo-alt"></i> Trụ sở: Thủ Đô Hà Nội</p>
       <p><i class="bi bi-telephone"></i> 0123456789</p>
       <p><i class="bi bi-envelope"></i> Ahihi12345@gmail.com</p>
     </div>
@@ -1171,7 +1364,7 @@
         <li><a href="#" class="text-white">Trang chủ</a></li>
         <li><a href="#" class="text-white">Giới thiệu</a></li>
         <li><a href="#" class="text-white">Sản phẩm</a></li>
-        <li><a href="#" class="text-white">Tin tức</a></li>
+        
       </ul>
     </div>
 
@@ -1204,7 +1397,7 @@
   </div>
 
   <!-- Bản quyền -->
-  <div class="footer-bottom text-center text-dark py-2">
+  <div  class="footer full-bleed" class="footer-bottom text-center text-dark py-2">
     © 2025 Văn Phòng Phẩm - Bản Quyền Thuộc Về DKT | 
     Lấy Cảm Hứng Từ <a href="https://vinastar.net/website/" class="text-dark fw-bold">VINASTAR.INFO</a>
   </div>
