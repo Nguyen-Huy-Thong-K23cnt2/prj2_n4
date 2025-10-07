@@ -1,46 +1,104 @@
-﻿@model VanPhongPhamDKT.Models.SanPham
+﻿@using VanPhongPhamDKT.Models
+@model SanPham
 
 @{
     ViewData["Title"] = "Sửa sản phẩm";
     Layout = "~/Views/Shared/_Layout.cshtml";
+
+    string Src(string? p) => string.IsNullOrWhiteSpace(p)
+        ? Url.Content("~/assets/img/placeholder-300x300.png")
+        : (p.StartsWith("http", StringComparison.OrdinalIgnoreCase) ? p : Url.Content(p));
 }
 
 <div class="container mt-4">
-    <h2 class="fw-bold text-warning mb-3"><i class="fa-solid fa-pen"></i> Sửa sản phẩm</h2>
+    <h2 class="fw-bold text-warning mb-3">
+        <i class="fa-solid fa-pen"></i> Sửa sản phẩm
+    </h2>
 
-    <form asp-action="Edit" enctype="multipart/form-data" class="card shadow p-4">
+    <form asp-action="Edit" method="post" enctype="multipart/form-data" class="card shadow p-4">
+        @Html.AntiForgeryToken()
+
+        <!-- Khóa chính -->
         <input type="hidden" asp-for="MaSp" />
+        <!-- Lưu lại path hiện tại phòng khi không upload ảnh mới -->
+        <input type="hidden" asp-for="HinhAnh" />
 
-        <div class="row g-3">
-            <div class="col-md-6">
-                <label class="form-label">Tên sản phẩm</label>
-                <input asp-for="TenSp" class="form-control" />
+        <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
+
+        <div class="row g-4">
+            <div class="col-lg-5">
+                <div class="border rounded p-2 text-center">
+                    <img id="preview" src="@Src(Model.HinhAnh)" alt="@Model.TenSp"
+                         class="img-fluid rounded" style="max-height: 380px; object-fit: cover;" />
+                </div>
+
+                <div class="mt-3">
+                    <label class="form-label">Chọn ảnh mới (tùy chọn)</label>
+                    <!-- KHÔNG dùng asp-for vì HinhAnh là string lưu path -->
+                    <input type="file" name="HinhAnhFile" class="form-control" accept="image/*"
+                           onchange="previewFile(this)" />
+                    <small class="text-muted d-block mt-1">Để trống nếu muốn giữ ảnh cũ.</small>
+                    <span class="text-danger">@ViewBag.FileError</span>
+                </div>
             </div>
-            <div class="col-md-3">
-                <label class="form-label">Giá</label>
-                <input asp-for="Gia" class="form-control" type="number" />
-            </div>
-            <div class="col-md-3">
-                <label class="form-label">Số lượng</label>
-                <input asp-for="SoLuong" class="form-control" type="number" />
-            </div>
-            <div class="col-md-6">
-                <label class="form-label">Hình ảnh mới (nếu muốn đổi)</label>
-                <input asp-for="HinhAnh" class="form-control" type="file" name="ImageFile" />
-            </div>
-            <div class="col-md-6">
-                <label class="form-label">Danh mục</label>
-                <select asp-for="MaDm" asp-items="ViewBag.MaDm" class="form-select"></select>
-            </div>
-            <div class="col-12">
-                <label class="form-label">Mô tả</label>
-                <textarea asp-for="MoTa" class="form-control" rows="3"></textarea>
+
+            <div class="col-lg-7">
+                <div class="row g-3">
+                    <div class="col-12">
+                        <label asp-for="TenSp" class="form-label">Tên sản phẩm</label>
+                        <input asp-for="TenSp" class="form-control" />
+                        <span asp-validation-for="TenSp" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label asp-for="Gia" class="form-label">Giá</label>
+                        <input asp-for="Gia" class="form-control" type="number" step="1000" min="0" />
+                        <span asp-validation-for="Gia" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label asp-for="SoLuong" class="form-label">Số lượng</label>
+                        <input asp-for="SoLuong" class="form-control" type="number" step="1" min="0" />
+                        <span asp-validation-for="SoLuong" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-12">
+                        <label asp-for="MaDm" class="form-label">Danh mục</label>
+                        <select asp-for="MaDm" asp-items="ViewBag.MaDm" class="form-select" required>
+                            <option value="">-- Chọn danh mục --</option>
+                        </select>
+                        <span asp-validation-for="MaDm" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-12">
+                        <label asp-for="MoTa" class="form-label">Mô tả</label>
+                        <textarea asp-for="MoTa" class="form-control" rows="4"></textarea>
+                        <span asp-validation-for="MoTa" class="text-danger"></span>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <div class="mt-4">
-            <button type="submit" class="btn btn-warning"><i class="fa-solid fa-save"></i> Cập nhật</button>
-            <a asp-action="Index" class="btn btn-secondary">Quay lại</a>
+        <div class="mt-4 d-flex gap-2">
+            <button type="submit" class="btn btn-warning">
+                <i class="fa-solid fa-save"></i> Cập nhật
+            </button>
+            <a asp-area="admins" asp-controller="SanPham" asp-action="Index" class="btn btn-secondary">
+                ← Quay lại
+            </a>
         </div>
     </form>
 </div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        function previewFile(input) {
+            const file = input.files && input.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = e => document.getElementById('preview').src = e.target.result;
+            reader.readAsDataURL(file);
+        }
+    </script>
+}

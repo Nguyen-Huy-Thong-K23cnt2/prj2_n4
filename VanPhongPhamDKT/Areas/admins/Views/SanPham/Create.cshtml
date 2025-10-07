@@ -1,48 +1,74 @@
 ﻿@model VanPhongPhamDKT.Models.SanPham
-
 @{
     ViewData["Title"] = "Thêm sản phẩm";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <div class="container mt-4">
-    <h2 class="fw-bold text-success mb-3"><i class="fa-solid fa-plus"></i> Thêm sản phẩm mới</h2>
+    <h2 class="fw-bold text-success mb-3">
+        <i class="fa-solid fa-plus"></i> Thêm sản phẩm mới
+    </h2>
 
-    <form asp-action="Create" enctype="multipart/form-data" class="card shadow p-4">
+    <form asp-action="Create" method="post" enctype="multipart/form-data" class="card shadow p-4">
+        @Html.AntiForgeryToken()
+
+        <!-- Hiển thị lỗi tổng quát -->
+        <div asp-validation-summary="ModelOnly" class="text-danger mb-2"></div>
+        @if (ViewBag.ModelErrors != null)
+        {
+            <div class="alert alert-danger">@ViewBag.ModelErrors</div>
+        }
+
         <div class="row g-3">
             <div class="col-md-6">
-                <label class="form-label">Tên sản phẩm</label>
+                <label asp-for="TenSp" class="form-label">Tên sản phẩm</label>
                 <input asp-for="TenSp" class="form-control" />
                 <span asp-validation-for="TenSp" class="text-danger"></span>
             </div>
+
             <div class="col-md-3">
-                <label class="form-label">Giá</label>
-                <input asp-for="Gia" class="form-control" type="number" />
+                <label asp-for="Gia" class="form-label">Giá</label>
+                <input asp-for="Gia" class="form-control" type="number" step="1000" min="0" />
                 <span asp-validation-for="Gia" class="text-danger"></span>
             </div>
+
             <div class="col-md-3">
-                <label class="form-label">Số lượng</label>
-                <input asp-for="SoLuong" class="form-control" type="number" />
+                <label asp-for="SoLuong" class="form-label">Số lượng</label>
+                <input asp-for="SoLuong" class="form-control" type="number" step="1" min="0" />
                 <span asp-validation-for="SoLuong" class="text-danger"></span>
             </div>
+
             <div class="col-md-6">
                 <label class="form-label">Hình ảnh</label>
-                <input asp-for="HinhAnh" class="form-control" type="file" name="ImageFile" />
-                <span asp-validation-for="HinhAnh" class="text-danger"></span>
+                <!-- KHÔNG dùng asp-for nếu HinhAnh là string path -->
+                <input type="file" name="HinhAnhFile" class="form-control" accept="image/*" />
+                <span class="text-danger">@ViewBag.FileError</span>
             </div>
+
             <div class="col-md-6">
-                <label class="form-label">Danh mục</label>
-                <select asp-for="MaDm" asp-items="ViewBag.MaDm" class="form-select"></select>
+                <label asp-for="MaDm" class="form-label">Danh mục</label>
+                <select asp-for="MaDm" asp-items="ViewBag.MaDm" class="form-select" required>
+                    <option value="">-- Chọn danh mục --</option>
+                </select>
+                <span asp-validation-for="MaDm" class="text-danger"></span>
             </div>
+
             <div class="col-12">
-                <label class="form-label">Mô tả</label>
+                <label asp-for="MoTa" class="form-label">Mô tả</label>
                 <textarea asp-for="MoTa" class="form-control" rows="3"></textarea>
+                <span asp-validation-for="MoTa" class="text-danger"></span>
             </div>
         </div>
 
-        <div class="mt-4">
-            <button type="submit" class="btn btn-success"><i class="fa-solid fa-save"></i> Lưu</button>
+        <div class="mt-4 d-flex gap-2">
+            <button type="submit" class="btn btn-success">
+                <i class="fa-solid fa-save"></i> Lưu
+            </button>
             <a asp-action="Index" class="btn btn-secondary">Quay lại</a>
         </div>
     </form>
 </div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -72,7 +72,7 @@
         <nav class="bg-white border-top">
             <div class="container d-flex align-items-center">
 
-                <!-- Danh mục sản phẩm có submenu -->
+                <!-- Danh mục có submenu -->
                 <div class="dropdown position-static">
                     <a href="#" class="btn btn-lg text-white fw-bold me-5 dropdown-toggle"
                        style="background-color:#c7a062;" id="danhmucMenu"
@@ -80,37 +80,56 @@
                         <i class="bi bi-list"></i> Danh mục sản phẩm
                     </a>
 
-                    <!-- Submenu -->
+
                     <ul class="dropdown-menu shadow mt-0 p-3" aria-labelledby="danhmucMenu">
                         <div class="d-flex">
                             <div class="me-4">
                                 <h6 class="fw-bold">VPP Học Sinh</h6>
-                                <a class="dropdown-item" href="sanpham.html">Bút</a>
-                                <a class="dropdown-item" href="sanpham.html">Vở</a>
+                                <a asp-controller="Sanpham" asp-action="index" class="nav-link text-dark me-4">
+                                    Bút
+                                </a>
+                                <a asp-controller="Sanpham" asp-action="index" class="nav-link text-dark me-4">
+                                    Vở
+                                </a>
                             </div>
                             <div class="me-4">
                                 <h6 class="fw-bold">VPP Văn Phòng</h6>
-                                <a class="dropdown-item" href="sanpham.html">Kẹp Tài Liệu</a>
-                                <a class="dropdown-item" href="sanpham.html">Sổ Tài Liệu</a>
+                                <a asp-controller="Sanpham" asp-action="index" class="nav-link text-dark me-4">
+                                    Kẹp tài liệu
+                                </a>
+                                <a asp-controller="Sanpham" asp-action="index" class="nav-link text-dark me-4">
+                                    Sổ tài liệu
+                                </a>
                             </div>
                             <div class="me-4">
                                 <h6 class="fw-bold">Dụng Cụ Vẽ</h6>
-                                <a class="dropdown-item" href="sanpham.html">Bút Vẽ</a>
-                                <a class="dropdown-item" href="sanpham.html">Màu Vẽ</a>
+                                <a asp-controller="Sanpham" asp-action="index" class="nav-link text-dark me-4">
+                                    Bút vẽ
+                                </a>
+                                <a asp-controller="Sanpham" asp-action="index" class="nav-link text-dark me-4">
+                                    Màu vẽ
+                                </a>
                             </div>
                             <div class="me-4">
                                 <h6 class="fw-bold">Bút Viết</h6>
-                                <a class="dropdown-item" href="sanpham.html">Bút Bi</a>
-                                <a class="dropdown-item" href="sanpham.html">Bút Chì</a>
+                                <a asp-controller="Sanpham" asp-action="index" class="nav-link text-dark me-4">
+                                    Bút bi
+                                </a>
+                                <a asp-controller="Sanpham" asp-action="index" class="nav-link text-dark me-4">
+                                    Bút chì
+                                </a>
                             </div>
                             <div>
                                 <h6 class="fw-bold">Sản Phẩm Về Giấy</h6>
-                                <a class="dropdown-item" href="sanpham.html">Sổ Các Loại</a>
-                                <a class="dropdown-item" href="sanpham.html">Tập - Vở</a>
+                                <a asp-controller="Sanpham" asp-action="index" class="nav-link text-dark me-4">
+                                    Sổ các loại
+                                </a>
+                                <a asp-controller="Sanpham" asp-action="index" class="nav-link text-dark me-4">
+                                    Tập vở
+                                </a>
                             </div>
                         </div>
                     </ul>
-
                 </div>
 
                 <!-- Menu bên cạnh -->
@@ -120,8 +139,10 @@
                 <a href="@Url.Action("Index","Home")#services" class="nav-link text-dark me-4">
                     <i class="bi bi-shield"></i> Dịch vụ
                 </a>
-               
-                <a href="#" class="nav-link text-dark"><i class="bi bi-telephone"></i> Liên hệ</a>
+
+                <a href="@Url.Action("Index","Home")#footer" class="nav-link text-dark me-4">
+                    <i class="bi bi-telephone"></i> Liên hệ
+                </a>
             </div>
         </nav>
 

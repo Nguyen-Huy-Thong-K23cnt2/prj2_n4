@@ -1,25 +1,38 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.AspNetCore.Mvc.ModelBinding.Validation; // 👈 thêm using này
 
-namespace VanPhongPhamDKT.Models;
-
-public partial class SanPham
+namespace VanPhongPhamDKT.Models
 {
-    public int MaSp { get; set; }
+    public partial class SanPham
+    {
+        [Key]
+        public int MaSp { get; set; }
 
-    public string TenSp { get; set; } = null!;
+        [Required, StringLength(200)]
+        public string TenSp { get; set; } = null!;
 
-    public decimal Gia { get; set; }
+        [Column(TypeName = "decimal(18,2)")]
+        [Range(0, 999999999)]
+        public decimal Gia { get; set; }
 
-    public int SoLuong { get; set; }
+        [Range(0, int.MaxValue)]
+        public int SoLuong { get; set; }
 
-    public string? HinhAnh { get; set; }
+        public string? HinhAnh { get; set; }
 
-    public string? MoTa { get; set; }
+        [StringLength(4000)]
+        public string? MoTa { get; set; }
 
-    public int MaDm { get; set; }
+        [Required]
+        public int MaDm { get; set; }
 
-    public virtual ICollection<ChiTietDonHang> ChiTietDonHangs { get; set; } = new List<ChiTietDonHang>();
+        [ValidateNever] // 👈 KHÔNG validate thuộc tính navigation
+        public virtual ICollection<ChiTietDonHang> ChiTietDonHangs { get; set; } =
+            new List<ChiTietDonHang>();
 
-    public virtual DanhMucSanPham MaDmNavigation { get; set; } = null!;
+        [ValidateNever] // 👈 KHÔNG validate navigation
+        public virtual DanhMucSanPham? MaDmNavigation { get; set; } // 👈 cho phép nullable
+    }
 }

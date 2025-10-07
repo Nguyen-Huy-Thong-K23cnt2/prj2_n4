@@ -1,46 +1,58 @@
-﻿@model VanPhongPhamDKT.Models.SanPham
+﻿@using VanPhongPhamDKT.Models
+@model SanPham
 
 @{
     ViewData["Title"] = "Chi tiết sản phẩm";
     Layout = "~/Views/Shared/_Layout.cshtml";
+
+    string Src(string? p) => string.IsNullOrWhiteSpace(p)
+        ? Url.Content("~/assets/img/placeholder-600x400.png")
+        : (p.StartsWith("http", StringComparison.OrdinalIgnoreCase) ? p : Url.Content(p));
+
+    string Fmt(decimal v) => string.Format("{0:N0} ₫", v);
 }
 
 <div class="container mt-4">
-    <h2 class="fw-bold text-info mb-3"><i class="fa-solid fa-eye"></i> Chi tiết sản phẩm</h2>
-
-    <div class="card shadow p-4">
-        <dl class="row">
-            <dt class="col-sm-3">Tên sản phẩm</dt>
-            <dd class="col-sm-9">@Model.TenSp</dd>
-
-            <dt class="col-sm-3">Giá</dt>
-            <dd class="col-sm-9">@String.Format("{0:N0} đ", Model.Gia)</dd>
-
-            <dt class="col-sm-3">Số lượng</dt>
-            <dd class="col-sm-9">@Model.SoLuong</dd>
-
-            <dt class="col-sm-3">Hình ảnh</dt>
-            <dd class="col-sm-9">
-                @if (!string.IsNullOrEmpty(Model.HinhAnh))
-                {
-                    <img src="~/uploads/@Model.HinhAnh" width="150" class="rounded border" />
-                }
-                else
-                {
-                    <span class="text-muted">Chưa có</span>
-                }
-            </dd>
-
-            <dt class="col-sm-3">Mô tả</dt>
-            <dd class="col-sm-9">@Model.MoTa</dd>
-
-            <dt class="col-sm-3">Danh mục</dt>
-            <dd class="col-sm-9">@Model.MaDmNavigation?.TenDm</dd>
-        </dl>
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2 class="text-primary mb-0">Chi tiết sản phẩm</h2>
+        <div>
+            <a asp-area="admins" asp-controller="SanPham" asp-action="Edit" asp-route-id="@Model.MaSp"
+               class="btn btn-warning me-2"><i class="fa fa-pen"></i> Sửa</a>
+            <a asp-area="admins" asp-controller="SanPham" asp-action="Index" class="btn btn-secondary">
+                ← Quay lại
+            </a>
+        </div>
     </div>
 
-    <div class="mt-3">
-        <a asp-action="Edit" asp-route-id="@Model.MaSp" class="btn btn-warning"><i class="fa-solid fa-pen"></i> Sửa</a>
-        <a asp-action="Index" class="btn btn-secondary">Quay lại</a>
+    <div class="row g-4">
+        <div class="col-lg-5">
+            <div class="card shadow-sm border-0">
+                <img src="@Src(Model.HinhAnh)" alt="@Model.TenSp"
+                     class="card-img-top" style="object-fit:cover;max-height:420px" />
+            </div>
+        </div>
+
+        <div class="col-lg-7">
+            <div class="card shadow-sm border-0">
+                <div class="card-body">
+                    <h3 class="fw-bold">@Model.TenSp</h3>
+                    <div class="text-danger fs-4 fw-semibold mb-3">@Fmt(Model.Gia)</div>
+
+                    <dl class="row mb-0">
+                        <dt class="col-sm-3">Mã SP</dt>
+                        <dd class="col-sm-9">@Model.MaSp</dd>
+
+                        <dt class="col-sm-3">Danh mục</dt>
+                        <dd class="col-sm-9">@((Model.MaDmNavigation?.TenDm) ?? $"#{Model.MaDm}")</dd>
+
+                        <dt class="col-sm-3">Số lượng</dt>
+                        <dd class="col-sm-9">@Model.SoLuong</dd>
+
+                        <dt class="col-sm-3">Mô tả</dt>
+                        <dd class="col-sm-9">@(string.IsNullOrWhiteSpace(Model.MoTa) ? "—" : Model.MoTa)</dd>
+                    </dl>
+                </div>
+            </div>
+        </div>
     </div>
 </div>

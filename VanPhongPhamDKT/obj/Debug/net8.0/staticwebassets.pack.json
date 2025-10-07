@@ -297,6 +297,22 @@
       "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.map"
     },
     {
+      "Id": "D:\\project2\\VanPhongPhamDKT\\wwwroot\\uploads\\products\\ajax4sue.3ar.png",
+      "PackagePath": "staticwebassets\\uploads\\products\\ajax4sue.3ar.png"
+    },
+    {
+      "Id": "D:\\project2\\VanPhongPhamDKT\\wwwroot\\uploads\\products\\akbfcgau.tu3.png",
+      "PackagePath": "staticwebassets\\uploads\\products\\akbfcgau.tu3.png"
+    },
+    {
+      "Id": "D:\\project2\\VanPhongPhamDKT\\wwwroot\\uploads\\products\\d2u4ce5r.mvx.webp",
+      "PackagePath": "staticwebassets\\uploads\\products\\d2u4ce5r.mvx.webp"
+    },
+    {
+      "Id": "D:\\project2\\VanPhongPhamDKT\\wwwroot\\uploads\\products\\mv55pn4r.aoy.png",
+      "PackagePath": "staticwebassets\\uploads\\products\\mv55pn4r.aoy.png"
+    },
+    {
       "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.VanPhongPhamDKT.Microsoft.AspNetCore.StaticWebAssets.props",
       "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
     },
