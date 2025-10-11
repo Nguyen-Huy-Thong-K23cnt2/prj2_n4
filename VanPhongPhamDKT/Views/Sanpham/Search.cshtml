@@ -1,0 +1,283 @@
+﻿@using System.Security.Claims
+@model IEnumerable<VanPhongPhamDKT.Models.SanPham>
+
+@{
+    Layout = null; // KHÔNG dùng _Layout theo yêu cầu
+    var isLoggedIn = User?.Identity?.IsAuthenticated ?? false;
+    var userEmail = User?.FindFirst(ClaimTypes.Email)?.Value
+                    ?? Context.Session.GetString("UserEmail");
+
+    string keyword = ViewBag.Keyword as string ?? "";
+    int page = ViewBag.Page is int p ? p : 1;
+    int pageSize = ViewBag.PageSize is int ps ? ps : 12;
+    int total = ViewBag.Total is int t ? t : 0;
+    int pageCount = (int)Math.Ceiling((double)Math.Max(total, 0) / Math.Max(pageSize, 1));
+    if (pageCount == 0) pageCount = 1;
+    string returnUrl = Context.Request.Path + Context.Request.QueryString;
+}
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Kết quả tìm kiếm - @keyword</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif
+        }
+
+        .full-bleed {
+            width: 100vw;
+            margin-left: calc(50% - 50vw);
+            margin-right: calc(50% - 50vw)
+        }
+
+        header {
+            background: #111;
+            color: #fff
+        }
+
+            header a {
+                color: #fff;
+                text-decoration: none
+            }
+
+                header a:hover {
+                    color: #c7a062
+                }
+
+        .search input {
+            border-radius: 999px;
+            padding: 12px 44px 12px 18px
+        }
+
+        .card.product {
+            border: 0;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: .2s ease
+        }
+
+            .card.product:hover {
+                transform: translateY(-4px);
+                box-shadow: 0 6px 18px rgba(0,0,0,.12)
+            }
+
+            .card.product img {
+                height: 220px;
+                object-fit: cover
+            }
+
+        .badge-keyword {
+            background: #fff;
+            color: #111;
+            border: 1px solid #eee;
+            border-radius: 999px;
+            padding: .35rem .75rem
+        }
+
+        footer {
+            background: #111;
+            color: #fff
+        }
+
+        .footer-bottom {
+            background: #6e6c6c;
+            color: #111
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header class="full-bleed">
+        <div class="container d-flex justify-content-between align-items-center py-3">
+            <a asp-controller="Home" asp-action="Index" class="d-flex align-items-center text-decoration-none">
+                <img src="~/assets/img/logo.png" alt="Logo" style="height:64px">
+                <small class="ms-3 fst-italic text-white">Lựa chọn số 1 cho bạn</small>
+            </a>
+
+            <!-- Form tìm kiếm -->
+            <form method="get" asp-controller="Sanpham" asp-action="Search" class="search d-flex mx-4 flex-grow-1">
+                <input class="form-control form-control-lg" name="q" value="@keyword" placeholder="Tìm kiếm sản phẩm...">
+                <button class="btn btn-link text-white ms-n5" type="submit" aria-label="Tìm">
+                    <i class="bi bi-search fs-5"></i>
+                </button>
+            </form>
+
+            <div class="d-flex align-items-center">
+                <a href="tel:0123456789" class="btn text-white rounded-pill px-3 me-3" style="background:#c7a062">
+                    <i class="bi bi-telephone-fill me-1"></i> 0123456789
+                </a>
+                <a asp-controller="Cart" asp-action="Index" class="text-white me-3"><i class="bi bi-bag fs-4"></i></a>
+
+                @if (isLoggedIn)
+                {
+                    <div class="dropdown">
+                        <a class="text-white dropdown-toggle text-decoration-none" href="#" role="button" data-bs-toggle="dropdown">
+                            <i class="bi bi-person-circle fs-4 me-1"></i> @userEmail
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end">
+                            <li><a class="dropdown-item" asp-controller="Auth" asp-action="DangXuat">Đăng xuất</a></li>
+                        </ul>
+                    </div>
+                }
+                else
+                {
+                    <a asp-controller="Auth" asp-action="DangNhap" class="text-white">
+                        <i class="bi bi-person fs-4"></i>
+                    </a>
+                }
+            </div>
+        </div>
+    </header>
+
+    <!-- KẾT QUẢ -->
+    <main class="py-4">
+        <div class="container">
+            <div class="d-flex align-items-center justify-content-between mb-3">
+                <h4 class="mb-0">Kết quả cho: <span class="badge-keyword">@keyword</span></h4>
+                <span class="text-muted">@total kết quả</span>
+            </div>
+
+            @if (!Model.Any())
+            {
+                <div class="alert alert-warning">
+                    Không tìm thấy sản phẩm nào phù hợp với từ khóa <strong>@keyword</strong>.
+                </div>
+            }
+            else
+            {
+                <div class="row g-3">
+                    @foreach (var sp in Model)
+                    {
+                        <div class="col-6 col-md-4 col-lg-3">
+                            <div class="card product h-100">
+                                <a asp-controller="Sanpham" asp-action="Details" asp-route-id="@sp.MaSp">
+                                    <img src="@(string.IsNullOrEmpty(sp.HinhAnh) ? Url.Content("~/assets/img/no-image.png") : sp.HinhAnh)" class="card-img-top" alt="@sp.TenSp" />
+                                </a>
+                                <div class="card-body d-flex flex-column">
+                                    <h6 class="mb-1 text-truncate" title="@sp.TenSp">@sp.TenSp</h6>
+                                    <div class="mb-2">
+                                        <span class="fw-bold text-danger">@sp.Gia.ToString("N0")₫</span>
+                                    </div>
+                                    <div class="mt-auto d-flex gap-2">
+                                        <a asp-controller="Sanpham" asp-action="Details" asp-route-id="@sp.MaSp" class="btn btn-outline-secondary btn-sm flex-fill">
+                                            Xem chi tiết
+                                        </a>
+                                        @if (isLoggedIn)
+                                        {
+                                            <a asp-controller="Cart" asp-action="AddToCart" asp-route-maSp="@sp.MaSp" asp-route-soLuong="1" class="btn btn-danger btn-sm">
+                                                <i class="bi bi-cart-plus"></i>
+                                            </a>
+                                        }
+                                        else
+                                        {
+                                            <a asp-controller="Auth" asp-action="DangNhap" asp-route-returnUrl="@returnUrl" class="btn btn-secondary btn-sm">
+                                                Đăng nhập
+                                            </a>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+
+                <!-- PHÂN TRANG -->
+                <nav class="mt-4">
+                    <ul class="pagination justify-content-center">
+                        @{
+                            string BuildUrl(int targetPage) =>
+                            Url.Action("Search", "Sanpham", new { q = keyword, page = targetPage, pageSize }) ?? $"?q={keyword}&page={targetPage}&pageSize={pageSize}";
+
+                            bool prevDisabled = page <= 1;
+                            bool nextDisabled = page >= pageCount;
+                        }
+                        <li class="page-item @(prevDisabled ? "disabled" : "")">
+                            <a class="page-link" href="@(prevDisabled ? "#" : BuildUrl(page - 1))" aria-label="Trang trước">&laquo;</a>
+                        </li>
+
+                        @for (int i = Math.Max(1, page - 2); i <= Math.Min(pageCount, page + 2); i++)
+                        {
+                            <li class="page-item @(i == page ? "active" : "")">
+                                <a class="page-link" href="@(BuildUrl(i))">@i</a>
+                            </li>
+                        }
+
+                        <li class="page-item @(nextDisabled ? "disabled" : "")">
+                            <a class="page-link" href="@(nextDisabled ? "#" : BuildUrl(page + 1))" aria-label="Trang sau">&raquo;</a>
+                        </li>
+                    </ul>
+                </nav>
+            }
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+
+    <section id="footer">
+        <footer class="footer full-bleed" class="footer text-white bg-dark">
+            <div class="container py-5 d-flex flex-wrap justify-content-between">
+
+                <!-- Logo + liên hệ -->
+                <div class="mb-4">
+                    <h4 class="fw-bold">DKT Bookstore</h4>
+                    <p>Lựa chọn số 1 cho bạn</p>
+                    <p><i class="bi bi-geo-alt"></i> Trụ sở: Thủ Đô Hà Nội</p>
+                    <p><i class="bi bi-telephone"></i> 0123456789</p>
+                    <p><i class="bi bi-envelope"></i> Ahihi12345@gmail.com</p>
+                </div>
+
+                <!-- Links -->
+                <div class="mb-4">
+                    <h6 class="fw-bold">TÌM HIỂU THÊM</h6>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-white">Trang chủ</a></li>
+                        <li><a href="#" class="text-white">Giới thiệu</a></li>
+                        <li><a href="#" class="text-white">Sản phẩm</a></li>
+
+                    </ul>
+                </div>
+
+                <div class="mb-4">
+                    <h6 class="fw-bold">HỖ TRỢ KHÁCH HÀNG</h6>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-white">Chính sách</a></li>
+                        <li><a href="#" class="text-white">Hướng dẫn mua hàng</a></li>
+                        <li><a href="#" class="text-white">Liên hệ</a></li>
+                    </ul>
+                </div>
+
+                <!-- Social -->
+                <div>
+                    <h6 class="fw-bold">THEO DÕI CHÚNG TÔI</h6>
+                    <div class="d-flex gap-3 fs-5">
+                        <a href="https://www.facebook.com/khanhnguyen1301" class="text-white"><i class="bi bi-facebook"></i></a>
+                        <a href="https://www.instagram.com/d.khanh_1301/?fbclid=IwY2xjawMw6rVleHRuA2FlbQIxMABicmlkETE3aERIQzcwejlVdFM0WWxyAR5MD6HTv0-xBjx38e6RuoOARN_jY4EKG251YXuRMDuPsdF_frhpDThtfkC-HQ_aem_5qH278P0GtMJf27uUwN__A#" class="text-white"><i class="bi bi-instagram"></i></a>
+                        <a href="https://x.com/i/status/1963981909488198043" class="text-white"><i class="bi bi-twitter"></i></a>
+                        <a href="https://www.youtube.com/watch?v=xvFZjo5PgG0&list=RDxvFZjo5PgG0&start_radio=1" class="text-white"><i class="bi bi-youtube"></i></a>
+                    </div>
+                    <h6 class="fw-bold mt-3">PHƯƠNG THỨC THANH TOÁN</h6>
+                    <div class="payment-box d-inline-block px-3 py-2">
+                        <img src="https://taphoa01.vinastar.info/wp-content/uploads/2023/05/logo_acb.png" alt="ACB" style="height:25px; margin-right:10px;">
+                        <img src="https://taphoa01.vinastar.info/wp-content/uploads/2023/05/logo_msb.png" alt="MSB" style="height:25px;">
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- Bản quyền -->
+            <div class="footer full-bleed" class="footer-bottom text-center text-dark py-2">
+                © 2025 Văn Phòng Phẩm - Bản Quyền Thuộc Về DKT |
+                Lấy Cảm Hứng Từ <a href="https://vinastar.net/website/" class="text-dark fw-bold">VINASTAR.INFO</a>
+            </div>
+        </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

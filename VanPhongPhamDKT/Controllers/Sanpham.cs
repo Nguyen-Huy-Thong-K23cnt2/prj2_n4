@@ -1,83 +1,99 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using System;
+using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using VanPhongPhamDKT.Models;
 
 namespace VanPhongPhamDKT.Controllers
 {
+    // Controller dành cho trang khách (không phải Area admins)
     public class Sanpham : Controller
     {
-        // GET: Sanpham
-        public ActionResult Index()
+        private readonly VanPhongPhamContext _context;
+
+        public Sanpham(VanPhongPhamContext context)
         {
-            return View();
+            _context = context;
         }
 
-        // GET: Sanpham/Details/5
-        public ActionResult Details(int id)
+        // ===================== INDEX (liệt kê sản phẩm) =====================
+        // /Sanpham?categoryId=...&page=1&pageSize=12
+        [HttpGet]
+        public async Task<IActionResult> Index(int? categoryId, int page = 1, int pageSize = 12)
         {
-            return View();
-        }
+            if (page < 1) page = 1;
+            if (pageSize < 1 || pageSize > 100) pageSize = 12;
 
-        // GET: Sanpham/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
+            var query = _context.SanPhams
+                .AsNoTracking()
+                .Include(x => x.MaDmNavigation)
+                .AsQueryable();
 
-        // POST: Sanpham/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
-        {
-            try
+            if (categoryId.HasValue)
             {
-                return RedirectToAction(nameof(Index));
+                query = query.Where(x => x.MaDm == categoryId.Value);
             }
-            catch
-            {
-                return View();
-            }
+
+            var total = await query.CountAsync();
+            var data = await query
+                .OrderByDescending(x => x.MaSp)
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize)
+                .ToListAsync();
+
+            // Categories cho sidebar/filter (nếu view cần)
+            ViewBag.Categories = await _context.DanhMucSanPhams
+                .AsNoTracking()
+                .OrderBy(x => x.TenDm)
+                .ToListAsync();
+
+            ViewBag.CategoryId = categoryId;
+            ViewBag.Total = total;
+            ViewBag.Page = page;
+            ViewBag.PageSize = pageSize;
+
+            return View(data);
         }
 
-        // GET: Sanpham/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
 
-        // POST: Sanpham/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        // ===================== SEARCH (tìm kiếm sản phẩm) =====================
+        // /Sanpham/Search?q=but&page=1&pageSize=12
+        [HttpGet]
+        public async Task<IActionResult> Search(string q, int page = 1, int pageSize = 12)
         {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
+            q ??= string.Empty;
+            q = q.Trim();
+            if (page < 1) page = 1;
+            if (pageSize < 1 || pageSize > 100) pageSize = 12;
 
-        // GET: Sanpham/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
+            var query = _context.SanPhams
+                .AsNoTracking()
+                .Include(x => x.MaDmNavigation)
+                .AsQueryable();
 
-        // POST: Sanpham/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
+            if (!string.IsNullOrWhiteSpace(q))
             {
-                return RedirectToAction(nameof(Index));
+                // Tìm theo tên & mô tả (có thể bỏ MoTa nếu cột lớn)
+                query = query.Where(x =>
+                    EF.Functions.Like(x.TenSp, $"%{q}%") ||
+                    (x.MoTa != null && EF.Functions.Like(x.MoTa, $"%{q}%"))
+                );
             }
-            catch
-            {
-                return View();
-            }
+
+            var total = await query.CountAsync();
+            var data = await query
+                .OrderByDescending(x => x.MaSp)
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize)
+                .ToListAsync();
+
+            ViewBag.Keyword = q;
+            ViewBag.Total = total;
+            ViewBag.Page = page;
+            ViewBag.PageSize = pageSize;
+
+            return View(data); // View: Views/Sanpham/Search.cshtml
         }
     }
 }

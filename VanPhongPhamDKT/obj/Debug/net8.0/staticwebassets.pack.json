@@ -53,6 +53,34 @@
       "PackagePath": "staticwebassets\\assets\\img\\slider_1.png"
     },
     {
+      "Id": "D:\\project2\\VanPhongPhamDKT\\wwwroot\\assets\\img\\sp10-247x247.webp",
+      "PackagePath": "staticwebassets\\assets\\img\\sp10-247x247.webp"
+    },
+    {
+      "Id": "D:\\project2\\VanPhongPhamDKT\\wwwroot\\assets\\img\\sp11-247x247.webp",
+      "PackagePath": "staticwebassets\\assets\\img\\sp11-247x247.webp"
+    },
+    {
+      "Id": "D:\\project2\\VanPhongPhamDKT\\wwwroot\\assets\\img\\sp12-247x247.webp",
+      "PackagePath": "staticwebassets\\assets\\img\\sp12-247x247.webp"
+    },
+    {
+      "Id": "D:\\project2\\VanPhongPhamDKT\\wwwroot\\assets\\img\\sp5-247x247.webp",
+      "PackagePath": "staticwebassets\\assets\\img\\sp5-247x247.webp"
+    },
+    {
+      "Id": "D:\\project2\\VanPhongPhamDKT\\wwwroot\\assets\\img\\sp6-247x247.webp",
+      "PackagePath": "staticwebassets\\assets\\img\\sp6-247x247.webp"
+    },
+    {
+      "Id": "D:\\project2\\VanPhongPhamDKT\\wwwroot\\assets\\img\\sp7-247x247.webp",
+      "PackagePath": "staticwebassets\\assets\\img\\sp7-247x247.webp"
+    },
+    {
+      "Id": "D:\\project2\\VanPhongPhamDKT\\wwwroot\\assets\\img\\sp8-3-247x247.webp",
+      "PackagePath": "staticwebassets\\assets\\img\\sp8-3-247x247.webp"
+    },
+    {
       "Id": "D:\\project2\\VanPhongPhamDKT\\wwwroot\\assets\\img\\sp9.webp",
       "PackagePath": "staticwebassets\\assets\\img\\sp9.webp"
     },
@@ -297,20 +325,44 @@
       "PackagePath": "staticwebassets\\lib\\jquery\\dist\\jquery.min.map"
     },
     {
+      "Id": "D:\\project2\\VanPhongPhamDKT\\wwwroot\\uploads\\products\\1tapcekg.ja1.webp",
+      "PackagePath": "staticwebassets\\uploads\\products\\1tapcekg.ja1.webp"
+    },
+    {
       "Id": "D:\\project2\\VanPhongPhamDKT\\wwwroot\\uploads\\products\\ajax4sue.3ar.png",
       "PackagePath": "staticwebassets\\uploads\\products\\ajax4sue.3ar.png"
     },
     {
-      "Id": "D:\\project2\\VanPhongPhamDKT\\wwwroot\\uploads\\products\\akbfcgau.tu3.png",
-      "PackagePath": "staticwebassets\\uploads\\products\\akbfcgau.tu3.png"
+      "Id": "D:\\project2\\VanPhongPhamDKT\\wwwroot\\uploads\\products\\bme5kf2x.ye3.webp",
+      "PackagePath": "staticwebassets\\uploads\\products\\bme5kf2x.ye3.webp"
+    },
+    {
+      "Id": "D:\\project2\\VanPhongPhamDKT\\wwwroot\\uploads\\products\\bwmangvs.cqp.webp",
+      "PackagePath": "staticwebassets\\uploads\\products\\bwmangvs.cqp.webp"
     },
     {
       "Id": "D:\\project2\\VanPhongPhamDKT\\wwwroot\\uploads\\products\\d2u4ce5r.mvx.webp",
       "PackagePath": "staticwebassets\\uploads\\products\\d2u4ce5r.mvx.webp"
     },
     {
+      "Id": "D:\\project2\\VanPhongPhamDKT\\wwwroot\\uploads\\products\\dmuzea0w.dlk.webp",
+      "PackagePath": "staticwebassets\\uploads\\products\\dmuzea0w.dlk.webp"
+    },
+    {
+      "Id": "D:\\project2\\VanPhongPhamDKT\\wwwroot\\uploads\\products\\kyqxmp5e.f1t.webp",
+      "PackagePath": "staticwebassets\\uploads\\products\\kyqxmp5e.f1t.webp"
+    },
+    {
       "Id": "D:\\project2\\VanPhongPhamDKT\\wwwroot\\uploads\\products\\mv55pn4r.aoy.png",
       "PackagePath": "staticwebassets\\uploads\\products\\mv55pn4r.aoy.png"
+    },
+    {
+      "Id": "D:\\project2\\VanPhongPhamDKT\\wwwroot\\uploads\\products\\n5gnvcsx.hxr.webp",
+      "PackagePath": "staticwebassets\\uploads\\products\\n5gnvcsx.hxr.webp"
+    },
+    {
+      "Id": "D:\\project2\\VanPhongPhamDKT\\wwwroot\\uploads\\products\\shzr2ria.hsz.webp",
+      "PackagePath": "staticwebassets\\uploads\\products\\shzr2ria.hsz.webp"
     },
     {
       "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.VanPhongPhamDKT.Microsoft.AspNetCore.StaticWebAssets.props",

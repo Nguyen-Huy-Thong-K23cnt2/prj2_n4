@@ -5,13 +5,8 @@
     ViewData["Title"] = "Danh sách Admin";
 }
 
-<h2 class="mb-3">Danh sách Admin</h2>
+<h2 class="mb-3">Danh sách Quản Trị Viên</h2>
 
-<p>
-    <a class="btn btn-primary" asp-area="admins" asp-controller="Admin" asp-action="Create">
-        + Thêm mới Admin
-    </a>
-</p>
 
 
 <table class="table table-bordered table-hover table-striped align-middle">
@@ -48,11 +43,7 @@
                            asp-area="admins" asp-controller="Admin" asp-action="Details" asp-route-id="@item.MaId">
                             Xem
                         </a>
-                        <a class="btn btn-sm btn-danger"
-                           asp-area="admins" asp-controller="Admin" asp-action="Delete" asp-route-id="@item.MaId"
-                           onclick="return confirm('Bạn có chắc muốn xóa admin này không?');">
-                            Xóa
-                        </a>
+                      
                     </div>
 
                 </td>
