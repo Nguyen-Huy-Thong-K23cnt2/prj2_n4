@@ -1,0 +1,571 @@
+﻿/* ===== SanPham Theme (List) ===== */
+
+/* (Tuỳ chọn) Nền riêng cho trang Sản phẩm.
+   Muốn dùng, thêm <div class="site-bg--sanpham"></div> trong view. */
+.site-bg--sanpham {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background: radial-gradient(1100px 340px at 16% 10%, rgba(190,200,230,.20) 0%, rgba(190,200,230,0) 60%), radial-gradient(880px 280px at 70% 12%, rgba(120,170,250,.14) 0%, rgba(120,170,250,0) 60%), linear-gradient(180deg, #0a1226 0%, #081020 55%, #06101c 100%);
+    background-attachment: fixed;
+}
+
+.sp-page {
+    position: relative;
+    z-index: 1;
+}
+
+/* Tiêu đề + nút thêm */
+.sp-title {
+    color: #fff;
+    font-weight: 900;
+    letter-spacing: .2px;
+    margin: 8px 0 6px;
+}
+
+.sp-btn-add {
+    border-radius: 999px;
+    padding: 10px 16px;
+    font-weight: 800;
+    background: linear-gradient(180deg, #cfe0ff, #8ab4ff);
+    color: #0b1020;
+    border: 0;
+    box-shadow: 0 10px 26px rgba(138,180,255,.28);
+}
+
+    .sp-btn-add:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 12px 34px rgba(138,180,255,.36);
+    }
+
+/* Khung bảng glass */
+.sp-table-wrap {
+    background: linear-gradient(180deg, rgba(16,26,52,.90), rgba(10,18,38,.88));
+    border: 1px solid rgba(255,255,255,.10);
+    border-radius: 18px;
+    padding: 16px;
+    box-shadow: 0 12px 36px rgba(2,6,23,.55);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+/* Bảng */
+.table.sp-table {
+    color: #eaf1ff;
+    margin: 0;
+    border-collapse: separate;
+    border-spacing: 0;
+    overflow: hidden;
+    border-radius: 12px;
+}
+
+    .table.sp-table thead {
+        background: linear-gradient(180deg, #162445, #12213f);
+        color: #cfe0ff;
+        border-bottom: 1px solid rgba(255,255,255,.08);
+    }
+
+        .table.sp-table thead th {
+            font-weight: 800;
+            letter-spacing: .2px;
+            padding: 14px 16px;
+            vertical-align: middle;
+        }
+
+    .table.sp-table tbody td {
+        padding: 12px 16px;
+        border-color: rgba(255,255,255,.09) !important;
+    }
+
+    .table.sp-table tbody tr {
+        background: rgba(255,255,255,.02);
+    }
+
+        .table.sp-table tbody tr:hover {
+            background: rgba(138,180,255,.10) !important;
+        }
+
+/* Ảnh sản phẩm */
+.sp-thumb {
+    width: 64px;
+    height: 64px;
+    object-fit: cover;
+    border-radius: 10px;
+    border: 1px solid rgba(255,255,255,.12);
+    box-shadow: 0 2px 10px rgba(2,6,23,.4);
+}
+
+/* Giá nổi bật */
+.sp-price {
+    font-weight: 900;
+    color: #e9f2ff;
+    background: rgba(138,180,255,.14);
+    border: 1px solid rgba(138,180,255,.28);
+    padding: 4px 8px;
+    border-radius: 10px;
+    display: inline-block;
+}
+
+/* Danh mục dạng chip */
+.sp-cat {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 10px;
+    border-radius: 999px;
+    font-weight: 700;
+    background: rgba(255,255,255,.06);
+    border: 1px solid rgba(255,255,255,.16);
+    color: #eaf1ff;
+}
+
+/* Nút thao tác nhỏ */
+.btn.sp-btn-xs {
+    border-radius: 10px;
+    font-weight: 800;
+    padding: 6px 10px;
+    border: 1px solid rgba(255,255,255,.14);
+    transition: transform .12s ease, box-shadow .12s ease;
+}
+
+    .btn.sp-btn-xs:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 8px 22px rgba(138,180,255,.18);
+    }
+
+.btn-warning.sp-btn-xs {
+    color: #0b1020;
+}
+
+.btn-outline-secondary.sp-btn-xs {
+    color: #eaf1ff;
+    border-color: rgba(255,255,255,.18);
+}
+
+/* Footer back button giống primary pill */
+.sp-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    border-radius: 999px;
+    padding: 10px 16px;
+    font-weight: 800;
+    background: linear-gradient(180deg, #cfe0ff, #8ab4ff);
+    color: #0b1020;
+    border: 0;
+    box-shadow: 0 10px 26px rgba(138,180,255,.28);
+    text-decoration: none;
+}
+
+    .sp-back:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 12px 34px rgba(138,180,255,.36);
+    }
+
+/* Responsive */
+@media (max-width: 576px) {
+    .sp-table-wrap {
+        padding: 12px;
+    }
+
+    .btn.sp-btn-xs {
+        padding: 6px 8px;
+    }
+}
+
+/* ==== Enlarge product thumbnail column ==== */
+
+/* Nới column đầu tiên (Ảnh) cho rộng rãi */
+.table.sp-table thead th:first-child,
+.table.sp-table tbody td:first-child {
+    width: 120px !important; /* 120–136 tuỳ bạn */
+    min-width: 120px !important;
+}
+
+/* Tăng size thumbnail + bo & bóng */
+.sp-thumb {
+    width: 96px; /* 96–110 tuỳ bạn */
+    height: 96px;
+    border-radius: 14px;
+    border: 1px solid rgba(255,255,255,.16);
+    box-shadow: 0 4px 14px rgba(2,6,23,.45);
+    object-fit: cover;
+}
+
+/* Giảm padding dọc của row để ảnh không bị “đè” */
+.table.sp-table tbody td {
+    padding-top: 14px;
+    padding-bottom: 14px;
+}
+
+/* ===== FIX back button chỉ ở trang Sản phẩm ===== */
+.sp-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 16px;
+    border-radius: 999px;
+    font-weight: 800;
+    /* nền đậm như nút "Thêm sản phẩm" để luôn thấy */
+    background: linear-gradient(180deg, #cfe0ff, #8ab4ff) !important;
+    color: #0b1020 !important;
+    border: 0 !important;
+    text-decoration: none !important;
+    box-shadow: 0 10px 26px rgba(138,180,255,.28) !important;
+    /* chặn mọi rule khác làm mờ/ẩn */
+    opacity: 1 !important;
+    visibility: visible !important;
+    filter: none !important;
+    /* nổi lên trên bóng/overlay của bảng */
+    position: relative;
+    z-index: 6;
+    pointer-events: auto;
+    /* không dùng transition opacity để khỏi "biến mất" rồi mới hiện khi hover */
+    transition: transform .12s ease, box-shadow .12s ease;
+}
+
+    .sp-back:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 12px 34px rgba(138,180,255,.36) !important;
+    }
+
+/* Nếu có rule chung làm link nhạt hoặc gạch chân trong khu sp-page */
+.sp-page a {
+    text-decoration: none;
+}
+
+    .sp-page a:hover {
+        text-decoration: none;
+    }
+
+/* Bảng ở dưới nút (tránh che) */
+.sp-table-wrap {
+    position: relative;
+    z-index: 1;
+}
+
+/* ===== Create Product (Form glass 2 cột + preview) ===== */
+.sp-create-page {
+    position: relative;
+    z-index: 1;
+}
+
+.sp-form-glass {
+    max-width: 1040px;
+    background: linear-gradient(180deg, rgba(16,26,52,.92), rgba(10,18,38,.88));
+    border: 1px solid rgba(255,255,255,.10);
+    border-radius: 18px;
+    box-shadow: 0 12px 36px rgba(2,6,23,.55);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    padding: 22px;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(220px, 1fr)); /* 3 cột gọn */
+    gap: 16px 20px;
+}
+
+    .sp-form-glass .mb-3 {
+        margin-bottom: 0 !important;
+    }
+
+.sp-col-full {
+    grid-column: 1 / -1;
+}
+
+.form-label {
+    font-weight: 800;
+    color: #cfe0ff;
+    margin-bottom: 6px;
+}
+
+.form-control, .form-select {
+    background: rgba(255,255,255,.06);
+    border: 1px solid rgba(255,255,255,.16);
+    color: #eaf1ff;
+    border-radius: 12px;
+    padding: 10px 12px;
+}
+
+    .form-control::placeholder {
+        color: #b8c6e6;
+    }
+
+    .form-control:focus, .form-select:focus {
+        border-color: rgba(138,180,255,.45);
+        box-shadow: 0 0 0 4px rgba(138,180,255,.18);
+        background: rgba(255,255,255,.09);
+        color: #fff;
+    }
+
+.sp-form-error {
+    color: #fecaca;
+    font-weight: 700;
+}
+
+.sp-field-error {
+    color: #fecaca;
+    font-weight: 700;
+    font-size: 12.5px;
+    margin-top: 6px;
+    display: block;
+}
+
+.sp-field-note {
+    color: #9fb0cf;
+    font-size: 12px;
+}
+
+/* Ảnh preview ô gọn bên phải (share 1 cột) */
+.sp-image-field {
+    display: flex;
+    flex-direction: column;
+}
+
+.sp-image-preview {
+    margin-top: 8px;
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+}
+
+    .sp-image-preview img {
+        display: none; /* hiện khi có file */
+        width: 160px;
+        height: 160px;
+        border-radius: 14px;
+        object-fit: cover;
+        border: 1px solid rgba(255,255,255,.16);
+        box-shadow: 0 6px 18px rgba(2,6,23,.5);
+    }
+
+/* Nút */
+.sp-actions {
+    grid-column: 1 / -1;
+    display: flex;
+    gap: 10px;
+    margin-top: 4px;
+}
+
+.sp-btn-primary {
+    border-radius: 12px;
+    padding: 10px 16px;
+    font-weight: 800;
+    background: linear-gradient(180deg, #cfe0ff, #8ab4ff);
+    color: #0b1020;
+    border: 0;
+    box-shadow: 0 10px 26px rgba(138,180,255,.28);
+}
+
+    .sp-btn-primary:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 12px 34px rgba(138,180,255,.36);
+    }
+
+.sp-btn-cancel {
+    background: rgba(255,255,255,.08);
+    color: #eaf1ff;
+    border: 1px solid rgba(255,255,255,.18);
+    border-radius: 12px;
+    padding: 10px 16px;
+    font-weight: 800;
+}
+
+    .sp-btn-cancel:hover {
+        background: rgba(255,255,255,.12);
+        border-color: rgba(255,255,255,.28);
+    }
+
+/* Responsive */
+@media (max-width: 992px) {
+    .sp-form-glass {
+        grid-template-columns: repeat(2, minmax(220px, 1fr));
+    }
+}
+
+@media (max-width: 576px) {
+    .sp-form-glass {
+        grid-template-columns: 1fr;
+        padding: 16px;
+        gap: 12px 14px;
+    }
+
+    .sp-image-preview img {
+        width: 220px;
+        height: 220px;
+    }
+    /* mobile cho dễ nhìn */
+}
+
+/* Dropdown "Danh mục" – chữ đen, nền sáng trong danh sách */
+#MaDm option,
+#MaDm optgroup {
+    color: #0b1020 !important; /* chữ đen */
+    background-color: #f7f9ff !important; /* nền sáng để tương phản */
+}
+
+/* Nếu một số trình duyệt dùng màu của <select> cho cả popup,
+   bạn có thể ép nền popup sáng khi focus: */
+#MaDm:focus {
+    background-color: rgba(247,249,255, .85) !important;
+}
+
+/* Giữ ô select (khi chưa mở) theo theme tối như cũ.
+   Nếu bạn muốn cả ô hiển thị chữ đen luôn, bỏ comment dòng dưới. */
+/* #MaDm { color:#0b1020 !important; background-color:#f2f6ff !important; } */
+
+/* ===== Edit Product layout (2 cột) ===== */
+.sp-edit-page {
+    position: relative;
+    z-index: 1;
+}
+
+/* Dùng lại thẻ form kính, chỉ đổi layout thành 2 cột: trái 380px, phải auto */
+.sp-form-glass--edit {
+    grid-template-columns: 380px 1fr; /* cột trái cố định cho ảnh, phải linh hoạt */
+    align-items: start;
+}
+
+/* Cột trái: preview lớn */
+.sp-edit-left {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.sp-image-preview.large {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+    .sp-image-preview.large img {
+        width: 100%;
+        max-width: 360px;
+        height: 360px;
+        border-radius: 16px;
+        object-fit: cover;
+        border: 1px solid rgba(255,255,255,.16);
+        box-shadow: 0 8px 24px rgba(2,6,23,.55);
+    }
+
+/* Cột phải: cho các field xếp gọn (2 cột tự co khi đủ rộng) */
+.sp-edit-right {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(220px, 1fr));
+    gap: 16px 20px;
+}
+
+    .sp-edit-right .sp-col-full {
+        grid-column: 1 / -1;
+    }
+
+/* Responsive */
+@media (max-width: 992px) {
+    .sp-form-glass--edit {
+        grid-template-columns: 1fr;
+    }
+
+    .sp-edit-right {
+        grid-template-columns: 1fr;
+    }
+
+    .sp-image-preview.large img {
+        max-width: 420px;
+        height: 420px;
+    }
+}
+
+@media (max-width: 576px) {
+    .sp-image-preview.large img {
+        max-width: 260px;
+        height: 260px;
+    }
+}
+
+/* ===== Product Details ===== */
+.sp-detail-page {
+    position: relative;
+    z-index: 1;
+}
+
+/* Lưới 2 cột: ảnh trái, thông tin phải */
+.sp-detail-grid {
+    display: grid;
+    grid-template-columns: 480px 1fr;
+    gap: 18px;
+}
+
+/* Card kính tái sử dụng style */
+.sp-detail-card {
+    background: linear-gradient(180deg, rgba(16,26,52,.92), rgba(10,18,38,.88));
+    border: 1px solid rgba(255,255,255,.10);
+    border-radius: 18px;
+    padding: 16px;
+    box-shadow: 0 12px 36px rgba(2,6,23,.55);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+/* Ảnh lớn */
+.sp-detail-img {
+    width: 100%;
+    height: 420px;
+    object-fit: cover;
+    border-radius: 14px;
+    border: 1px solid rgba(255,255,255,.16);
+    box-shadow: 0 8px 24px rgba(2,6,23,.55);
+}
+
+/* Giá lớn nổi bật */
+.sp-price-large {
+    display: inline-block;
+    font-weight: 900;
+    font-size: 1.6rem;
+    color: #e9f2ff;
+    background: rgba(138,180,255,.16);
+    border: 1px solid rgba(138,180,255,.32);
+    padding: 6px 12px;
+    border-radius: 12px;
+}
+
+/* DL key/value */
+.sp-dl {
+    display: grid;
+    grid-template-columns: 150px 1fr;
+    gap: 10px 14px;
+    margin: 0;
+}
+
+    .sp-dl dt {
+        color: #cfe0ff;
+        font-weight: 800;
+    }
+
+    .sp-dl dd {
+        color: #eaf1ff;
+        margin: 0;
+        padding-bottom: 6px;
+        border-bottom: 1px dashed rgba(255,255,255,.10);
+    }
+
+/* Responsive */
+@media (max-width: 992px) {
+    .sp-detail-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .sp-detail-img {
+        height: 360px;
+    }
+}
+
+@media (max-width: 576px) {
+    .sp-detail-img {
+        height: 260px;
+    }
+
+    .sp-dl {
+        grid-template-columns: 1fr;
+    }
+}

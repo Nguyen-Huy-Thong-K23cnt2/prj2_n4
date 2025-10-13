@@ -5,86 +5,59 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2 class="mt-3">Danh sách người dùng</h2>
+<link rel="stylesheet" href="~/css/khachhang.css" asp-append-version="true" />
 
-<p>
-    <a asp-action="Create" class="btn btn-primary">+ Thêm mới người dùng</a>
-</p>
+<!-- Nền riêng cho trang Khách hàng (bỏ nếu không muốn đổi nền) -->
+<div class="site-bg--khachhang"></div>
 
-<table class="table table-bordered table-striped">
-    <thead class="table-dark">
-        <tr>
-            <th>@Html.DisplayNameFor(model => model.MaKh)</th>  <!-- Thêm dòng này -->
-            <th>@Html.DisplayNameFor(model => model.HoTen)</th>
-            <th>@Html.DisplayNameFor(model => model.Email)</th>
-            <th>@Html.DisplayNameFor(model => model.MatKhau)</th>
-            <th>@Html.DisplayNameFor(model => model.DiaChi)</th>
-            <th>@Html.DisplayNameFor(model => model.SoDienThoai)</th>
-            <th>@Html.DisplayNameFor(model => model.ChucVu)</th>
-            <th>@Html.DisplayNameFor(model => model.NgayTao)</th>
-            <th>Hành động</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>@item.MaKh</td>   <!-- Thêm dòng này -->
-                <td>@item.HoTen</td>
-                <td>@item.Email</td>
-                <td>@item.MatKhau</td>
-                <td>@item.DiaChi</td>
-                <td>@item.SoDienThoai</td>
-                <td>@item.ChucVu</td>
-                <td>@item.NgayTao?.ToString("dd/MM/yyyy")</td>
-                <td>
-                    <a asp-action="Edit" asp-route-id="@item.MaKh" class="btn btn-warning btn-sm">Sửa</a>
-                    <a asp-action="Details" asp-route-id="@item.MaKh" class="btn btn-info btn-sm">Chi tiết</a>
-                    <a asp-action="Delete" asp-route-id="@item.MaKh" class="btn btn-danger btn-sm">Xóa</a>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
-<p>
-    <a asp-area="admins" asp-controller="Dashboard" asp-action="Index" class="btn btn-secondary">
-        ⬅ Quay về trang chủ
-    </a>
-</p>
+<div class="kh-page">
+    <h2 class="kh-title mt-2">Danh sách khách hàng</h2>
 
-<style>
-    .table-responsive {
-        border: 1px solid #dee2e6;
-        border-radius: 8px;
-        overflow-x: auto;
-    }
+    <p>
+        <a asp-action="Create" class="btn kh-btn-primary">+ Thêm khách hàng</a>
+    </p>
 
-    .table th {
-        background: #0d6efd;
-        color: #fff;
-        font-weight: 600;
-        text-align: center;
-    }
+    <div class="kh-table-wrap">
+        <table class="table table-bordered table-striped kh-table">
+            <thead class="table-dark">
+                <tr>
+                    <th>@Html.DisplayNameFor(model => model.MaKh)</th>
+                    <th>@Html.DisplayNameFor(model => model.HoTen)</th>
+                    <th>@Html.DisplayNameFor(model => model.Email)</th>
+                    <th>@Html.DisplayNameFor(model => model.MatKhau)</th>
+                    <th>@Html.DisplayNameFor(model => model.DiaChi)</th>
+                    <th>@Html.DisplayNameFor(model => model.SoDienThoai)</th>
+                    <th>@Html.DisplayNameFor(model => model.ChucVu)</th>
+                    <th>@Html.DisplayNameFor(model => model.NgayTao)</th>
+                    <th>Hành động</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@item.MaKh</td>
+                        <td>@item.HoTen</td>
+                        <td>@item.Email</td>
+                        <td data-mask="password"></td> @* ẩn mật khẩu *@
+                        <td>@item.DiaChi</td>
+                        <td>@item.SoDienThoai</td>
+                        <td>@item.ChucVu</td>
+                        <td>@item.NgayTao?.ToString("dd/MM/yyyy")</td>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@item.MaKh" class="btn btn-warning btn-sm kh-btn-xs">Sửa</a>
+                            <a asp-action="Details" asp-route-id="@item.MaKh" class="btn btn-info btn-sm kh-btn-xs">Chi tiết</a>
+                            <a asp-action="Delete" asp-route-id="@item.MaKh" class="btn btn-danger btn-sm kh-btn-xs">Xóa</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
 
-    .table td {
-        text-align: center;
-        vertical-align: middle;
-        padding: 0.5rem;
-    }
-
-    .table img {
-        width: 60px;
-        height: 60px;
-        object-fit: cover;
-        border: 1px solid #dee2e6;
-        border-radius: 6px;
-    }
-
-    .table-hover tbody tr:hover {
-        background: #f1f3f5;
-    }
-
-    .btn-sm i {
-        margin-right: 4px;
-    }
-</style>
+    <p>
+        <a asp-area="admins" asp-controller="Dashboard" asp-action="Index" class="kh-back">
+            ⬅ Quay về trang chủ
+        </a>
+    </p>
+</div>

@@ -12,11 +12,15 @@
     string Fmt(decimal v) => string.Format("{0:N0} ₫", v);
 }
 
-<div class="container mt-4">
+<link rel="stylesheet" href="~/css/sanpham.css" asp-append-version="true" />
+<div class="site-bg--sanpham"></div>  @* nếu muốn nền blob *@
+
+
+<div class="sp-page container mt-4">
 
     <div class="d-flex justify-content-between align-items-center mb-3">
-        <h2 class="text-primary mb-0">Danh sách sản phẩm</h2>
-        <a asp-area="admins" asp-controller="SanPham" asp-action="Create" class="btn btn-success">
+        <h2 class="sp-title mb-0">Danh sách sản phẩm</h2>
+        <a asp-area="admins" asp-controller="SanPham" asp-action="Create" class="btn sp-btn-add">
             <i class="fa fa-plus"></i> Thêm sản phẩm
         </a>
     </div>
@@ -30,10 +34,10 @@
         <div class="alert alert-danger">@err</div>
     }
 
-    <div class="card shadow-sm">
+    <div class="sp-table-wrap card shadow-none border-0">
         <div class="table-responsive">
-            <table class="table align-middle mb-0">
-                <thead class="table-light">
+            <table class="table sp-table align-middle mb-0">
+                <thead>
                     <tr>
                         <th style="width:80px">Ảnh</th>
                         <th>Tên sản phẩm</th>
@@ -48,24 +52,23 @@
                     {
                         <tr>
                             <td>
-                                <img src="@Src(sp.HinhAnh)" alt="@sp.TenSp" class="rounded"
-                                     style="width:64px;height:64px;object-fit:cover;border:1px solid #eee" />
+                                <img src="@Src(sp.HinhAnh)" alt="@sp.TenSp" class="sp-thumb" />
                             </td>
                             <td class="fw-semibold">@sp.TenSp</td>
-                            <td>@Fmt(sp.Gia)</td>
+                            <td><span class="sp-price">@Fmt(sp.Gia)</span></td>
                             <td>@sp.SoLuong</td>
-                            <td>@(sp.MaDmNavigation?.TenDm ?? $"#{sp.MaDm}")</td>
+                            <td><span class="sp-cat">@(@sp.MaDmNavigation?.TenDm ?? $"#{sp.MaDm}")</span></td>
                             <td class="text-end">
                                 <a asp-area="admins" asp-controller="SanPham" asp-action="Details" asp-route-id="@sp.MaSp"
-                                   class="btn btn-sm btn-outline-secondary">
+                                   class="btn btn-outline-secondary btn-sm sp-btn-xs">
                                     <i class="fa fa-eye"></i> Chi tiết
                                 </a>
                                 <a asp-area="admins" asp-controller="SanPham" asp-action="Edit" asp-route-id="@sp.MaSp"
-                                   class="btn btn-sm btn-warning">
+                                   class="btn btn-warning btn-sm sp-btn-xs">
                                     <i class="fa fa-pen"></i> Sửa
                                 </a>
                                 <a asp-area="admins" asp-controller="SanPham" asp-action="Delete" asp-route-id="@sp.MaSp"
-                                   class="btn btn-sm btn-danger"
+                                   class="btn btn-danger btn-sm sp-btn-xs"
                                    onclick="return confirm('Xoá sản phẩm này?');">
                                     <i class="fa fa-trash"></i> Xoá
                                 </a>
@@ -80,8 +83,7 @@
 
 <!-- Footer actions -->
 <div class="mt-3">
-    <a asp-area="admins" asp-controller="Dashboard" asp-action="Index" class="btn btn-secondary">
-        ⬅ Quay về trang chủ quản trị
+    <a asp-area="admins" asp-controller="Dashboard" asp-action="Index" class="sp-back">
+        ⬅ Quay về trang chủ
     </a>
-</div>
 </div>

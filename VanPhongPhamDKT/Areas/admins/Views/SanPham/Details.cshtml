@@ -12,46 +12,46 @@
     string Fmt(decimal v) => string.Format("{0:N0} ₫", v);
 }
 
-<div class="container mt-4">
+<link rel="stylesheet" href="~/css/sanpham.css" asp-append-version="true" />
+<div class="site-bg--sanpham"></div>
+
+<div class="sp-detail-page container mt-4">
     <div class="d-flex justify-content-between align-items-center mb-3">
-        <h2 class="text-primary mb-0">Chi tiết sản phẩm</h2>
+        <h2 class="sp-title mb-0">Chi tiết sản phẩm</h2>
         <div>
             <a asp-area="admins" asp-controller="SanPham" asp-action="Edit" asp-route-id="@Model.MaSp"
-               class="btn btn-warning me-2"><i class="fa fa-pen"></i> Sửa</a>
-            <a asp-area="admins" asp-controller="SanPham" asp-action="Index" class="btn btn-secondary">
+               class="btn sp-btn-primary me-2"><i class="fa fa-pen"></i> Sửa</a>
+            <a asp-area="admins" asp-controller="SanPham" asp-action="Index" class="btn sp-btn-cancel sp-back">
                 ← Quay lại
             </a>
         </div>
     </div>
 
-    <div class="row g-4">
-        <div class="col-lg-5">
-            <div class="card shadow-sm border-0">
-                <img src="@Src(Model.HinhAnh)" alt="@Model.TenSp"
-                     class="card-img-top" style="object-fit:cover;max-height:420px" />
-            </div>
+    <div class="sp-detail-grid">
+        <div class="sp-detail-card">
+            <img src="@Src(Model.HinhAnh)" alt="@Model.TenSp" class="sp-detail-img" />
         </div>
 
-        <div class="col-lg-7">
-            <div class="card shadow-sm border-0">
-                <div class="card-body">
-                    <h3 class="fw-bold">@Model.TenSp</h3>
-                    <div class="text-danger fs-4 fw-semibold mb-3">@Fmt(Model.Gia)</div>
+        <div class="sp-detail-card">
+            <div class="card-body p-0">
+                <h3 class="fw-bold text-white mb-2">@Model.TenSp</h3>
+                <div class="sp-price-large mb-3">@Fmt(Model.Gia)</div>
 
-                    <dl class="row mb-0">
-                        <dt class="col-sm-3">Mã SP</dt>
-                        <dd class="col-sm-9">@Model.MaSp</dd>
+                <dl class="sp-dl">
+                    <dt>Mã SP</dt>
+                    <dd>@Model.MaSp</dd>
 
-                        <dt class="col-sm-3">Danh mục</dt>
-                        <dd class="col-sm-9">@((Model.MaDmNavigation?.TenDm) ?? $"#{Model.MaDm}")</dd>
+                    <dt>Danh mục</dt>
+                    <dd>
+                        <span class="sp-cat">@((Model.MaDmNavigation?.TenDm) ?? $"#{Model.MaDm}")</span>
+                    </dd>
 
-                        <dt class="col-sm-3">Số lượng</dt>
-                        <dd class="col-sm-9">@Model.SoLuong</dd>
+                    <dt>Số lượng</dt>
+                    <dd>@Model.SoLuong</dd>
 
-                        <dt class="col-sm-3">Mô tả</dt>
-                        <dd class="col-sm-9">@(string.IsNullOrWhiteSpace(Model.MoTa) ? "—" : Model.MoTa)</dd>
-                    </dl>
-                </div>
+                    <dt>Mô tả</dt>
+                    <dd>@(string.IsNullOrWhiteSpace(Model.MoTa) ? "—" : Model.MoTa)</dd>
+                </dl>
             </div>
         </div>
     </div>

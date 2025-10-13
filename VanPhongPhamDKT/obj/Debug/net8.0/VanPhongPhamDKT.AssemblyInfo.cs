@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("VanPhongPhamDKT")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f4aa038e9750bb400391144abb514709c177928f")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c251499e68484eac85c2b4cce9ae8b9de491e402")]
 [assembly: System.Reflection.AssemblyProductAttribute("VanPhongPhamDKT")]
 [assembly: System.Reflection.AssemblyTitleAttribute("VanPhongPhamDKT")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

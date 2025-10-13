@@ -5,27 +5,51 @@
     ViewData["Title"] = "Chi tiết Admin";
 }
 
-<h2>Chi tiết Admin</h2>
-<hr />
 
-<dl class="row">
-    <dt class="col-sm-2">Họ tên</dt>
-    <dd class="col-sm-10">@Model.HoTen</dd>
+<link rel="stylesheet" href="~/css/admin.css" />
 
-    <dt class="col-sm-2">Email</dt>
-    <dd class="col-sm-10">@Model.Email</dd>
+<!-- Nền riêng (tuỳ chọn, bỏ nếu không cần) -->
+<div class="site-bg--detail-admin"></div>
 
-    <dt class="col-sm-2">SĐT</dt>
-    <dd class="col-sm-10">@Model.SoDienThoai</dd>
+<div class="detail-admin-page">
+    <h2 class="page-title mb-1">Chi tiết Admin</h2>
+    <p class="page-desc">Thông tin quản trị viên.</p>
 
-    <dt class="col-sm-2">Chức vụ</dt>
-    <dd class="col-sm-10">@Model.ChucVu</dd>
+    <div class="detail-card">
+        <dl class="detail-grid">
+            <dt>Họ tên</dt>
+            <dd>@Model.HoTen</dd>
 
-    <dt class="col-sm-2">Ngày tạo</dt>
-    <dd class="col-sm-10">@Model.NgayTao?.ToString("dd/MM/yyyy")</dd>
+            <dt>Email</dt>
+            <dd>@Model.Email</dd>
 
-    <dt class="col-sm-2">Trạng thái</dt>
-    <dd class="col-sm-10">@(Model.TrangThai == true ? "Hoạt động" : "Khóa")</dd>
-</dl>
+            <dt>SĐT</dt>
+            <dd>@Model.SoDienThoai</dd>
 
-<a asp-action="Index" class="btn btn-secondary">Quay lại</a>
+            <dt>Chức vụ</dt>
+            <dd>@Model.ChucVu</dd>
+
+            <dt>Ngày tạo</dt>
+            <dd>@(Model.NgayTao?.ToString("dd/MM/yyyy"))</dd>
+
+            <dt>Trạng thái</dt>
+            <dd>
+                @if (Model.TrangThai == true)
+                {
+                    <span class="badge-state badge-on">Hoạt động</span>
+                }
+                else
+                {
+                    <span class="badge-state badge-off">Khóa</span>
+                }
+            </dd>
+        </dl>
+
+        <div class="detail-actions">
+            <a asp-area="admins" asp-controller="Admin" asp-action="Edit" asp-route-id="@Model.MaId"
+               class="btn btn-save">Sửa</a>
+            <a asp-area="admins" asp-controller="Admin" asp-action="Index"
+               class="btn btn-cancel btn-back-slim">Quay lại</a>
+        </div>
+    </div>
+</div>

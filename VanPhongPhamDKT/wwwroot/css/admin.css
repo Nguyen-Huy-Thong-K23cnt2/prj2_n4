@@ -1,0 +1,697 @@
+﻿﻿ /* ===== Admin Index: Table + Buttons + Form (Dark Glass) ===== */
+/* Khung bảng đẹp, bo tròn + glass */
+.table-wrap {
+    background: linear-gradient(180deg, rgba(16,26,52,.88), rgba(10,18,38,.86));
+    border: 1px solid rgba(255,255,255,.08);
+    border-radius: 18px;
+    box-shadow: 0 10px 34px rgba(2,6,23,.5);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    padding: 14px;
+}
+
+/* Tùy biến table bootstrap cho hợp theme */
+.table.table-striped.table-hover.align-middle {
+    margin: 0;
+    color: #e8eeff;
+    border-collapse: separate;
+    border-spacing: 0;
+    overflow: hidden;
+    border-radius: 12px;
+}
+
+.table thead.table-dark {
+    background: linear-gradient(180deg, #162445, #12213f) !important;
+    color: #cfe0ff !important;
+    border-bottom: 1px solid rgba(255,255,255,.08);
+}
+
+.table thead th {
+    font-weight: 800;
+    letter-spacing: .2px;
+    vertical-align: middle;
+    padding: 14px 16px;
+    border-bottom-width: 0 !important;
+}
+
+.table tbody td {
+    padding: 12px 16px;
+    border-color: rgba(255,255,255,.08) !important;
+}
+
+.table-hover tbody tr:hover {
+    background: rgba(138,180,255,.06) !important;
+}
+
+/* Nhóm nút thao tác */
+.btn-group .btn {
+    border-radius: 10px !important;
+    font-weight: 700;
+    border: 1px solid rgba(255,255,255,.12);
+    transition: transform .12s ease, box-shadow .12s ease, background .12s ease;
+}
+
+    .btn-group .btn:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 8px 22px rgba(138,180,255,.18);
+    }
+
+.btn-primary {
+    background: linear-gradient(180deg, #bcd0ff, #8ab4ff);
+    color: #0b1020;
+    border-color: transparent;
+}
+
+.btn-warning {
+    color: #0f172a;
+    font-weight: 800;
+}
+
+.btn-info {
+    color: #0f172a;
+    font-weight: 800;
+}
+
+.btn-danger {
+    color: #fff;
+}
+
+/* Chip trạng thái */
+.badge-state {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 10px;
+    border-radius: 999px;
+    font-weight: 800;
+    font-size: 12.5px;
+    border: 1px solid rgba(255,255,255,.12);
+}
+
+.badge-on {
+    background: rgba(34,197,94,.14);
+    border-color: rgba(34,197,94,.28);
+    color: #bbf7d0;
+}
+
+.badge-off {
+    background: rgba(239,68,68,.14);
+    border-color: rgba(239,68,68,.30);
+    color: #fecaca;
+}
+
+/* Nút “Thêm mới” kiểu pill */
+.btn-add {
+    border-radius: 999px;
+    padding: 10px 16px;
+    font-weight: 800;
+    box-shadow: 0 8px 26px rgba(138,180,255,.25);
+}
+
+/* ===== Form (Create/Edit/Details) ===== */
+.form-glass {
+    background: linear-gradient(180deg, rgba(16,26,52,.88), rgba(10,18,38,.86));
+    border: 1px solid rgba(255,255,255,.08);
+    border-radius: 18px;
+    box-shadow: 0 10px 34px rgba(2,6,23,.5);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    padding: 20px;
+}
+
+.form-label {
+    font-weight: 800;
+    color: #cfe0ff;
+    margin-bottom: 6px;
+}
+
+.form-control, .form-select {
+    background: rgba(255,255,255,.03);
+    border: 1px solid rgba(255,255,255,.12);
+    color: #e8eeff;
+    border-radius: 12px;
+    padding: 10px 12px;
+}
+
+    .form-control::placeholder {
+        color: #9fb0cf;
+        opacity: .7;
+    }
+
+    .form-control:focus, .form-select:focus {
+        border-color: rgba(138,180,255,.45);
+        box-shadow: 0 0 0 4px rgba(138,180,255,.18);
+        background: rgba(255,255,255,.05);
+        color: #e8eeff;
+    }
+
+/* Validation */
+.field-validation-error {
+    color: #fecaca;
+    font-weight: 700;
+    font-size: 12.5px;
+}
+
+/* Nút trong form */
+.btn-save {
+    background: linear-gradient(180deg, #bcd0ff, #8ab4ff);
+    color: #0b1020;
+    border: 0;
+    font-weight: 800;
+    border-radius: 12px;
+    padding: 10px 16px;
+}
+
+.btn-cancel {
+    background: rgba(255,255,255,.04);
+    color: #e8eeff;
+    border: 1px solid rgba(255,255,255,.12);
+    border-radius: 12px;
+    padding: 10px 16px;
+    font-weight: 800;
+}
+
+/* Tiêu đề + khoảng cách */
+.page-title {
+    font-weight: 900;
+    margin-bottom: 10px;
+}
+
+.page-desc {
+    color: #9fb0cf;
+    margin-bottom: 14px;
+}
+
+/* Responsive tinh gọn nếu CSS nằm trong .cshtml thì đổi @media -> @@media */
+@media (max-width: 576px) {
+    .btn-group .btn {
+        padding: 6px 10px;
+    }
+
+    .table-wrap {
+        padding: 10px;
+    }
+}
+
+/* ===== PAGE BACKGROUND GIỐNG DASHBOARD ===== */
+.theme-dashboard {
+    /* nền tối + các vệt sáng */
+    background: radial-gradient(1100px 340px at 16% 10%, rgba(185,196,220,.22) 0%, rgba(185,196,220,0) 60%), radial-gradient(880px 280px at 70% 12%, rgba(138,180,255,.16) 0%, rgba(138,180,255,0) 60%), linear-gradient(180deg, #0a1226 0%, #070d1a 60%, #040915 100%) !important;
+    color: #e8eeff;
+}
+
+/* ===== BACK BUTTON (glass/pill) ===== */
+.btn-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    border-radius: 999px;
+    padding: 10px 14px;
+    font-weight: 800;
+    color: #e8eeff;
+    background: rgba(255,255,255,.04);
+    border: 1px solid rgba(255,255,255,.12);
+    box-shadow: 0 8px 22px rgba(138,180,255,.18);
+    text-decoration: none;
+    transition: transform .12s ease, box-shadow .12s ease, background .12s ease, border-color .12s;
+}
+
+    .btn-back:hover {
+        background: rgba(138,180,255,.10);
+        border-color: rgba(138,180,255,.28);
+        transform: translateY(-1px);
+        box-shadow: 0 12px 30px rgba(138,180,255,.22);
+    }
+
+    /* icon mũi tên nhỏ trong nút */
+    .btn-back .ico {
+        width: 18px;
+        height: 18px;
+        display: inline-grid;
+        place-items: center;
+        border-radius: 50%;
+        background: rgba(255,255,255,.06);
+        border: 1px solid rgba(255,255,255,.12);
+    }
+
+/* OPTIONAL: khung bảng bo tròn + bóng to hơn chút cho nổi */
+.table-wrap {
+    border-radius: 22px;
+    box-shadow: 0 14px 40px rgba(2,6,23,.55);
+    padding: 16px;
+}
+
+/* 1) Chỉ để nền trên body */
+.theme-dashboard {
+    background: radial-gradient(1100px 340px at 16% 10%, rgba(185,196,220,.22) 0%, rgba(185,196,220,0) 60%), radial-gradient(880px 280px at 70% 12%, rgba(138,180,255,.16) 0%, rgba(138,180,255,0) 60%), linear-gradient(180deg, #0a1226 0%, #070d1a 60%, #040915 100%) !important;
+    color: #e8eeff;
+}
+
+/* 2) Reset mọi wrapper Bootstrap/ layout về trong suốt */
+main, .content, .container, .container-fluid,
+.app-content, .app-shell, .page-content, section {
+    background: transparent !important;
+    box-shadow: none !important;
+}
+
+/* 3) Các thẻ glass nhỏ (bảng, nút…) vẫn giữ nền của chúng */
+.table-wrap, .app-nav, .app-sidebar, .card-glass, .btn-back {
+    /* giữ nguyên nền glass hiện có */
+}
+
+/* 4) (Tuỳ chọn) tránh cảm giác "đứt mạch" khi gradient quá gắt */
+.theme-dashboard {
+    background-attachment: fixed; /* mượt khi scroll, không tạo dải */
+}
+
+/* ===== NỀN CỐ ĐỊNH RIÊNG CHO TRANG ADMIN (không cần layout) ===== */
+.site-bg--admin-fixed {
+    position: fixed;
+    inset: 0;
+    z-index: 0; /* nằm dưới nội dung trang */
+    pointer-events: none;
+    background: radial-gradient(1200px 360px at 14% 10%, rgba(190,200,230,.22) 0%, rgba(190,200,230,0) 60%), radial-gradient(900px 300px at 72% 14%, rgba(120,170,250,.16) 0%, rgba(120,170,250,0) 60%), radial-gradient(700px 260px at 50% 70%, rgba(60,120,210,.10) 0%, rgba(60,120,210,0) 55%), linear-gradient(180deg, #0a1226 0%, #081020 55%, #060b19 100%);
+    background-attachment: fixed; /* mượt khi scroll */
+    filter: saturate(110%);
+}
+
+/* Toàn bộ nội dung trang nổi lên trên nền */
+.admin-page {
+    position: relative;
+    z-index: 1;
+}
+
+/* Reset wrapper để tránh tạo thêm dải nền */
+main, .main,
+.container, .container-fluid,
+.app-shell, .app-content, .content, .content-wrapper,
+.page, .page-content, section {
+    background: transparent !important;
+    background-image: none !important;
+    box-shadow: none !important;
+}
+
+/* (giữ nguyên các style bảng, nút, form bạn đã có) */
+
+/* === READABILITY BOOST + BACK BUTTON FIX === */
+
+/* 1) Chữ trong bảng rõ hơn (đừng xám quá) */
+.table thead th {
+    color: #eaf1ff !important;
+}
+
+.table tbody td, .table tbody th {
+    color: #dbe7ff !important; /* tăng độ sáng chữ */
+    opacity: 1 !important;
+}
+
+/* Hàng bảng có nền nhẹ để chữ nổi hơn */
+.table tbody tr {
+    background: rgba(255,255,255,.02); /* rất nhạt */
+}
+
+.table-hover tbody tr:hover {
+    background: rgba(138,180,255,.10) !important; /* hover đậm hơn */
+}
+
+/* 2) Link trong bảng (nếu có) – đổi màu cho dễ thấy */
+.table a {
+    color: #bcd0ff !important;
+    text-decoration: none;
+}
+
+    .table a:hover {
+        color: #e6f0ff !important;
+        text-decoration: underline;
+    }
+
+/* 3) Badge trạng thái – tăng tương phản */
+.badge-on {
+    background: rgba(34,197,94,.22) !important;
+    border-color: rgba(34,197,94,.38) !important;
+    color: #dcfce7 !important;
+}
+
+.badge-off {
+    background: rgba(239,68,68,.22) !important;
+    border-color: rgba(239,68,68,.40) !important;
+    color: #ffe4e6 !important;
+}
+
+/* 4) Nút thao tác – chữ tối/ sáng hợp nền */
+.btn-warning {
+    color: #0b1020 !important;
+}
+
+.btn-info {
+    color: #0b1020 !important;
+}
+
+.btn-danger {
+    color: #ffffff !important;
+}
+
+/* 5) NÚT QUAY VỀ: luôn nhìn thấy (không cần hover) */
+.btn-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    border-radius: 999px;
+    padding: 10px 16px;
+    font-weight: 800;
+    background: rgba(255,255,255,.10) !important; /* mặc định rõ hơn */
+    border: 1px solid rgba(255,255,255,.22) !important;
+    color: #eaf1ff !important;
+    box-shadow: 0 8px 24px rgba(20,40,80,.35) !important;
+    opacity: 1 !important; /* tránh bị rule nào đó làm mờ */
+    visibility: visible !important;
+}
+
+    .btn-back .ico {
+        width: 20px;
+        height: 20px;
+        display: inline-grid;
+        place-items: center;
+        border-radius: 999px;
+        background: rgba(255,255,255,.12);
+        border: 1px solid rgba(255,255,255,.22);
+    }
+
+    .btn-back:hover {
+        background: rgba(138,180,255,.18) !important;
+        border-color: rgba(138,180,255,.35) !important;
+        transform: translateY(-1px);
+        box-shadow: 0 12px 30px rgba(60,110,200,.45) !important;
+    }
+
+/* 6) Nếu có rule nào vô tình làm mờ nút/link */
+.btn, a.btn, .btn-back {
+    filter: none !important;
+}
+
+/* 7) Khoảng cách để nút không lẫn vào bóng của table */
+.btn-back {
+    margin-top: 12px;
+}
+
+/* ===== Back button = Primary pill như nút "Thêm mới" ===== */
+.btn-back {
+    /* giống btn-add */
+    border-radius: 999px;
+    padding: 10px 16px;
+    font-weight: 800;
+    /* giống btn-primary gradient */
+    background: linear-gradient(180deg, #bcd0ff, #8ab4ff) !important;
+    color: #0b1020 !important;
+    border: 0 !important;
+    box-shadow: 0 8px 26px rgba(138,180,255,.25) !important;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    position: relative; /* để nổi lên trên bóng bảng nếu cần */
+    z-index: 2;
+    opacity: 1 !important; /* tránh rule khác làm mờ */
+    visibility: visible !important;
+    filter: none !important;
+}
+
+    .btn-back:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 12px 34px rgba(138,180,255,.35) !important;
+    }
+
+    /* Nếu có style .btn-back cũ thì vô hiệu hoá */
+    .btn-back .ico {
+        background: transparent;
+        border: 0;
+        width: auto;
+        height: auto;
+    }
+
+/* Title trắng cho trang Admin */
+h2.page-title {
+    color: #ffffff !important;
+    text-shadow: none; /* nếu trước đó có bóng chữ thì tắt đi */
+}
+
+/* ====== Create Admin (Form) - Dark Glass ====== */
+
+/* Tiêu đề & mô tả */
+.page-title {
+    color: #fff !important;
+    font-weight: 900;
+    letter-spacing: .2px;
+    margin-bottom: 6px;
+}
+
+.page-desc {
+    color: #9fb0cf;
+    margin-bottom: 14px;
+}
+
+/* Khung form kính + layout lưới auto 2 cột */
+form.form-glass {
+    max-width: 960px;
+    margin-top: 8px;
+    background: linear-gradient(180deg, rgba(16,26,52,.88), rgba(10,18,38,.86));
+    border: 1px solid rgba(255,255,255,.08);
+    border-radius: 18px;
+    box-shadow: 0 12px 36px rgba(2,6,23,.55);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    padding: 22px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 16px 20px;
+}
+
+/* Mỗi field */
+.form-glass .mb-3 {
+    margin-bottom: 0 !important;
+}
+
+/* Nhãn & input */
+.form-label {
+    font-weight: 800;
+    color: #cfe0ff;
+    margin-bottom: 6px;
+}
+
+.form-control, .form-select {
+    background: rgba(255,255,255,.04);
+    border: 1px solid rgba(255,255,255,.14);
+    color: #e8eeff;
+    border-radius: 12px;
+    padding: 10px 12px;
+}
+
+    .form-control::placeholder {
+        color: #9fb0cf;
+        opacity: .8;
+    }
+
+    .form-control:focus, .form-select:focus {
+        border-color: rgba(138,180,255,.45);
+        box-shadow: 0 0 0 4px rgba(138,180,255,.18);
+        background: rgba(255,255,255,.06);
+        color: #e8eeff;
+    }
+
+/* Validate */
+.field-validation-error {
+    color: #fecaca;
+    font-weight: 700;
+    font-size: 12.5px;
+    margin-top: 6px;
+    display: block;
+}
+
+/* Hàng nút full-width dưới cùng */
+.form-glass .d-flex {
+    grid-column: 1 / -1; /* chiếm toàn bộ hàng */
+    margin-top: 4px;
+}
+
+/* Nút */
+.btn-save {
+    background: linear-gradient(180deg, #bcd0ff, #8ab4ff);
+    color: #0b1020;
+    border: 0;
+    font-weight: 800;
+    border-radius: 12px;
+    padding: 10px 16px;
+    box-shadow: 0 8px 26px rgba(138,180,255,.25);
+}
+
+    .btn-save:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 12px 34px rgba(138,180,255,.35);
+    }
+
+.btn-cancel {
+    background: rgba(255,255,255,.06);
+    color: #e8eeff;
+    border: 1px solid rgba(255,255,255,.16);
+    border-radius: 12px;
+    padding: 10px 16px;
+    font-weight: 800;
+}
+
+    .btn-cancel:hover {
+        background: rgba(255,255,255,.10);
+        border-color: rgba(255,255,255,.28);
+    }
+
+/* Responsive nhỏ */
+@media (max-width:576px) {
+    form.form-glass {
+        padding: 16px;
+        gap: 12px 14px;
+    }
+
+    .btn-save, .btn-cancel {
+        padding: 9px 14px;
+    }
+}
+
+
+/* ===== NỀN CHỈ CHO TRANG THÊM ADMIN ===== */
+.site-bg--create-admin {
+    position: fixed;
+    inset: 0;
+    z-index: 0; /* nằm dưới nội dung */
+    pointer-events: none;
+    /* bạn đổi màu ở đây nếu thích */
+    background: radial-gradient(1200px 360px at 14% 10%, rgba(190,200,230,.22) 0%, rgba(190,200,230,0) 60%), radial-gradient(900px 300px at 72% 14%, rgba(120,170,250,.16) 0%, rgba(120,170,250,0) 60%), radial-gradient(700px 260px at 50% 70%, rgba(60,120,210,.10) 0%, rgba(60,120,210,0) 55%), linear-gradient(180deg, #0a1226 0%, #081020 55%, #060b19 100%);
+    background-attachment: fixed;
+    filter: saturate(110%);
+}
+
+/* Nội dung trang nổi lên trên nền */
+.create-admin-page {
+    position: relative;
+    z-index: 1;
+}
+
+    /* (Tuỳ chọn) Đồng bộ màu khung form & nút, nhưng CHỈ ở trang Create */
+    .create-admin-page .form-glass {
+        background: linear-gradient(180deg, rgba(16,26,52,.90), rgba(10,18,38,.88));
+        border: 1px solid rgba(138,180,255,.18);
+        box-shadow: 0 12px 36px rgba(2,6,23,.6);
+    }
+
+    .create-admin-page .btn-save {
+        background: linear-gradient(180deg, #cfe0ff, #8ab4ff);
+        color: #0b1020;
+        border: 0;
+        box-shadow: 0 10px 28px rgba(138,180,255,.35);
+    }
+
+/* ===== NỀN CHỈ CHO TRANG EDIT ADMIN ===== */
+.site-bg--edit-admin {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    /* Chọn palette bạn muốn. Ví dụ: Indigo khác Create một chút */
+    background: radial-gradient(1200px 360px at 14% 10%, rgba(203,213,255,.20) 0%, rgba(203,213,255,0) 60%), radial-gradient(900px 300px at 72% 14%, rgba(139,92,246,.16) 0%, rgba(139,92,246,0) 60%), radial-gradient(700px 260px at 50% 70%, rgba(99,102,241,.12) 0%, rgba(99,102,241,0) 55%), linear-gradient(180deg, #0b0f21 0%, #0a0f1d 55%, #090e1a 100%);
+    background-attachment: fixed;
+}
+
+.edit-admin-page {
+    position: relative;
+    z-index: 1;
+}
+
+    /* (tuỳ chọn) Tinh màu form theo palette Indigo ở trên */
+    .edit-admin-page .form-glass {
+        background: linear-gradient(180deg, rgba(20,22,40,.90), rgba(16,20,36,.88));
+        border: 1px solid rgba(139,92,246,.22);
+        box-shadow: 0 12px 36px rgba(10,12,28,.65);
+    }
+
+    .edit-admin-page .btn-save {
+        background: linear-gradient(180deg, #c7d2fe, #8b5cf6) !important;
+        color: #0b0f21 !important;
+        border: 0 !important;
+        box-shadow: 0 10px 28px rgba(139,92,246,.35) !important;
+    }
+
+/* ===== Details (glass) ===== */
+.detail-admin-page {
+    position: relative;
+    z-index: 1;
+}
+
+.detail-card {
+    max-width: 960px;
+    background: linear-gradient(180deg, rgba(16,26,52,.90), rgba(10,18,38,.88));
+    border: 1px solid rgba(255,255,255,.10);
+    border-radius: 18px;
+    padding: 20px;
+    box-shadow: 0 12px 36px rgba(2,6,23,.55);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+/* Lưới key/value: 2 cột desktop, 1 cột mobile */
+.detail-grid {
+    display: grid;
+    grid-template-columns: 180px 1fr;
+    gap: 10px 16px;
+    margin: 0;
+}
+
+    .detail-grid dt {
+        font-weight: 800;
+        color: #cfe0ff;
+    }
+
+    .detail-grid dd {
+        margin: 0;
+        color: #eaf1ff;
+        min-height: 24px;
+        border-bottom: 1px dashed rgba(255,255,255,.08);
+        padding-bottom: 6px;
+    }
+
+/* Hành động */
+.detail-actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 16px;
+}
+
+.btn-back-slim {
+    padding: 10px 14px;
+}
+
+/* Nền riêng cho trang Detail (tuỳ chọn) */
+.site-bg--detail-admin {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background: radial-gradient(1100px 340px at 16% 10%, rgba(190,200,230,.20) 0%, rgba(190,200,230,0) 60%), radial-gradient(880px 280px at 70% 12%, rgba(120,170,250,.14) 0%, rgba(120,170,250,0) 60%), linear-gradient(180deg, #0a1226 0%, #081020 55%, #06101c 100%);
+    background-attachment: fixed;
+}
+
+/* Responsive */
+@media (max-width: 576px) {
+    .detail-card {
+        padding: 16px;
+    }
+
+    .detail-grid {
+        grid-template-columns: 1fr;
+    }
+
+        .detail-grid dt {
+            color: #9fb0cf;
+        }
+
+    .detail-actions {
+        flex-wrap: wrap;
+    }
+}

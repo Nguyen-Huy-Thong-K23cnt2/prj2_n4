@@ -5,34 +5,42 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2 class="mt-3">Chi tiết khách hàng</h2>
 
-<div class="card mt-3">
-    <div class="card-body">
-        <dl class="row">
-            <dt class="col-sm-3">Họ tên</dt>
-            <dd class="col-sm-9">@Model.HoTen</dd>
+<link rel="stylesheet" href="~/css/khachhang.css" asp-append-version="true" />
 
-            <dt class="col-sm-3">Email</dt>
-            <dd class="col-sm-9">@Model.Email</dd>
+<!-- (tuỳ chọn) nền giống trang Khách hàng -->
+<div class="site-bg--khachhang"></div>
 
-            <dt class="col-sm-3">Mật khẩu</dt>
-            <dd class="col-sm-9">@Model.MatKhau</dd>
+<div class="kh-detail-page">
+    <h2 class="kh-title mt-2">Chi tiết khách hàng</h2>
 
-            <dt class="col-sm-3">Địa chỉ</dt>
-            <dd class="col-sm-9">@Model.DiaChi</dd>
+    <div class="kh-detail-card">
+        <dl class="kh-detail-grid">
+            <dt>Họ tên</dt>
+            <dd>@Model.HoTen</dd>
 
-            <dt class="col-sm-3">Số điện thoại</dt>
-            <dd class="col-sm-9">@Model.SoDienThoai</dd>
+            <dt>Email</dt>
+            <dd>@Model.Email</dd>
+
+            <dt>Mật khẩu</dt>
+            <dd class="kh-mask">••••••</dd> @* Không show pass thật *@
+
+            <dt>Địa chỉ</dt>
+            <dd>@Model.DiaChi</dd>
+
+            <dt>Số điện thoại</dt>
+            <dd>@Model.SoDienThoai</dd>
 
             <dt class="col-sm-3">Chức vụ</dt>
             <dd class="col-sm-9">@Model.ChucVu</dd>
 
-            <dt class="col-sm-3">Ngày tạo</dt>
-            <dd class="col-sm-9">@Model.NgayTao?.ToString("dd/MM/yyyy")</dd>
+            <dt>Ngày tạo</dt>
+            <dd>@Model.NgayTao?.ToString("dd/MM/yyyy")</dd>
         </dl>
+
+        <div class="kh-detail-actions">
+            <a asp-action="Edit" asp-route-id="@Model.MaKh" class="btn kh-btn-primary">Sửa</a>
+            <a asp-action="Index" class="btn kh-btn-cancel">Quay lại</a>
+        </div>
     </div>
 </div>
-
-<a asp-action="Edit" asp-route-id="@Model.MaKh" class="btn btn-warning mt-2">Sửa</a>
-<a asp-action="Index" class="btn btn-secondary mt-2">Quay lại</a>

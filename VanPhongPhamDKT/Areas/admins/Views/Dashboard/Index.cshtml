@@ -1,124 +1,110 @@
-﻿@{
+﻿﻿@{
     ViewData["Title"] = "Bảng điều khiển";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+<link rel="stylesheet" href="~/css/dashboard.css" />
 
-<div class="d-flex">
+
+<!-- LAYER NỀN – đứng sau nội dung nhưng đứng trước background trắng của body -->
+<div id="bg-dashboard" aria-hidden="true"></div>
+<div class="page-dashboard">
+<div class="app-shell">
     <!-- Sidebar -->
-    <div class="sidebar bg-primary text-white p-3 shadow-lg">
-        <h3 class="text-center mb-4"><i class="fa-solid fa-crown"></i> Admin</h3>
-        <ul class="nav flex-column">
-            <li class="nav-item mb-2">
-                <a class="nav-link text-white fw-semibold" asp-area="admins" asp-controller="Admin" asp-action="Index">
-                    <i class="fa-solid fa-user-shield me-2"></i> Quản lý Quản trị viên
+    <aside class="app-sidebar">
+        <div class="title"><i class="fa-solid fa-crown"></i> Admin</div>
+        <ul class="menu">
+            <li>
+                <a class="menu-link active" asp-area="admins" asp-controller="Admin" asp-action="Index">
+                    <span class="mi"><i class="fa-solid fa-user-shield"></i></span>
+                    Quản lý Admin
+                    <span class="badge">4</span>
                 </a>
             </li>
-            <li class="nav-item mb-2">
-                <a class="nav-link text-white fw-semibold" asp-area="admins" asp-controller="SanPham" asp-action="Index">
-                    <i class="fa-solid fa-box me-2"></i> Quản lý Sản phẩm
+            <li>
+                <a class="menu-link" asp-area="admins" asp-controller="SanPham" asp-action="Index">
+                    <span class="mi"><i class="fa-solid fa-box-open"></i></span>
+                    Quản lý Sản phẩm
                 </a>
             </li>
-            <li class="nav-item mb-2">
-                <a class="nav-link text-white fw-semibold" asp-area="admins" asp-controller="KhachHang" asp-action="Index">
-                    <i class="fa-solid fa-users me-2"></i> Quản lý người dùng
+            <li>
+                <a class="menu-link" asp-area="admins" asp-controller="KhachHang" asp-action="Index">
+                    <span class="mi"><i class="fa-solid fa-users"></i></span>
+                    Quản lý Khách hàng
                 </a>
             </li>
-            <li class="nav-item mb-2">
-                <a class="nav-link text-white fw-semibold" asp-area="admins" asp-controller="DonHang" asp-action="Index">
-                    <i class="fa-solid fa-cart-shopping me-2"></i> Quản lý Đơn hàng
+            <li>
+                <a class="menu-link" asp-area="admins" asp-controller="DonHang" asp-action="Index">
+                    <span class="mi"><i class="fa-solid fa-cart-shopping"></i></span>
+                    Quản lý Đơn hàng
                 </a>
             </li>
         </ul>
-    </div>
+    </aside>
 
     <!-- Content -->
-    <div class="content p-4">
-        <div class="d-flex justify-content-end align-items-center gap-2 mb-3">
-            <a asp-area="" asp-controller="Home" asp-action="Index"
-               class="btn btn-outline-light border text-primary">
-                <i class="fa-solid fa-house me-1"></i> Về trang chính
+    <main class="app-content">
+        <!-- Top nav tuỳ chọn -->
+        <div class="app-nav">
+            <div class="app-brand">
+                <i class="fa-solid fa-cart-shopping"></i>
+                <span>VanPhongPham <small>Giao diện quản trị</small></span>
+            </div>
+            @* <div class="d-flex gap-2"> *@
+            @*     <a asp-area="" asp-controller="Auth" asp-action="Login" class="btn-pill btn-primary-glass">Đăng nhập</a> *@
+            @*     <a asp-area="" asp-controller="Auth" asp-action="Register" class="btn-pill btn-outline-glass">Đăng ký</a> *@
+            @* </div> *@
+        </div>
+
+        <h2 class="section-title">Bảng điều khiển</h2>
+        <p class="text-muted">Chọn chức năng bạn muốn quản lý:</p>
+
+        <div class="card-grid">
+            <a asp-area="admins" asp-controller="Admin" asp-action="Index" class="card-link">
+                <div class="card-glass">
+                    <div class="card-top">
+                        <div class="icon-wrap icon--primary"><i class="fa-solid fa-user-shield"></i></div>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </div>
+                    <h5 class="card-title">Quản lý Admin</h5>
+                    <p class="card-desc">Thêm, sửa, xoá tài khoản quản trị.</p>
+                </div>
+            </a>
+
+            <a asp-area="admins" asp-controller="SanPham" asp-action="Index" class="card-link">
+                <div class="card-glass">
+                    <div class="card-top">
+                        <div class="icon-wrap icon--success"><i class="fa-solid fa-box-open"></i></div>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </div>
+                    <h5 class="card-title">Quản lý Sản phẩm</h5>
+                    <p class="card-desc">Kho & thông tin sản phẩm.</p>
+                </div>
+            </a>
+
+            <a asp-area="admins" asp-controller="KhachHang" asp-action="Index" class="card-link">
+                <div class="card-glass">
+                    <div class="card-top">
+                        <div class="icon-wrap icon--info"><i class="fa-solid fa-users"></i></div>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </div>
+                    <h5 class="card-title">Quản lý Khách hàng</h5>
+                    <p class="card-desc">Theo dõi & CSKH.</p>
+                </div>
+            </a>
+
+            <a asp-area="admins" asp-controller="DonHang" asp-action="Index" class="card-link">
+                <div class="card-glass">
+                    <div class="card-top">
+                        <div class="icon-wrap icon--warn"><i class="fa-solid fa-cart-shopping"></i></div>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </div>
+                    <h5 class="card-title">Quản lý Đơn hàng</h5>
+                    <p class="card-desc">Đơn hàng & vận chuyển.</p>
+                </div>
             </a>
         </div>
-
-        <h2 class="fw-bold text-primary mb-3"><i class="fa-solid fa-gauge-high"></i> Bảng điều khiển</h2>
-        <p class="text-muted">Chào mừng bạn đến với trang quản trị, hãy chọn chức năng bạn muốn quản lý:</p>
-
-        <div class="row g-4 justify-content-center mt-4">
-            <div class="col-md-3"> 
-                <a asp-area="admins" asp-controller="Admin" asp-action="Index" class="text-decoration-none"> 
-                    <div class="card shadow border-0 rounded-4 bg-primary text-white text-center p-4 admin-card"> 
-                        <i class="fa-solid fa-user-shield fa-2x mb-3"></i>
-                        <h5 class="fw-bold">Thông tin QTV</h5> 
-                        <p>Xem tài khoản quản trị viên.</p> 
-                    </div> 
-                  </a> 
-                </div>
-            <div class="col-md-3">
-                <a asp-area="admins" asp-controller="SanPham" asp-action="Index" class="text-decoration-none">
-                    <div class="card shadow border-0 rounded-4 text-white text-center p-4 admin-card" style="background: linear-gradient(135deg, #28a745, #1e7e34);">
-                        <i class="fa-solid fa-box-open fa-2x mb-3"></i>
-                        <h5 class="fw-bold">Quản lý Sản phẩm</h5>
-                        <p class="small">Quản lý kho và thông tin sản phẩm.</p>
-                    </div>
-                </a>
-            </div>
-            <div class="col-md-3">
-                <a asp-area="admins" asp-controller="KhachHang" asp-action="Index" class="text-decoration-none">
-                    <div class="card shadow border-0 rounded-4 text-white text-center p-4 admin-card" style="background: linear-gradient(135deg, #17a2b8, #117a8b);">
-                        <i class="fa-solid fa-users fa-2x mb-3"></i>
-                        <h5 class="fw-bold">Quản lý người dùng</h5>
-                        <p class="small">Theo dõi và quản lý thông tin người dùng.</p>
-                    </div>
-                </a>
-            </div>
-            <div class="col-md-3">
-                <a asp-area="admins" asp-controller="DonHang" asp-action="Index" class="text-decoration-none">
-                    <div class="card shadow border-0 rounded-4 text-white text-center p-4 admin-card" style="background: linear-gradient(135deg, #ffc107, #e0a800);">
-                        <i class="fa-solid fa-cart-shopping fa-2x mb-3"></i>
-                        <h5 class="fw-bold">Quản lý Đơn hàng</h5>
-                        <p class="small">Theo dõi và quản lý thông tin đơn hàng.</p>
-                    </div>
-                </a>
-            </div>
-        </div>
-    </div>
+    </main>
 </div>
-
-<style>
-    .sidebar {
-        width: 260px;
-        min-height: 100vh;
-        position: fixed;
-        top: 0;
-        left: 0;
-        z-index: 1000;
-    }
-
-    .content {
-        margin-left: 260px;
-        width: calc(100% - 260px);
-    }
-
-    .sidebar .nav-link {
-        font-size: 1rem;
-        padding: 10px 15px;
-        border-radius: 6px;
-        transition: background 0.2s, transform 0.2s;
-    }
-
-    .sidebar .nav-link:hover {
-        background: rgba(255, 255, 255, 0.2);
-        transform: translateX(5px);
-    }
-
-    .admin-card {
-        transition: transform 0.25s ease, box-shadow 0.25s ease;
-    }
-
-    .admin-card:hover {
-        transform: translateY(-6px);
-        box-shadow: 0 12px 24px rgba(0,0,0,0.2);
-    }
-</style>
+</div>

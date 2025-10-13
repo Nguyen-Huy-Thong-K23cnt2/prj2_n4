@@ -5,49 +5,58 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2 class="mb-3">Thêm Admin</h2>
+<link rel="stylesheet" href="~/css/admin.css" />
 
-<div class="row">
-    <div class="col-md-6">
-        <form asp-action="Create" method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+<!-- Nền riêng cho trang Thêm Admin -->
+<div class="site-bg--create-admin"></div>
 
-            <div class="form-group mb-3">
-                <label asp-for="HoTen" class="form-label"></label>
-                <input asp-for="HoTen" class="form-control" />
-                <span asp-validation-for="HoTen" class="text-danger"></span>
-            </div>
+<!-- Bọc toàn bộ nội dung trang để nổi lên trên nền -->
+<div class="create-admin-page">
 
-            <div class="form-group mb-3">
-                <label asp-for="Email" class="form-label"></label>
-                <input asp-for="Email" class="form-control" />
-                <span asp-validation-for="Email" class="text-danger"></span>
-            </div>
+    <h2 class="page-title">Thêm mới Admin</h2>
+    <p class="page-desc">Điền thông tin quản trị viên.</p>
 
-            <div class="form-group mb-3">
-                <label asp-for="MatKhau" class="form-label"></label>
-                <input asp-for="MatKhau" type="password" class="form-control" />
-                <span asp-validation-for="MatKhau" class="text-danger"></span>
-            </div>
+    <form asp-area="admins" asp-controller="Admin" asp-action="Create" method="post" class="form-glass">
+        <div class="mb-3">
+            <label asp-for="HoTen" class="form-label"></label>
+            <input asp-for="HoTen" class="form-control" placeholder="Nguyễn Văn A" />
+            <span asp-validation-for="HoTen" class="field-validation-error"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="Email" class="form-label"></label>
+            <input asp-for="Email" class="form-control" placeholder="admin@domain.com" />
+            <span asp-validation-for="Email" class="field-validation-error"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="MatKhau" class="form-label"></label>
+            <input asp-for="MatKhau" type="password" class="form-control" placeholder="••••••••" />
+            <span asp-validation-for="MatKhau" class="field-validation-error"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="SoDienThoai" class="form-label"></label>
+            <input asp-for="SoDienThoai" class="form-control" placeholder="09xx xxx xxx" />
+            <span asp-validation-for="SoDienThoai" class="field-validation-error"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="ChucVu" class="form-label"></label>
+            <input asp-for="ChucVu" class="form-control" placeholder="Quản trị viên" />
+            <span asp-validation-for="ChucVu" class="field-validation-error"></span>
+        </div>
+        <div class="mb-3">
+            <label asp-for="TrangThai" class="form-label"></label>
+            <select asp-for="TrangThai" class="form-select">
+                <option value="true">Hoạt động</option>
+                <option value="false">Khóa</option>
+            </select>
+            <span asp-validation-for="TrangThai" class="field-validation-error"></span>
+        </div>
 
-            <div class="form-group mb-3">
-                <label asp-for="SoDienThoai" class="form-label"></label>
-                <input asp-for="SoDienThoai" class="form-control" />
-                <span asp-validation-for="SoDienThoai" class="text-danger"></span>
-            </div>
-
-            <div class="form-group mb-3">
-                <label asp-for="ChucVu" class="form-label"></label>
-                <input asp-for="ChucVu" class="form-control" />
-                <span asp-validation-for="ChucVu" class="text-danger"></span>
-            </div>
-
-            <button type="submit" class="btn btn-primary">Lưu</button>
-            <a asp-action="Index" class="btn btn-secondary">Quay lại</a>
-        </form>
-    </div>
-</div>
-
+        <div class="d-flex gap-2">
+            <button type="submit" class="btn btn-save">Lưu</button>
+            <a asp-area="admins" asp-controller="Admin" asp-action="Index" class="btn btn-cancel">Hủy</a>
+        </div>
+    </form>
+</div> <!-- /create-admin-page -->
 @section Scripts {
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");

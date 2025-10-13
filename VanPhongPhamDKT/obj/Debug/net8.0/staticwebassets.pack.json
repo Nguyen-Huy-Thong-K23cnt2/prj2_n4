@@ -85,6 +85,26 @@
       "PackagePath": "staticwebassets\\assets\\img\\sp9.webp"
     },
     {
+      "Id": "D:\\project2\\VanPhongPhamDKT\\wwwroot\\css\\admin.css",
+      "PackagePath": "staticwebassets\\css\\admin.css"
+    },
+    {
+      "Id": "D:\\project2\\VanPhongPhamDKT\\wwwroot\\css\\dashboard.css",
+      "PackagePath": "staticwebassets\\css\\dashboard.css"
+    },
+    {
+      "Id": "D:\\project2\\VanPhongPhamDKT\\wwwroot\\css\\donhang.css",
+      "PackagePath": "staticwebassets\\css\\donhang.css"
+    },
+    {
+      "Id": "D:\\project2\\VanPhongPhamDKT\\wwwroot\\css\\khachhang.css",
+      "PackagePath": "staticwebassets\\css\\khachhang.css"
+    },
+    {
+      "Id": "D:\\project2\\VanPhongPhamDKT\\wwwroot\\css\\sanpham.css",
+      "PackagePath": "staticwebassets\\css\\sanpham.css"
+    },
+    {
       "Id": "D:\\project2\\VanPhongPhamDKT\\wwwroot\\css\\site.css",
       "PackagePath": "staticwebassets\\css\\site.css"
     },

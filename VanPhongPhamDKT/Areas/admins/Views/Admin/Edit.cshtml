@@ -5,46 +5,70 @@
     ViewData["Title"] = "Chỉnh sửa Admin";
 }
 
-<h2>Chỉnh sửa Admin</h2>
-<hr />
 
-<div class="row">
-    <div class="col-md-6">
-        <form asp-action="Edit" method="post">
-            <input type="hidden" asp-for="MaId" />
+<link rel="stylesheet" href="~/css/admin.css" />
 
-            <div class="mb-3">
-                <label asp-for="HoTen" class="form-label"></label>
-                <input asp-for="HoTen" class="form-control" />
-                <span asp-validation-for="HoTen" class="text-danger"></span>
-            </div>
+<!-- NỀN RIÊNG CHO TRANG EDIT (không ảnh hưởng trang khác) -->
+<div class="site-bg--edit-admin"></div>
+<div class="edit-admin-page">
 
-            <div class="mb-3">
-                <label asp-for="Email" class="form-label"></label>
-                <input asp-for="Email" class="form-control" />
-                <span asp-validation-for="Email" class="text-danger"></span>
-            </div>
+    <h2 class="page-title mb-1">Chỉnh sửa Admin</h2>
+    <p class="page-desc">Cập nhật thông tin quản trị viên. Để trống mật khẩu nếu muốn giữ nguyên.</p>
 
-            <div class="mb-3">
-                <label asp-for="MatKhau" class="form-label"></label>
-                <input asp-for="MatKhau" class="form-control" type="password" />
-                <span asp-validation-for="MatKhau" class="text-danger"></span>
-            </div>
+    <div asp-validation-summary="ModelOnly" class="field-validation-error mb-2"></div>
 
-            <div class="mb-3">
-                <label asp-for="SoDienThoai" class="form-label"></label>
-                <input asp-for="SoDienThoai" class="form-control" />
-                <span asp-validation-for="SoDienThoai" class="text-danger"></span>
-            </div>
+    <form asp-area="admins" asp-controller="Admin" asp-action="Edit" method="post" class="form-glass">
+        @Html.AntiForgeryToken()
+        <input type="hidden" asp-for="MaId" />
 
-            <div class="mb-3">
-                <label asp-for="ChucVu" class="form-label"></label>
-                <input asp-for="ChucVu" class="form-control" />
-                <span asp-validation-for="ChucVu" class="text-danger"></span>
-            </div>
+        <div class="mb-3">
+            <label asp-for="HoTen" class="form-label"></label>
+            <input asp-for="HoTen" class="form-control" placeholder="Nguyễn Văn A" />
+            <span asp-validation-for="HoTen" class="field-validation-error"></span>
+        </div>
 
-            <button type="submit" class="btn btn-primary">Cập nhật</button>
-            <a asp-action="Index" class="btn btn-secondary">Quay lại</a>
-        </form>
-    </div>
-</div>
+        <div class="mb-3">
+            <label asp-for="Email" class="form-label"></label>
+            <input asp-for="Email" class="form-control" placeholder="admin@domain.com" />
+            <span asp-validation-for="Email" class="field-validation-error"></span>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Mật khẩu (tuỳ chọn)</label>
+            <input asp-for="MatKhau" type="password" class="form-control" placeholder="Để trống nếu giữ nguyên" value="" />
+            <span asp-validation-for="MatKhau" class="field-validation-error"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="SoDienThoai" class="form-label"></label>
+            <input asp-for="SoDienThoai" class="form-control" placeholder="09xx xxx xxx" />
+            <span asp-validation-for="SoDienThoai" class="field-validation-error"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="ChucVu" class="form-label"></label>
+            <input asp-for="ChucVu" class="form-control" placeholder="Quản trị viên" />
+            <span asp-validation-for="ChucVu" class="field-validation-error"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="TrangThai" class="form-label"></label>
+            <select asp-for="TrangThai" class="form-select">
+                <option value="true">Hoạt động</option>
+                <option value="false">Khóa</option>
+            </select>
+            <span asp-validation-for="TrangThai" class="field-validation-error"></span>
+        </div>
+
+        <div class="d-flex gap-2">
+            <button type="submit" class="btn btn-save">Lưu thay đổi</button>
+            <a asp-area="admins" asp-controller="Admin" asp-action="Index" class="btn btn-cancel">Quay lại</a>
+        </div>
+    </form>
+
+</div> <!-- /edit-admin-page -->
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
