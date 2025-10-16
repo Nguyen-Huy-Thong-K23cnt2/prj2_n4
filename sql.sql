@@ -3,8 +3,8 @@ GO
 USE VanPhongPham;
 GO
 
--- 2. Bảng KhachHang
-CREATE TABLE KhachHang (
+-- 1. Bảng User
+CREATE TABLE User (
     MaKH INT IDENTITY(1,1) PRIMARY KEY,
     HoTen NVARCHAR(100) NOT NULL,
     Email NVARCHAR(100) UNIQUE NOT NULL,
@@ -16,7 +16,7 @@ CREATE TABLE KhachHang (
 );
 GO
 
--- 3. Bảng NhanVien
+-- 2. Bảng NhanVien
 CREATE TABLE Admin (
     MaNV INT IDENTITY(1,1) PRIMARY KEY,
     HoTen NVARCHAR(100) NOT NULL,
@@ -29,7 +29,7 @@ CREATE TABLE Admin (
 );
 GO
 
--- 4. Bảng DanhMucSanPham
+-- 3. Bảng DanhMucSanPham
 CREATE TABLE DanhMucSanPham (
     MaDM INT IDENTITY(1,1) PRIMARY KEY,
     TenDM NVARCHAR(100) NOT NULL,
@@ -37,7 +37,7 @@ CREATE TABLE DanhMucSanPham (
 );
 GO
 
--- 5. Bảng SanPham
+-- 4. Bảng SanPham
 CREATE TABLE SanPham (
     MaSP INT IDENTITY(1,1) PRIMARY KEY,
     TenSP NVARCHAR(200) NOT NULL,
@@ -50,7 +50,7 @@ CREATE TABLE SanPham (
 );
 GO
 
--- 6. Bảng DonHang
+-- 5. Bảng DonHang
 CREATE TABLE DonHang (
     MaDH INT IDENTITY(1,1) PRIMARY KEY,
     MaKH INT NOT NULL,
@@ -61,7 +61,7 @@ CREATE TABLE DonHang (
 );
 GO
 
--- 7. Bảng ChiTietDonHang
+-- 6. Bảng ChiTietDonHang
 CREATE TABLE ChiTietDonHang (
     MaCTDH INT IDENTITY(1,1) PRIMARY KEY,
     MaDH INT NOT NULL,
@@ -71,11 +71,6 @@ CREATE TABLE ChiTietDonHang (
     FOREIGN KEY (MaDH) REFERENCES DonHang(MaDH),
     FOREIGN KEY (MaSP) REFERENCES SanPham(MaSP)
 );
-
-INSERT INTO Admin (HoTen, Email, MatKhau, SoDienThoai, ChucVu, NgayTao, TrangThai)
-VALUES
-(N'Nguyễn Văn A', 'adminA@gmail.com', '123456', '0123456789', N'Quản trị viên', GETDATE(), 1),
-(N'Trần Thị B', 'adminB@gmail.com', '654321', '0987654321', N'Nhân viên', GETDATE(), 1);
 
 SELECT * FROM KhachHang;
 
