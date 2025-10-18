@@ -402,3 +402,83 @@ html, body {
     border-radius: 12px;
     font-size: 18px;
 }
+
+/* Thanh nav căn 2 đầu (nếu chưa có) */
+.app-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 20px;
+}
+
+/* Nút back kiểu “glass pill” */
+.btn-back-home {
+    --bg: rgba(255,255,255,0.05);
+    --bg-hover: rgba(255,255,255,0.08);
+    --border: rgba(255,255,255,0.12);
+    --border-hover: rgba(255,255,255,0.22);
+    --text: #cfe0ff; /* xanh nhạt dễ đọc trên nền đậm */
+    --shadow: rgba(0,0,0,0.35);
+    --ring: #5b8cff; /* màu nhấn đồng bộ link “Về trang chủ” */
+
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 14px;
+    border-radius: 9999px;
+    text-decoration: none;
+    color: var(--text);
+    background: var(--bg);
+    border: 1px solid var(--border);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.04), 0 10px 24px var(--shadow);
+    transition: background .2s ease, border-color .2s ease, transform .15s ease, box-shadow .2s ease, color .2s ease;
+    font-weight: 600;
+    letter-spacing: .2px;
+}
+
+    /* Icon cùng style toàn site */
+    .btn-back-home i {
+        font-size: 14px;
+        translate: 0 0;
+        transition: translate .15s ease;
+    }
+
+    /* Hover: sáng hơn, hơi nổi lên, icon dịch nhẹ sang trái */
+    .btn-back-home:hover {
+        background: var(--bg-hover);
+        border-color: var(--border-hover);
+        transform: translateY(-1px);
+        box-shadow: inset 0 1px 0 rgba(255,255,255,0.06), 0 12px 28px rgba(0,0,0,0.45);
+    }
+
+        .btn-back-home:hover i {
+            translate: -2px 0;
+        }
+
+    /* Active: nhún xuống 1px */
+    .btn-back-home:active {
+        transform: translateY(0);
+    }
+
+    /* Focus ring đồng bộ link màu xanh */
+    .btn-back-home:focus-visible {
+        outline: 2px solid var(--ring);
+        outline-offset: 2px;
+        box-shadow: 0 0 0 4px color-mix(in oklab, var(--ring) 25%, transparent);
+    }
+
+/* Với nền rất tối, tăng độ sáng text một chút */
+@media (prefers-color-scheme: dark) {
+    .btn-back-home {
+        color: #e3edff;
+    }
+}
+
+/* Giảm animation nếu người dùng không thích chuyển động */
+@media (prefers-reduced-motion: reduce) {
+    .btn-back-home, .btn-back-home i {
+        transition: none;
+    }
+}

@@ -2,11 +2,11 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
 using VanPhongPhamDKT.Models;
-using VanPhongPhamDKT.Helpers; // SessionExtensions
+using VanPhongPhamDKT.Helpers; 
 
 namespace VanPhongPhamDKT.Controllers
 {
-    [Authorize] // ✅ yêu cầu đăng nhập cho mọi action (trừ action gắn [AllowAnonymous])
+    [Authorize] // yêu cầu đăng nhập cho mọi action 
     public class CartController : Controller
     {
         private readonly VanPhongPhamContext _context;
@@ -17,19 +17,19 @@ namespace VanPhongPhamDKT.Controllers
             _context = context;
         }
 
-        // ---------------------------
+       
         // Xem giỏ hàng
-        // ---------------------------
-        [AllowAnonymous] // ✅ cho phép ai cũng xem; nếu muốn bắt đăng nhập thì bỏ dòng này
+      
+        [AllowAnonymous] // cho phép ai cũng xem; 
         public IActionResult Index()
         {
             var cart = HttpContext.Session.GetObject<List<CartItem>>(CARTKEY) ?? new List<CartItem>();
             return View(cart);
         }
 
-        // ---------------------------
-        // Thêm sản phẩm vào giỏ (yêu cầu login do [Authorize] ở class)
-        // ---------------------------
+        
+        // Thêm sản phẩm vào giỏ (yêu cầu login )
+        
         public async Task<IActionResult> AddToCart(int maSp, int soLuong = 1)
         {
             var sp = await _context.SanPhams.FindAsync(maSp);
@@ -57,9 +57,9 @@ namespace VanPhongPhamDKT.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        // ---------------------------
+ 
         // Xóa sản phẩm khỏi giỏ (yêu cầu login)
-        // ---------------------------
+    
         public IActionResult Remove(int maSp)
         {
             var cart = HttpContext.Session.GetObject<List<CartItem>>(CARTKEY) ?? new List<CartItem>();
@@ -68,9 +68,9 @@ namespace VanPhongPhamDKT.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        // ---------------------------
-        // Đặt hàng (ghi vào DB) – yêu cầu login, tự lấy MaKh từ session/đăng nhập
-        // ---------------------------
+       
+        // Đặt hàng (ghi vào DB) – yêu cầu login
+       
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DatHang()
@@ -82,7 +82,7 @@ namespace VanPhongPhamDKT.Controllers
                 return RedirectToAction(nameof(Index));
             }
 
-            // Lấy email từ session (bạn đã set khi đăng nhập)
+            // Lấy email từ session 
             var email = HttpContext.Session.GetString("UserEmail");
             if (string.IsNullOrEmpty(email))
             {
@@ -110,7 +110,7 @@ namespace VanPhongPhamDKT.Controllers
                 };
 
                 _context.DonHangs.Add(donHang);
-                await _context.SaveChangesAsync(); // có MaDh
+                await _context.SaveChangesAsync(); 
 
                 decimal tong = 0;
 

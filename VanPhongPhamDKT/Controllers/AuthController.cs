@@ -31,7 +31,7 @@ namespace VanPhongPhamDKT.Controllers
                 ViewBag.ReturnUrl = returnUrl;
                 return View();
             }
-
+            //Kiểm tra trong CSDL
             var user = await _context.KhachHangs
                                      .AsNoTracking()
                                      .FirstOrDefaultAsync(x => x.Email == email && x.MatKhau == matKhau);

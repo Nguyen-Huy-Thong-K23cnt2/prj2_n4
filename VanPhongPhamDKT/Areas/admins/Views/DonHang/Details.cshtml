@@ -1,6 +1,6 @@
 ﻿@model VanPhongPhamDKT.Models.DonHang
 @{
-    Layout = "~/Views/Shared/_Layout.cshtml"; // hoặc giữ null nếu bạn muốn
+    Layout = "~/Views/Shared/_Layout.cshtml"; 
     string title = $"Chi tiết đơn hàng #{Model?.MaDh}";
     string ngayDat = Model?.NgayDat?.ToString("dd/MM/yyyy HH:mm") ?? "-";
     string tongTien = string.Format("{0:N0} đ", Model?.TongTien ?? 0);

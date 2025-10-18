@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="~/css/dashboard.css" />
 
 
-<!-- LAYER NỀN – đứng sau nội dung nhưng đứng trước background trắng của body -->
+
 <div id="bg-dashboard" aria-hidden="true"></div>
 <div class="page-dashboard">
 <div class="app-shell">
@@ -19,7 +19,7 @@
                 <a class="menu-link active" asp-area="admins" asp-controller="Admin" asp-action="Index">
                     <span class="mi"><i class="fa-solid fa-user-shield"></i></span>
                     Quản lý Admin
-                    <span class="badge">4</span>
+   
                 </a>
             </li>
             <li>
@@ -46,16 +46,22 @@
     <!-- Content -->
     <main class="app-content">
         <!-- Top nav tuỳ chọn -->
-        <div class="app-nav">
-            <div class="app-brand">
-                <i class="fa-solid fa-cart-shopping"></i>
-                <span>VanPhongPham <small>Giao diện quản trị</small></span>
+            <div class="app-nav">
+                <div class="app-brand">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                    <span>VanPhongPham <small>Giao diện quản trị</small></span>
+                </div>
+
+                <!-- đặt trong .app-nav, bên phải -->
+                <a href="/" class="btn-back-home" title="Về trang khách">
+                    <i class="fa-solid fa-angle-left"></i>
+                    <span>Về trang khách</span>
+                </a>
+    
             </div>
-            @* <div class="d-flex gap-2"> *@
-            @*     <a asp-area="" asp-controller="Auth" asp-action="Login" class="btn-pill btn-primary-glass">Đăng nhập</a> *@
-            @*     <a asp-area="" asp-controller="Auth" asp-action="Register" class="btn-pill btn-outline-glass">Đăng ký</a> *@
-            @* </div> *@
-        </div>
+
+            
+
 
         <h2 class="section-title">Bảng điều khiển</h2>
         <p class="text-muted">Chọn chức năng bạn muốn quản lý:</p>

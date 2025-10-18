@@ -1,6 +1,6 @@
 ﻿@model VanPhongPhamDKT.Models.DonHang
 @{
-    Layout = null; /* nếu muốn dùng layout chung, thay = "~/Views/Shared/_Layout.cshtml" */
+    Layout = null; 
     var title = $"Sửa đơn hàng #{Model?.MaDh}";
     string? ngayDatValue = Model?.NgayDat.HasValue == true
         ? Model.NgayDat.Value.ToString("yyyy-MM-ddTHH:mm")

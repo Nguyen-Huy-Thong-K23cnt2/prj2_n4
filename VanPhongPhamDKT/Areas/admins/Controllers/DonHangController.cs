@@ -114,11 +114,6 @@ namespace VanPhongPhamDKT.Areas.admins.Controllers
             return View(donHang);
         }
 
-        /// <summary>
-        /// CÁCH 2: Không dựa vào binder cho các trường nhạy cảm.
-        /// Đọc thẳng Request.Form, tự parse/validate, gán vào entity đang tracking và lưu.
-        /// (ĐỔI TÊN method -> EditPost, map lại tên action "Edit" để tránh trùng chữ ký)
-        /// </summary>
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ActionName("Edit")]
